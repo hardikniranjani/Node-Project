@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
-var mongoDB = "mongodb://localhost/backend";
-mongoose
-  .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Connected to MongoDB"));
+
+
 
 const companySchema = new mongoose.Schema({
     _id: {

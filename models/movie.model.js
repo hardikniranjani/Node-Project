@@ -1,14 +1,7 @@
 const mongoose = require("mongoose");
 var mongoDB = "mongodb://localhost/backend";
 
-mongoose
-  .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log("DB runing");
-  })
-  .catch((err) => {
-    console.log("Database error occurred " + err);
-  });
+
 
 const movieSchema = new mongoose.Schema({
   _id: {
