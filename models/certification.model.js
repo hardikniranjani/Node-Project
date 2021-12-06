@@ -13,4 +13,8 @@ const certificaionSchema  = new mongoose.Schema({
     MovieCertificates : {
         type : Object
     }
-})
+});
+
+const certification = mongoose.model("Certification",certificaionSchema);
+
+module.exports = certification;
