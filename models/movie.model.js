@@ -24,7 +24,7 @@ const movieSchema = new mongoose.Schema({
     type: [Number],
     ref: 'spoken_languages',
   },
-  budget: {
+  Budget: {
     type: Number,
   },
   ShortDescription: {
@@ -42,7 +42,7 @@ const movieSchema = new mongoose.Schema({
     type: Number,
   },
   DirectorName: {
-    type: String,
+    type: [String],
   },
   Production_companies: {
     type: [Number],
@@ -65,6 +65,6 @@ const movieSchema = new mongoose.Schema({
   },
 });
 
-const Movies = mongoose.model("movies", movieSchema);
+const Movie = mongoose.model("movies", movieSchema);
 
-module.exports = { Movies };
+module.exports =  Movie ;

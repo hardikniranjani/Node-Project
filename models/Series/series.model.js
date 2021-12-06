@@ -1,44 +1,76 @@
-const mongoose = require('mongoose');
-const Joi = require('joi');
+const mongoose = require("mongoose");
+const Joi = require("joi");
 
-var mongoDB = "mongodb://localhost/backend"
-mongoose.connect(mongoDB, {useNewUrlParser:true, useUnifiedTopology:true})
+var mongoDB = "mongodb://localhost/backend";
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
-const seriesSchema = new mongoose.Schema(({
-    _id:{
-        type:Number
-    },
-    SeriesName:{
-        type:String,
-    },
-    ShortDescription:{
-        type:String
-    },
-    Category:{
-        type:[Number],
-        ref:'Categories'
-},
+const seriesSchema = new mongoose.Schema({
+  _id: {
+    type: Number,
+  },
+  SeriesName: {
+    type: String,
+  },
+  Original_language: {
+    type: String,
+  },
+  Spoken_languages: {
+    type: [Number],
+    ref: "spoken_languages",
+  },
+  Budget: {
+    type: Number,
+  },
+  ShortDescription: {
+    type: String,
+  },
+  Category: {
+    type: [Number],
+    ref: "genres",
+  },
+  Number_of_episodes:{
+    type: Number,
+  },
+  Number_of_seasons:{
+    type: Number,
+  },
+  ReleaseDate: {
+    type: Date,
+  },
+  Popularity: {
+    type: Number,
+  },
+  Poster_path:{
+    type: String,
+  },
+  Production_companies: {
+    type: [Number],
+    ref: "compaines",
+  },
+  Revenue: {
+    type: Number,
+  },
+  Status: {
+    type: String,
+  },
+  DirectorName: {
+    type: [String],
+  },
+  Seasons: {
+    type: [Number],
+    ref: "seasons",
+  },
+  Vote_average: {
+    type: Number,
+  },
+  Vote_count: {
+    type: Number,
+  },
+  LongDescription: {
+    type: String,
+  }
+});
 
-    ReleaseDate:{
-        type:Date
-    },
-    Rating:{
-        type:Number
-    },
-    DirectorName:{
-        type:String
-    },
-    LongDescription:{
-        type:String
-    },
-    Session:{
-        type:[Number],
-        ref:'Session'
-    }
-}))
+const Series = mongoose.model("series", seriesSchema);
 
-const Series= mongoose.model('series',seriesSchema);
-
-
-
-module.exports =Series ;
+module.exports = Series;

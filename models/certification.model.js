@@ -7,10 +7,10 @@ mongoose
   .then(() => console.log("Connected to MongoDB"));
 
 const certificaionSchema  = new mongoose.Schema({
-    tvCertificates : {
+    TvCertificates : {
         type : Object
     },
-    movieCertificates : {
+    MovieCertificates : {
         type : Object
     }
 })
