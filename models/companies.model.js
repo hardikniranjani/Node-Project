@@ -9,23 +9,23 @@ const companySchema = new mongoose.Schema({
         type : Number,
         required : true
     },
-    name : {
+    Name : {
         type: String,
         required : true,
     },
-    origin_country : {
+    Origin_country : {
         type: String,
         required : true
     },
-    headquaters : {
+    Headquaters : {
         type : String
     },
-    description : {
+    Description : {
         type :String
     }
 });
 
 
-const company = mongoose.model("company",companySchema);
+const company = mongoose.model("Companies",companySchema);
 
 module.exports = company;
