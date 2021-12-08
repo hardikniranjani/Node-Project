@@ -2,34 +2,41 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 
 
-const userSchema = new mongoose.Schema(({
-    _id:{
-        type:Number
-    },
-    Name:{
-        type:String
-    },
-    UserName:{
-        type:String
-    },
-    Email:{
-        type:String,
-        lowercase:true
-    },
-    Password:{
-        type:String
-    },
-    Role:{
-        type:String,
-        enum:['user', 'admin'],
-        default:'user'
-    },
-    IsActive: {
-        type: Boolean,
-        default: true
-    }
-
-}))
+const userSchema = new mongoose.Schema({
+  _id: {
+    type: Number,
+  },
+  Name: {
+    type: String,
+  },
+  UserName: {
+    type: String,
+  },
+  Email: {
+    type: String,
+    lowercase: true,
+  },
+  Password: {
+    type: String,
+  },
+  Role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user",
+  },
+  Subscription_duration: {
+    type: Number,
+    default : 3
+  },
+  Subscription_plan_id: {
+    type: Number,
+    ref: "Subscription",
+  },
+  IsActive: {
+    type: Boolean,
+    default: true,
+  },
+});
 
 const Users = mongoose.model('users',userSchema);
  
