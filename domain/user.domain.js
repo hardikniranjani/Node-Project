@@ -11,7 +11,7 @@ class UserDomain {
         const { error } = UserModel.userValidation(Admin);
 
         if(error) return res.send("error");
-        
+
     }
 
 
@@ -83,6 +83,27 @@ class UserDomain {
       res.send("Access denied");
     }
   }
+
+    // Hard Delete user by id
+    async HardDeleteUser(req, res) {
+      var id = req.params.id;
+  
+      const result = await Users.findByIdAndDelete(id);
+      if (result) {
+        res.send("Successfully deleted");
+      } else {
+        res.status(404).send("Can't find User");
+      }
+    }
+    
+//   show watch History of user
+async showWatchHistory(req, res){
+    var User_id = req.params.id;
+
+    const user = await UserModel.findById(User_id);
+    
+}
+
 }
 
 module.exports = User;

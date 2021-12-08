@@ -56,6 +56,13 @@ const movieSchema = new mongoose.Schema({
   LongDescription: {
     type: String,
   },
+  Banner: {
+    type: String,
+  },
+  IsActive: {
+    type: Boolean,
+    default: true
+}
 });
 
 const Movie = mongoose.model("movies", movieSchema);
