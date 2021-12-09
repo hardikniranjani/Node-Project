@@ -123,4 +123,4 @@ class MovieDomain {
   }
 }
 
-module.exports = MovieDomain;
+module.exports = {MovieDomain};

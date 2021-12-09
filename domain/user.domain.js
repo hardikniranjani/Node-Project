@@ -1,5 +1,5 @@
+require("dotenv").config();
 const UserModel = require("../models/Users/user.model");
-const watchHistory = require("../models/Users/watchHistory.model");
 const watchHistory = require("../models/Users/watchHistory.model");
 const watchLater = require("../models/Users/watchLater.model");
 const wishlist = require("../models/Users/wishlist.model");
@@ -15,40 +15,44 @@ class UserDomain {
 
   // create new user domain
   async createAnUser(req, res) {
+
     const user = req.body;
     const { error } = validateUser(c);
     if (error) return res.status(500).send(error.details[0].message);
 
     const findUser = await UserModel.findOne({ Email: user.Email });
+
     if (findUser) return res.status(400).send("User already registered");
 
     const allUser = await UserModel.find().sort({ _id: -1 });
-    let id;
+    
+    let id = 1;
+
     if (allUser.length == 0) {
       id = 1;
     } else {
       id = allUser[0]._id + 1;
     }
-    let user = new users({
-      _id: id,
-      name: c.name,
-      email: c.email,
-      phone: c.phone,
-      password: c.password,
-      role: c.role,
-    });
 
     const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.password, salt);
+    const newPassword = await bcrypt.hash(user.password, salt);
+
+    let newUser = new UserModel({
+      _id: id,
+      Name: user.name,
+      Email: user.email,
+      Password: newPassword,
+      Role: user.role,
+    });
 
     try {
       const result = await user.save();
       const token = jwt.sign(
         { _id: user._id, role: user.role },
-        config.secretKey,
+        HSA256,
         {
-          algorithm: config.algorithm,
-          expiresIn: "1h",
+          algorithm: process.env.ACCESS_TOKEN_SECRET,
+          expiresIn: "1m",
         }
       );
       console.log(token);
@@ -229,19 +233,20 @@ class UserDomain {
     }
   }
 
-  async deleteWatchHistory(req,res) {
+  async deleteWatchHistory(req, res) {
     var User_id = req.decoded._id;
 
     const history = await watchHistory.find({ User: User_id });
 
     if (history.length == 0) {
       res.status(200).send("Nothing to delete!!!");
-    } 
-    else {
-      const deletedHistory = await watchHistory.findByIdAndDelete({ User: User_id });
+    } else {
+      const deletedHistory = await watchHistory.findByIdAndDelete({
+        User: User_id,
+      });
       res.status(200).send(deletedHistory);
     }
   }
 }
 
-module.exports = User;
+module.exports = { UserDomain };

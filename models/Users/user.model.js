@@ -9,9 +9,6 @@ const userSchema = new mongoose.Schema({
   Name: {
     type: String,
   },
-  UserName: {
-    type: String,
-  },
   Email: {
     type: String,
     lowercase: true,
@@ -26,7 +23,7 @@ const userSchema = new mongoose.Schema({
   },
   Subscription_duration: {
     type: Number,
-    default: 3,
+    default: 0,
   },
   Subscription_plan_id: {
     type: Number,
@@ -51,7 +48,6 @@ function userValidation(){
         UserName:Joi.string().max(17),
         Email:Joi.string().email(),
         Password:Joi.string().max(20),
-        Status:Joi.string().required()
     })
     
     return schema.validate()
