@@ -9,7 +9,6 @@ const subscriptionSchema = new mongoose.Schema({
         type : Number,
         required : true
     },
-    
     Plan_name : {
         type : String,
         required : true
@@ -27,7 +26,7 @@ const subscriptionSchema = new mongoose.Schema({
         required : true
     },
     Devices : {
-        type : [],
+        type : [String],
         required : true
     },
     offer : {
