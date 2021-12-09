@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const watchHistorySchema = new mongoose.Schema({
     User: {
         type: Number,
-        ref: 'users'
+        ref : 'users'
     },
     Movies: {
         type: [Number],
         ref: 'movies'
-    },
+    }, 
     Episode:{
         type: [Number],
         ref: 'episode'

@@ -5,6 +5,10 @@ const subscriptionSchema = new mongoose.Schema({
         type : Number,
         required : true
     },
+    Subscription_Number : {
+        type : Number,
+        required : true
+    },
     Monthly_price : {
         type : Number,
         required : true
@@ -28,10 +32,7 @@ const subscriptionSchema = new mongoose.Schema({
     Devices : {
         type : [String],
         required : true
-    },
-    offer : {
-
-    }   
+    }  
     
 });
 

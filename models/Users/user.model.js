@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
   },
   Subscription_duration: {
     type: Number,
-    default : 3
+    default: 3,
   },
   Subscription_plan_id: {
     type: Number,
@@ -35,6 +35,10 @@ const userSchema = new mongoose.Schema({
   IsActive: {
     type: Boolean,
     default: true,
+  },
+  watchHistory: {
+    type: Number,
+    ref: "watchHistory",
   },
 });
 
