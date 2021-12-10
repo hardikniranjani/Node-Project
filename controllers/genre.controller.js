@@ -3,53 +3,53 @@ const GenreDomain = require("../domain/genre.domain");
 const router = express.Router();
 
 class GenreController {
-  // get all Category
-  static async getAllCategory(req, res) {
-    const GenreDomain = new GenreDomain();
-    GenreDomain.getAllCategory(req, res);
+  // get all Genre
+  static async getAllGenre(req, res) {
+    const genreDomain = new GenreDomain();
+    genreDomain.getAllGenre(req, res);
+  }0
+
+  // get specific Genre by id
+  static async getGenre(req, res) {
+    const genreDomain = new GenreDomain();
+    genreDomain.getAnGenre(req, res);
   }
 
-  // get specific Category by id
-  static async getCategory(req, res) {
-    const GenreDomain = new GenreDomain();
-    GenreDomain.getAnCategory(req, res);
+  // create Genre
+  static async createGenre(req, res) {
+    const genreDomain = new GenreDomain();
+    genreDomain.createAnGenre(req, res);
   }
 
-  // create Category
-  static async createCategory(req, res) {
-    const GenreDomain = new GenreDomain();
-    GenreDomain.createAnCategory(req, res);
+  // update Genre
+  static async updateGenre(req, res) {
+    const genreDomain = new GenreDomain();
+    genreDomain.editAnGenre(req, res);
   }
 
-  // update Category
-  static async updateCategory(req, res) {
-    const GenreDomain = new GenreDomain();
-    GenreDomain.editAnCategory(req, res);
-  }
-
-  // delete Category
-  static async deleteCategory(req, res) {
-    const GenreDomain = new GenreDomain();
-    GenreDomain.deleteAnCategory(req, res);
+  // delete Genre
+  static async deleteGenre(req, res) {
+    const genreDomain = new GenreDomain();
+    genreDomain.deleteAnGenre(req, res);
   }
 }
 
 // // verify uthantication
 // router.use(verifytoken);
 
-// get all Category
-router.get("/", GenreController.getAllCategory);
+// get all Genre
+router.get("/", GenreController.getAllGenre);
 
-// get specific Category by id
-router.get("/:id", GenreController.getCategory);
+// get specific Genre by id
+router.get("/:id", GenreController.getGenre);
 
-// create Category
-router.post("/", GenreController.createCategory);
+// create Genre
+router.post("/", GenreController.createGenre);
 
-// update Category
-router.put("/:id", GenreController.updateCategory);
+// update Genre
+router.put("/:id", GenreController.updateGenre);
 
-// delete Category
-router.delete("/:id", GenreController.deleteCategory);
+// delete Genre
+router.delete("/:id", GenreController.deleteGenre);
 
 module.exports = router;
