@@ -13,11 +13,10 @@ class SeriesDomain {
         Budget: data.Budget,
         ShortDescription: data.ShortDescription,
         Genres: data.Genres,
-        Number_of_episodes: data.Number_of_episodes,
         Number_of_seasons: data.Number_of_seasons,
+        Number_of_episodes: data.Number_of_episodes,
         ReleaseDate: data.ReleaseDate,
         Popularity: data.Popularity,
-        Poster_path: data.Poster_path,
         Production_companies: data.Production_companies,
         Revenue: data.Revenue,
         Status: data.Status,
@@ -27,6 +26,7 @@ class SeriesDomain {
         LongDescription: data.LongDescription,
         Session:data.Session,
         Episode: data.Episode,
+        Poster_path: data.Poster_path,
         IsActive:data.IsActive
       });
 
@@ -98,11 +98,10 @@ class SeriesDomain {
             Budget: data.Budget,
             ShortDescription: data.ShortDescription,
             Genres: data.Genres,
-            Number_of_episodes: data.Number_of_episodes,
             Number_of_seasons: data.Number_of_seasons,
+            Number_of_episodes: data.Number_of_episodes,
             ReleaseDate: data.ReleaseDate,
             Popularity: data.Popularity,
-            Poster_path: data.Poster_path,
             Production_companies: data.Production_companies,
             Revenue: data.Revenue,
             Status: data.Status,
@@ -112,6 +111,7 @@ class SeriesDomain {
             LongDescription: data.LongDescription,
             Session:data.Session,
             Episode: data.Episode,
+            Poster_path: data.Poster_path,
             IsActive:data.IsActive
           },
         }, {new:true})

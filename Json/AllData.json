@@ -35,7 +35,34 @@
         "IsActive":true
     },
     {
+        "FileName":"Genres Model data",
         "_id": 1,
         "GenresName": ""
+    },
+    {
+        "FileName":"Series Model Data",
+        "_id":1,
+        "SeriesName":"",
+        "Original_language":"",
+        "Spoken_languages":[],
+        "Budget":"",
+        "ShortDescription":"",
+        "Genres":[],
+        "Number_of_seasons":5,
+        "Number_of_episodes":5,
+        "ReleaseDate":"",
+        "Popularity":5,
+        "Production_companies":[],
+        "Revenue":"",
+        "Status":"",
+        "Rating":5,
+        "DirectorName":[],
+        "Vote_average":5,
+        "Vote_count":555555,
+        "LongDescription":"",
+        "Session":[],
+        "Episode":[],
+        "Poster_path":"",
+        "IsActive":true
     }
 ]
