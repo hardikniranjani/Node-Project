@@ -1,0 +1,37 @@
+[
+    {
+        "FileName":"Movie Model data",
+        "_id": 1,
+        "MovieName": "",
+        "Original_language": "",
+        "Spoken_languages": [],
+        "DirectorName": [],
+        "Budget": "",
+        "ShortDescription": "",
+        "Genres":[],
+        "ReleaseDate": "",
+        "Popularity": 9,
+        "Production_companies": [],
+        "Revenue":"" ,
+        "Status":"" ,
+        "Vote_average": 7.8,
+        "Vote_count": 75689888,
+        "LongDescription": "",
+        "Banner": "",
+        "IsActive":true
+    },
+    {
+        "FileName":"Production company Model data",
+        "_id":1,
+        "Name":"",
+        "Origin_country":"",
+        "Founded":"",
+        "Founders":[],
+        "CEO":"",
+        "Address":"",
+        "Headquaters":[],
+        "Description":"",
+        "Value":"",
+        "IsActive":true
+    }
+]

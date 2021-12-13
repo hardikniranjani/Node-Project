@@ -42,7 +42,7 @@ const movieSchema = new mongoose.Schema({
     ref: "compaines",
   },
   Revenue: {
-    type: Number,
+    type: String,
   },
   Status: {
     type: String,

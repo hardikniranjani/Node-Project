@@ -15,11 +15,33 @@ const companySchema = new mongoose.Schema({
         type: String,
         required : true
     },
+    Founded:{
+        type:String,
+        required : true
+    },
+    Founders:{
+        type:[String],
+        required : true
+    },
+    CEO:{
+        type: String,
+    },
+    Address:{
+        type: String,
+        required : true
+    },
     Headquaters : {
-        type : String
+        type : [String]
     },
     Description : {
         type :String
+    },
+    Value:{
+        type: String
+    },
+    IsActive: {
+        type: Boolean,
+        default: true
     }
 });
 
