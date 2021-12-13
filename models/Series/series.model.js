@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-var mongoDB = "mongodb://localhost/backend";
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+
 
 const seriesSchema = new mongoose.Schema({
   _id: {
