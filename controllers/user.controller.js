@@ -4,50 +4,49 @@ const router = express.Router();
 const verifyToken = require('../authentication/auth.middleware');
 
 
-class userController{
+class UserController {
+  // get user by id
+  static async getAnUser(req, res) {
+    const userDomain = new UserDomain();
+    userDomain.getAnUser(req, res);
+  }
 
-    // get user by id 
-    static async getUser(req,res){
-        const userDomain = new UserDomain();
-        userDomain.getAnUser(req,res);
-    }
+  // create User
+  static async createAnUser(req, res) {
+    const userDomain = new UserDomain();
+    userDomain.createAnUser(req, res);
+  }
 
-    // create User
-    static async createUser(req,res){
-        const userDomain = new UserDomain();
-        userDomain.createAnUser(req,res);
-    }
+  // update user
+  static async updateAnUser(req, res) {
+    const userDomain = new UserDomain();
+    userDomain.updateAnUser(req, res);
+  }
 
-    // update user
-    static async editUser(req,res){
-        const userDomain = new UserDomain();
-        userDomain.editAnUser(req,res);
-    }
-
-    // delete user
-    static async deleteUser(req,res){
-        const userDomain = new UserDomain();
-        userDomain.deleteAnUser(req,res);
-    }
+  // delete user
+  static async deleteUser(req, res) {
+    const userDomain = new UserDomain();
+    userDomain.deleteAnUser(req, res);
+  }
 }
 
 // create User
-router.post('/signup', userController.createUser);
+router.post('/signup', UserController.createAnUser);
 
-router.post('/login')
+router.post('/login', UserController.getAnUser)
 
 // // verify uthantication
 // router.use(verifytoken);
 
 router.use(verifyToken);
 // get user by id 
-router.get('/:id', userController.getUser);
+// router.get('/:id', UserController.getUser);
 
 
 // update user
-router.put('/:id', userController.editUser);
+router.put("/update", UserController.updateAnUser);
 
 // delete user
-router.delete('/:id', userController.deleteUser);
+router.delete('/:id', UserController.deleteUser);
 
 module.exports = router;

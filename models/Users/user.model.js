@@ -28,6 +28,7 @@ const userSchema = new mongoose.Schema({
   Subscription_plan_id: {
     type: Number,
     ref: "Subscription",
+    default : null
   },
   IsActive: {
     type: Boolean,
@@ -39,19 +40,18 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const Users = mongoose.model('users',userSchema);
+const UserModel = mongoose.model('users',userSchema);
  
 function userValidation(){
     const schema = Joi.object({
         _id:Joi.number(),
         Name:Joi.string().max(25),
-        UserName:Joi.string().max(17),
         Email:Joi.string().email(),
-        Password:Joi.string().max(20),
+        Password:Joi.string().max(25),
     })
     
     return schema.validate()
 
 }
 
-module.exports = {Users, userValidation}
+module.exports = {UserModel, userValidation}

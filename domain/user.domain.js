@@ -1,5 +1,7 @@
 require("dotenv").config();
-const UserModel = require("../models/Users/user.model");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { UserModel, userValidation } = require("../models/Users/user.model");
 const watchHistory = require("../models/Users/watchHistory.model");
 const watchLater = require("../models/Users/watchLater.model");
 const wishlist = require("../models/Users/wishlist.model");
@@ -8,24 +10,24 @@ class UserDomain {
   // create Admin
   async createAnAdmin(req, res) {
     const Admin = req.body;
-    const { error } = UserModel.userValidation(Admin);
+    const { error } = userValidation(Admin);
 
     if (error) return res.send("error");
   }
 
-  // create new user domain
+  // create new user, signup path
   async createAnUser(req, res) {
-
     const user = req.body;
-    const { error } = validateUser(c);
+
+    const { error } = userValidation(user);
     if (error) return res.status(500).send(error.details[0].message);
 
-    const findUser = await UserModel.findOne({ Email: user.Email });
+    const findUser = await UserModel.findOne({ Email: user.email });
 
     if (findUser) return res.status(400).send("User already registered");
 
     const allUser = await UserModel.find().sort({ _id: -1 });
-    
+
     let id = 1;
 
     if (allUser.length == 0) {
@@ -42,16 +44,16 @@ class UserDomain {
       Name: user.name,
       Email: user.email,
       Password: newPassword,
-      Role: user.role,
     });
 
     try {
-      const result = await user.save();
+      const result = await newUser.save();
+
       const token = jwt.sign(
-        { _id: user._id, role: user.role },
-        HSA256,
+        { _id: newUser._id, role: "user" },
+        process.env.ACCESS_TOKEN_SECRET,
         {
-          algorithm: process.env.ACCESS_TOKEN_SECRET,
+          algorithm: "HS256",
           expiresIn: "1m",
         }
       );
@@ -62,68 +64,133 @@ class UserDomain {
     }
   }
 
-  // get all users
-  async getAllUsers(req, res) {
-    const result = await UserModel.find();
-
-    if (result.Role === "admin") {
-      if (result && result.IsActive === true) {
-        res.send(result);
-      } else {
-        res.status(404).send("Can't find User");
-      }
-    } else {
-      res.send("Access denied");
-    }
-  }
-
-  // get all deleted users
-
-  async getAllDeletedUsers(req, res) {
-    const result = await UserModel.find();
-    if (result.Role === "admin") {
-      if (result && result.IsActive === false) {
-        res.send(result);
-      } else {
-        res.status(404).send("Can't find User");
-      }
-    } else {
-      res.send("Access denied");
-    }
-  }
-
-  // ger user by Id
+  //get user ,login path
   async getAnUser(req, res) {
-    var id = req.params.id;
+    const user = req.body;
 
-    const result = await UserModel.findById(id);
-    if (result) {
-      res.send(result);
+    const findUser = await UserModel.findOne({ Email: user.email });
+    if (
+      findUser &&
+      bcrypt.compareSync(user.password, findUser.Password && findUser.IsActive)
+    ) {
+      const token = jwt.sign(
+        { _id: findUser._id, role: findUser.Role },
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+          algorithm: "HS256",
+          expiresIn: "1m",
+        }
+      );
+      console.log(token);
+      res.header("x-access-token", token).send(findUser);
     } else {
       res.status(404).send("Can't find User");
     }
   }
 
-  // delete user by id
-  async deleteAnUser(req, res) {
-    var id = req.params.id;
+  async updateAnUser(req, res) {
+    const user = req.body;
+    const user_id = req.user._id;
 
-    const result = await UserModel.findById(id);
-    if (result.Role === "admin") {
-      if (result) {
-        await UserModel.findByIdAndUpdate(id, {
-          $set: {
-            IsActive: false,
-          },
-        });
-        res.send("Successfully deleted");
-      } else {
-        res.status(404).send("Can't find User");
-      }
-    } else {
-      res.send("Access denied");
+    const { error } = userValidation(user);
+    if (error) return res.status(400).send(error.details[0].message);
+
+    const findUser = await UserModel.findById(user_id);
+
+    if (!findUser.IsActive) {
+      res.status(501).send("User not found");
+    }
+
+    const updatedUser = await UserModel.findOneAndUpdate(
+      { _id: user_id },
+      {
+        $set: {
+          Name: user.name,
+          Email: user.email,
+        },
+      },
+      { new: true }
+    );
+
+    try {
+      const result = await updatedUser.save();
+      res.send(result);
+    } catch (err) {
+      res.send(err);
     }
   }
+
+  // soft delete of user
+  // delete user by id
+  async deleteAnUser(req, res) {
+    var id = req.user._id;
+
+    const result = await UserModel.findById(id);
+
+    if (!result.IsActive) {
+      res.status(501).send("User not found");
+      return;
+    }
+
+    if (result) {
+      await UserModel.findByIdAndUpdate(id, {
+        $set: {
+          IsActive: false,
+        },
+      });
+      res.send("Successfully deleted");
+    } else {
+      res.status(404).send("Can't find User");
+    }
+  }
+
+  // soft delete of user by admin side
+  // delete user by id
+  async deleteAnUserByAdmin(req, res) {
+    
+    var id = req.params.id;
+
+    if(!(req.user.role == "admin")) res.status(401).send("Access Denied!!!");
+
+    const result = await UserModel.findById(id);
+
+    if (result) {
+      await UserModel.findByIdAndUpdate(id, {
+        $set: {
+          IsActive: false,
+        },
+      });
+      res.send("Successfully deleted");
+    } else {
+      res.status(404).send("Can't find User");
+    }
+  }
+
+  // get all users
+  async getAllUsers(req, res) {
+
+    if (req.user.role == "admin") res.status(401).send("Access Denied!!!");
+
+    const result = await UserModel.find({ "IsActive": true });
+
+    if (result) res.status(200).send(result); 
+    else res.status(404).send("Can't find User");
+
+  }
+
+  // get all deleted users
+
+  async getAllDeletedUsers(req, res) {
+    
+    if (req.user.role == "admin") res.status(401).send("Access Denied!!!");
+
+    const result = await UserModel.find({ "IsActive": false });
+
+    if (result) res.status(200).send(result);
+    else res.status(404).send("Can't find User");
+  }
+
+  // ger user by Id
 
   // Hard Delete user by id
   async HardDeleteUser(req, res) {
@@ -249,4 +316,4 @@ class UserDomain {
   }
 }
 
-module.exports = { UserDomain };
+module.exports = UserDomain;

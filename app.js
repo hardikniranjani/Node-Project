@@ -8,7 +8,7 @@ const episodeController = require("./controllers/series/episode.controller");
 // const logger = require("./middleware/logger");
 const Login = require("./controllers/login.controller");
 const verifytoken = require("./authentication/auth.middleware");
-var mongoDB = "mongodb://localhost/backend"
+var mongoDB = "mongodb://localhost/ottPlatform"
 const mongoose = require('mongoose');
 
 mongoose.connect(mongoDB, {useNewUrlParser:true, useUnifiedTopology:true})
@@ -22,7 +22,7 @@ app.use(express.json());
 // app.use('/login',Login );
 
 
-app.use(verifytoken);
+// app.use(verifytoken);
 app.use('/user', userController);
 app.use('/movies', moviesController);
 app.use('/series', seriesController);
@@ -34,4 +34,4 @@ app.use('/',(req,res)=>{
     res.send("Home Page!");
 })
 
-app.listen(3005);
+app.listen(3005,()=>console.log("listening on port 3005"));
