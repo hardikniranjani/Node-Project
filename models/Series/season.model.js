@@ -17,9 +17,6 @@ const seasonSchema = new mongoose.Schema({
   ShortDescription: {
     type: String,
   },
-  Poster_path:{
-    type: String,
-  },
   Number_of_episodes:{
     type: Number,
   },
@@ -29,9 +26,16 @@ const seasonSchema = new mongoose.Schema({
   Vote_count: {
     type: Number,
   },
+  Poster_path:{
+    type: String,
+  },
   Episodes: {
     type: [Number],
     ref: "episode",
+  },
+  IsActive: {
+    type: Boolean,
+    default: true,
   },
 });
 

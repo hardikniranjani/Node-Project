@@ -24,7 +24,7 @@ const seriesSchema = new mongoose.Schema({
   ShortDescription: {
     type: String,
   },
-  Category: {
+  Genres: {
     type: [Number],
     ref: "genres",
   },
@@ -60,6 +60,10 @@ const seriesSchema = new mongoose.Schema({
     type: [Number],
     ref: "seasons",
   },
+  Episode:{
+    type: [Number],
+    ref: "episode",
+  },
   Vote_average: {
     type: Number,
   },
@@ -68,7 +72,11 @@ const seriesSchema = new mongoose.Schema({
   },
   LongDescription: {
     type: String,
-  }
+  },
+  IsActive: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const Series = mongoose.model("series", seriesSchema);

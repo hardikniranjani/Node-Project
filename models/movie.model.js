@@ -18,7 +18,7 @@ const movieSchema = new mongoose.Schema({
     ref: 'spoken_languages',
   },
   Budget: {
-    type: Number,
+    type: String,
   },
   ShortDescription: {
     type: String,

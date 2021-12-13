@@ -30,13 +30,13 @@ const userSchema = new mongoose.Schema({
     ref: "Subscription",
     default : null
   },
-  IsActive: {
-    type: Boolean,
-    default: true,
-  },
   watchHistory: {
     type: Number,
     ref: "watchHistory",
+  },
+  IsActive: {
+    type: Boolean,
+    default: true,
   },
 });
 
