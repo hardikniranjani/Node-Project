@@ -1,0 +1,52 @@
+[
+    {
+      "_id": 1,
+      "GenresName": "Drama"
+    },
+    {
+      "_id": 2,
+      "GenresName": "Adventure"
+    },
+    {
+      "_id": 3,
+      "GenresName": "Comedy"
+    },
+    {
+      "_id": 4,
+      "GenresName": "Action"
+    },
+    {
+      "_id": 5,
+      "GenresName": "Classic"
+    },
+    {
+      "_id": 6,
+      "GenresName": "Anime"
+    },
+    {
+      "_id": 7,
+      "GenresName": "Crime and mystery"
+    },
+    {
+      "_id": 8,
+      "GenresName": "Documentaries"
+    },
+    {
+      "_id": 9,
+      "GenresName": "Thriller"
+    },
+    {
+      "_id": 10,
+      "GenresName": "Romance"
+    },
+    {
+      "_id": 11,
+      "GenresName": "Horror fiction"
+    },
+    {
+      "_id": 12,
+      "GenresName": "Fantasy"
+    }
+  
+  ]
+  
