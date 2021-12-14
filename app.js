@@ -12,7 +12,10 @@ var mongoDB = "mongodb://localhost/ottPlatform"
 const mongoose = require('mongoose');
 
 mongoose.connect(mongoDB, {useNewUrlParser:true, useUnifiedTopology:true})
-        .then(()=> console.log('Connected to MongoDB'));
+    .then(()=> console.log('Connected to MongoDB'));
+
+
+
 
 const app = express();
 app.use(express.json());

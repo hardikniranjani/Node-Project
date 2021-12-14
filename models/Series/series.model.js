@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-
-
 const seriesSchema = new mongoose.Schema({
   _id: {
     type: Number,

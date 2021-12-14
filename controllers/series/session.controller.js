@@ -1,5 +1,5 @@
 const express = require('express');
-const SessionDomain = require('../../domain/session.domain');
+const SessionDomain = require('../../domain/Series/series.domain');
 const router = express.Router();
 const Episode = require('./episode.controller');
 

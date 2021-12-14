@@ -1,5 +1,5 @@
 const express = require('express');
-const EpisodeDomain = require('../../domain/episode.domain');
+const EpisodeDomain = require('../../domain/Series/episode.domain');
 const router = express.Router();
 
 

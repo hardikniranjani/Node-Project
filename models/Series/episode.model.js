@@ -1,7 +1,4 @@
 const mongoose = require("mongoose");
-
-
-
 const episodeSchema = new mongoose.Schema({
   _id: {
     type: Number,
