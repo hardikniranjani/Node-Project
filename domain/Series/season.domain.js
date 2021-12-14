@@ -1,21 +1,21 @@
 const Series = require("../../models/Series/series.model");
-const Session = require("../../models/Series/Session.model");
+const season = require("../../models/Series/season.model");
 
-class SessionDomain {
+class seasonDomain {
 
-  // create new Session
+  // create new season
 
-  async createAnSession(req, res) {
+  async createAnseason(req, res) {
     var data = req.body;
     var id = req.params.series_id;
     const result = await Series.findById(id);
 
 
     if (result) {
-      let session = new Session({
+      let season = new season({
         _id: data._id,
-        SessionName: data.SessionName,
-        SessionNumber: data.SessionNumber,
+        SeasonName: data.SeasonName,
+        SeasonNumber: data.SeasonNumber,
         ShortDescription:data.ShortDescription,
         Number_of_episodes: data.Number_of_episodes,
         Vote_average: data.Vote_average,
@@ -26,72 +26,72 @@ class SessionDomain {
       });
       const UpdateSeries = await Series.findByIdAndUpdate(id, {
         $push: {
-          Session:data._id
+          season:data._id
         },
       }, {new:true})
 
-      const newSession = await session.save();
-      if (newSession) {
-        res.send(newSession);
+      const newseason = await season.save();
+      if (newseason) {
+        res.send(newseason);
         res.send(UpdateSeries);
       } else {
-        res.send("can't create new session");
+        res.send("can't create new season");
       }
     } else {
       res.send("series not found");
     }
   }
 
-  // get all session
-  async getAllSession(req, res) {
+  // get all season
+  async getAllseason(req, res) {
   
     var id = req.params.series_id;
     const result = await Series.findById(id);
     console.log(result);
  
-    var session_arry = [];
-    for(let i = 0; i < result.Session.length; i++) {
-      session_arry.push( await Session.findById(result.Session[i]))
+    var season_arry = [];
+    for(let i = 0; i < result.season.length; i++) {
+      season_arry.push( await season.findById(result.season[i]))
     }
     
-  res.send(session_arry);
+  res.send(season_arry);
     console.log(id)
 
    }
    
 
-  // get session by id
+  // get season by id
 
-  async getAnSession(req, res) {
+  async getAnseason(req, res) {
     var seriesID = req.params.series_id;
-    var sessionID = req.params.session_id;
+    var seasonID = req.params.season_id;
     const series_result = await Series.findById(seriesID);
-    const session_result = await Session.findById(sessionID);
+    const season_result = await season.findById(seasonID);
 
     if (series_result) {
-      if (session_result) {
-        res.send(session_result);
+      if (season_result) {
+        res.send(season_result);
       } else {
-        res.send("session not found");
+        res.send("season not found");
       }
     } else {
       res.send("series not found");
     }
   }
 
-  // delete session by id
+  // delete season by id
 
-  async deleteAnSession(req, res) {
+  async deleteAnseason(req, res) {
     var seriesID = req.params.series_id;
-    var sessionID = req.params.session_id;
+    var seasonID = req.params.season_id;
     const series_result = await Series.findById(seriesID);
-    const session_result = await Session.findById(sessionID);
+    const season_result = await season.findById(seasonID);
 
     if (series_result) {
-      if (session_result) {
+      if (season_result) {
         const UpdateSeries =await Series.findOneAndUpdate({ _id: seriesID}, {
           $pull: {
-            Session: sessionID 
+            season: seasonID 
           },
         }, {new:true})
 
@@ -99,31 +99,31 @@ class SessionDomain {
         res.send("Successfully deleted");
         // res.send(UpdateSeries);
       } else {
-        res.send("session not found");
+        res.send("season not found");
       }
     } else {
       res.send("series not found");
     }
   }
 
-  //   Edit session
+  //   Edit season
 
-  async editAnSession(req, res) {
+  async editAnseason(req, res) {
     var data = req.body;
     var seriesID = req.params.series_id;
-    var sessionID = req.params.session_id;
+    var seasonID = req.params.season_id;
     const series_result = await Series.findById(seriesID);
-    const session_result = await Session.findById(sessionID);
+    const season_result = await season.findById(seasonID);
 
     if (series_result) {
-      if (session_result) {
-        const updateSession = await Session.findByIdAndUpdate(
-          sessionID,
+      if (season_result) {
+        const updateseason = await season.findByIdAndUpdate(
+          seasonID,
           {
             $set: {
                 _id: data._id,
-                SessionName: data.SessionName,
-                SessionNumber: data.SessionNumber,
+                SeasonName: data.SeasonName,
+                SeasonNumber: data.SeasonNumber,
                 ShortDescription:data.ShortDescription,
                 Number_of_episodes: data.Number_of_episodes,
                 Vote_average: data.Vote_average,
@@ -136,13 +136,13 @@ class SessionDomain {
           { new: true }
         );
 
-        if (updateSession) {
-          res.send(updateSession);
+        if (updateseason) {
+          res.send(updateseason);
         } else {
-          res.send("Can't update session");
+          res.send("Can't update season");
         }
       } else {
-        res.send("session not found");
+        res.send("season not found");
       }
     } else {
       res.send("series not found");
@@ -151,4 +151,4 @@ class SessionDomain {
 }
 
 
-module.exports = SessionDomain; 
+module.exports = seasonDomain; 
