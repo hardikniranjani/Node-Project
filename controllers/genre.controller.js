@@ -7,7 +7,7 @@ class GenreController {
   static async getAllGenre(req, res) {
     const genreDomain = new GenreDomain();
     genreDomain.getAllGenre(req, res);
-  }0
+  }
 
   // get specific Genre by id
   static async getGenre(req, res) {
