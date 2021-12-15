@@ -25,19 +25,16 @@ class MovieDomain {
       Banner: data.Banner,
     });
 
-    try{
+    try {
       const newMovie = await Movie.save();
       if (newMovie) {
-      return res.send(newMovie);
+        return res.send(newMovie);
       } else {
         return res.status(400).send("We can't create a new Movie");
       }
-    }
-    catch(e){
+    } catch (e) {
       res.status(500).send(`some error ${e}`);
     }
-    
-    
   }
 
   // get all Movie
@@ -66,10 +63,10 @@ class MovieDomain {
   async deleteAnMovie(req, res) {
     var id = req.params.id;
 
-    const result = await MovieModel.findByIdAndUpdate(id,{
-        $set:{
-          IsActive:false
-        }
+    const result = await MovieModel.findByIdAndUpdate(id, {
+      $set: {
+        IsActive: false,
+      },
     });
     if (result) {
       res.send("Successfully deleted");
@@ -78,56 +75,58 @@ class MovieDomain {
     }
   }
 
-    // Hard Delete Movie by id
-    async hardDeleteMovie(req, res) {
-      var id = req.params.id;
-  
-      const result = await Movies.findByIdAndDelete(id);
-      if (result) {
-        res.send("Successfully deleted");
-      } else {
-        res.status(404).send("Can't find Movie");
-      }
+  // Hard Delete Movie by id
+  async hardDeleteMovie(req, res) {
+    var id = req.params.id;
+
+    const result = await Movies.findByIdAndDelete(id);
+    if (result) {
+      res.send("Successfully deleted");
+    } else {
+      res.status(404).send("Can't find Movie");
     }
+  }
 
   // Edit Movie
   async editAnMovie(req, res) {
     var data = req.body;
     const id = req.params.id;
 
-      const Movie = await MovieModel.findById(id);
-      if (!Movie) res.send("Movie Not Found");
-        const UpdateMovie = await MovieModel.findByIdAndUpdate(id, {
-          $set: {
-            _id: data._id,
-            MovieName: data.MovieName,
-            Original_language: data.Original_language,
-            Spoken_languages: data.Spoken_languages,
-            DirectorName: data.DirectorName,
-            Budget: data.Budget,
-            ShortDescription: data.ShortDescription,
-            Genres: data.Genres,
-            ReleaseDate: data.ReleaseDate,
-            Popularity: data.Popularity,
-            Production_companies: data.Production_companies,
-            Revenue: data.Revenue,
-            Status: data.Status,
-            Vote_average: data.Vote_average,
-            Vote_count: data.Vote_count,
-            LongDescription: data.LongDescription,
-            Banner: data.Banner,
-          },
-        }, {new:true})
+    const Movie = await MovieModel.findById(id);
+    if (!Movie) res.send("Movie Not Found");
+    const UpdateMovie = await MovieModel.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          _id: data._id,
+          MovieName: data.MovieName,
+          Original_language: data.Original_language,
+          Spoken_languages: data.Spoken_languages,
+          DirectorName: data.DirectorName,
+          Budget: data.Budget,
+          ShortDescription: data.ShortDescription,
+          Genres: data.Genres,
+          ReleaseDate: data.ReleaseDate,
+          Popularity: data.Popularity,
+          Production_companies: data.Production_companies,
+          Revenue: data.Revenue,
+          Status: data.Status,
+          Vote_average: data.Vote_average,
+          Vote_count: data.Vote_count,
+          LongDescription: data.LongDescription,
+          Banner: data.Banner,
+        },
+      },
+      { new: true }
+    );
 
-        if(UpdateMovie){
-            res.send(UpdateMovie)
-        }
-        else{
-            res.send("Can't update Movie")
-        }
-      
-    
+    if (UpdateMovie) {
+      res.send(UpdateMovie);
+    } else {
+      res.send("Can't update Movie");
+    }
   }
+
 }
 
 module.exports = MovieDomain;

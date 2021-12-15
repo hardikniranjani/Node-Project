@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const CountrySchema = new mongoose.Schema(({
         _id:{
             type:Number,
-            
+            required : true
         },
         CountryName:{
             type:String,
@@ -15,6 +15,11 @@ const CountrySchema = new mongoose.Schema(({
             type:String,
             minlength:2,
             maxlength:5
+        },
+        CountryCode : {
+            type : Number,
+            minlength : 1,
+            maxlength : 4
         }
 })) 
 

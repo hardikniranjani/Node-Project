@@ -28,6 +28,26 @@ class UserController {
     const userDomain = new UserDomain();
     userDomain.deleteAnUser(req, res);
   }
+
+  static async getWatchHistory(req, res) {
+    const userDomain = new UserDomain();
+    userDomain.showWatchHistory(req, res);
+  }
+
+  static async addToWatchHistory_Movie(req, res) {
+    const userDomain = new UserDomain();
+    userDomain.addToWatchHistoryMovie(req, res);
+  }
+
+  static async addToWatchHistory_Episode(req, res) {
+    const userDomain = new UserDomain();
+    userDomain.addToWatchHistoryEpisode(req, res);
+  }
+
+  static async deleteHistory(req,res){
+    const userDomain = new UserDomain();
+    userDomain.deleteWatchHistory(req, res);
+  }
 }
 
 // create User
@@ -48,5 +68,18 @@ router.put("/update", UserController.updateAnUser);
 
 // delete user
 router.delete('/delete', UserController.deleteUser);
+
+//get user watch history
+router.get('/watchHistory',UserController.getWatchHistory);
+
+//add to user watch history movie
+router.post('/watchedMovie',UserController.addToWatchHistory_Movie);
+
+//add to user watch history episode
+router.post('/watchedEpisode',UserController.addToWatchHistory_Episode);
+
+//delete user watch history 
+router.delete('/deleteHistory',UserController.deleteHistory);
+
 
 module.exports = router;

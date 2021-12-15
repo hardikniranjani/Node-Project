@@ -1,0 +1,68 @@
+[
+  {
+    "_id": 1,
+    "CountryName": "United States of America",
+    "CountryShortForm": "US",
+    "CountryCode": 1
+  },
+  {
+    "_id": 2,
+    "CountryName": "Canada",
+    "CountryShortForm": "CA",
+    "CountryCode": 1
+  },
+  {
+    "_id": 3,
+    "CountryName": "Denmark",
+    "CountryShortForm": "DK",
+    "CountryCode": 45
+  },
+  {
+    "_id": 4,
+    "CountryName": "France",
+    "CountryShortForm": "FR",
+    "CountryCode": 33
+  },
+  {
+    "_id": 5,
+    "CountryName": "New zealand",
+    "CountryShortForm": "NZ",
+    "CountryCode": 64
+  },
+  {
+    "_id": 6,
+    "CountryName": "India",
+    "CountryShortForm": "IN",
+    "CountryCode": 91
+  },
+  {
+    "_id": 7,
+    "CountryName": "Brazil",
+    "CountryShortForm": "BR",
+    "CountryCode": 55
+  },
+  {
+    "_id": 8,
+    "CountryName": "Finland",
+    "CountryShortForm": "FI",
+    "CountryCode": 358
+  },
+  {
+    "_id": 9,
+    "CountryName": "Philippines",
+    "CountryShortForm": "PH",
+    "CountryCode": 63
+  },
+  {
+    "_id": 10,
+    "CountryName": "Portugal",
+    "CountryShortForm": "PT",
+    "CountryCode": 351
+  },
+  {
+    "_id": 11,
+    "CountryName": "Australia",
+    "CountryShortForm": "AU",
+    "CountryCode": 61
+  }
+]
