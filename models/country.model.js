@@ -1,0 +1,24 @@
+const mongoose = require('mongoose');
+
+
+const CountrySchema = new mongoose.Schema(({
+        _id:{
+            type:Number,
+            
+        },
+        CountryName:{
+            type:String,
+            minlength:2,
+            maxlength:30
+        },
+        CountryShortForm:{
+            type:String,
+            minlength:2,
+            maxlength:5
+        }
+})) 
+
+
+const country = mongoose.model('Country', CountrySchema);
+
+module.exports = country;

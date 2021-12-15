@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-var mongoDB = "mongodb://localhost/backend";
+
 
 
 
