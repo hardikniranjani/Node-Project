@@ -50,7 +50,7 @@ router.post('/:series_id/Season/',SeasonController.createSeason);
 // update Season
 router.put('/:series_id/Season/:Season_id',SeasonController.updateSeason);
 
-// delete Season
-router.delete('/:series_id/Season/:Season_id',SeasonController.deleteSeason);
+//soft delete Season
+router.put('/:series_id/Season/:Season_id',SeasonController.deleteSeason);
 
 module.exports = router;

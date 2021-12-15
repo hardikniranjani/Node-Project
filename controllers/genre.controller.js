@@ -27,11 +27,16 @@ class GenreController {
     genreDomain.editAnGenre(req, res);
   }
 
-  // delete Genre
+  //soft delete Genre
   static async deleteGenre(req, res) {
     const genreDomain = new GenreDomain();
     genreDomain.deleteAnGenre(req, res);
   }
+    //Hard delete Genre
+    static async HardDeleteGenre(req, res) {
+      const genreDomain = new GenreDomain();
+      genreDomain.HardDeleteAnGenre(req, res);
+    }
 }
 
 // // verify uthantication
@@ -49,7 +54,10 @@ router.post("/", GenreController.createGenre);
 // update Genre
 router.put("/:id", GenreController.updateGenre);
 
-// delete Genre
-router.delete("/:id", GenreController.deleteGenre);
+//soft delete Genre
+router.put("/:id", GenreController.deleteGenre);
+
+//Hard delete Genre
+router.delete("/:id", GenreController.HardDeleteGenre);
 
 module.exports = router;

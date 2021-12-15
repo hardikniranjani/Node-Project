@@ -29,21 +29,25 @@ class UserController {
     userDomain.deleteAnUser(req, res);
   }
 
+  //get user watch history
   static async getWatchHistory(req, res) {
     const userDomain = new UserDomain();
     userDomain.showWatchHistory(req, res);
   }
 
+  //add to user watch history movie
   static async addToWatchHistory_Movie(req, res) {
     const userDomain = new UserDomain();
     userDomain.addToWatchHistoryMovie(req, res);
   }
 
+  //add to user watch history episode
   static async addToWatchHistory_Episode(req, res) {
     const userDomain = new UserDomain();
     userDomain.addToWatchHistoryEpisode(req, res);
   }
 
+  //delete user watch history 
   static async deleteHistory(req,res){
     const userDomain = new UserDomain();
     userDomain.deleteWatchHistory(req, res);
@@ -55,8 +59,6 @@ router.post('/signup', UserController.createAnUser);
 
 router.post('/login', UserController.getAnUser)
 
-// // verify uthantication
-// router.use(verifytoken);
 
 router.use(verifyToken);
 // get user by id 
@@ -66,8 +68,9 @@ router.use(verifyToken);
 // update user
 router.put("/update", UserController.updateAnUser);
 
-// delete user
-router.delete('/delete', UserController.deleteUser);
+//soft delete user
+router.put('/delete', UserController.deleteUser);
+
 
 //get user watch history
 router.get('/watchHistory',UserController.getWatchHistory);

@@ -54,8 +54,8 @@ router.post('/', seriesController.createSeries);
 // update series
 router.put('/:id', seriesController.updateSeries);
 
-// delete series
-router.delete('/:id', seriesController.deleteSeries);
+//soft delete series
+router.put('/:id', seriesController.deleteSeries);
 
 
 module.exports = router;

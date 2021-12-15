@@ -59,7 +59,7 @@ class MovieDomain {
     }
   }
 
-  // delete Movie by id
+  //soft delete Movie by id
   async deleteAnMovie(req, res) {
     var id = req.params.id;
 

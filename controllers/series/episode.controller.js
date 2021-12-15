@@ -57,8 +57,8 @@ router.post('/:series_id/:session_id/multiepisode',EpisodeController.createMulti
 // update episode
 router.put('/:series_id/:session_id/episode/:episode_id',EpisodeController.updateEpisode);
 
-// delete episode
-router.delete('/:series_id/:session_id/episode/:episode_id',EpisodeController.deleteEpisode);
+//put delete episode
+router.put('/:series_id/:session_id/episode/:episode_id',EpisodeController.deleteEpisode);
 
 
 module.exports = router;
