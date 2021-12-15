@@ -1,0 +1,58 @@
+[
+  {
+    "_id": 1,
+    "Spoken_Language": "US_English"
+  },
+  {
+    "_id": 2,
+    "Spoken_Language": "British_English"
+  },
+  {
+    "_id": 3,
+    "Spoken_Language": "Hindi"
+  },
+  {
+    "_id": 4,
+    "Spoken_Language": "German"
+  },
+  {
+    "_id": 5,
+    "Spoken_Language": "Russian"
+  },
+  {
+    "_id": 6,
+    "Spoken_Language": "French"
+  },
+  {
+    "_id": 7,
+    "Spoken_Language": "Chinese"
+  },
+  {
+    "_id": 8,
+    "Spoken_Language": "Korean"
+  },
+  {
+    "_id": 9,
+    "Spoken_Language": "Japanese"
+  },
+  {
+    "_id": 10,
+    "Spoken_Language": "Punjabi"
+  },
+  {
+    "_id": 11,
+    "Spoken_Language": "Telugu"
+  },
+  {
+    "_id": 12,
+    "Spoken_Language": "Marathi"
+  },
+  {
+    "_id": 13,
+    "Spoken_Language": "Malyalam"
+  },
+  {
+    "_id": 5,
+    "Spoken_Language": "Spanish"
+  }
+]

@@ -5,13 +5,13 @@ class MovieDomain {
   async createAnMovie(req, res) {
     var data = req.body;
 
-    let Movie = new MoviesModel({
+    let Movie = new MovieModel({
       _id: data._id,
       MovieName: data.MovieName,
       Original_language: data.Original_language,
       Spoken_languages: data.Spoken_languages,
       DirectorName: data.DirectorName,
-      budget: data.budget,
+      Budget: data.Budget,
       ShortDescription: data.ShortDescription,
       Genres: data.Genres,
       ReleaseDate: data.ReleaseDate,
@@ -25,12 +25,19 @@ class MovieDomain {
       Banner: data.Banner,
     });
 
-    const newMovie = await Movie.save();
-    if (newMovie) {
+    try{
+      const newMovie = await Movie.save();
+      if (newMovie) {
       return res.send(newMovie);
-    } else {
-      return res.send("We can't create a new Movie");
+      } else {
+        return res.status(400).send("We can't create a new Movie");
+      }
     }
+    catch(e){
+      res.status(500).send(`some error ${e}`);
+    }
+    
+    
   }
 
   // get all Movie
@@ -97,7 +104,7 @@ class MovieDomain {
             Original_language: data.Original_language,
             Spoken_languages: data.Spoken_languages,
             DirectorName: data.DirectorName,
-            budget: data.budget,
+            Budget: data.Budget,
             ShortDescription: data.ShortDescription,
             Genres: data.Genres,
             ReleaseDate: data.ReleaseDate,
@@ -123,4 +130,4 @@ class MovieDomain {
   }
 }
 
-module.exports = {MovieDomain};
+module.exports = MovieDomain;
