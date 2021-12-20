@@ -10,12 +10,12 @@ class seasonDomain {
     var id = req.params.series_id;
     const result = await Series.findById(id);
 
-
     if (result) {
       let season = new season({
         _id: data._id,
         SeasonName: data.SeasonName,
         SeasonNumber: data.SeasonNumber,
+        SeriesNumber : data.SeriesNumber,
         ShortDescription:data.ShortDescription,
         Number_of_episodes: data.Number_of_episodes,
         Vote_average: data.Vote_average,
@@ -42,22 +42,20 @@ class seasonDomain {
     }
   }
 
+
+  
   // get all season
   async getAllseason(req, res) {
   
     var id = req.params.series_id;
-    const result = await Series.findById(id);
-    console.log(result);
- 
-    var season_arry = [];
-    for(let i = 0; i < result.season.length; i++) {
-      season_arry.push( await season.findById(result.season[i]))
-    }
-    
-  res.send(season_arry);
-    console.log(id)
+    const result = await Series.find(id);
 
-   }
+    if(!result) res.status(404).send({msg : `Can't found series = ${id}`});
+    
+    
+    res.send(result);
+
+  }
    
 
   // get season by id
@@ -124,6 +122,7 @@ class seasonDomain {
                 _id: data._id,
                 SeasonName: data.SeasonName,
                 SeasonNumber: data.SeasonNumber,
+                SeriesNumber : data.SeriesNumber,
                 ShortDescription:data.ShortDescription,
                 Number_of_episodes: data.Number_of_episodes,
                 Vote_average: data.Vote_average,

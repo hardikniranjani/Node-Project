@@ -39,7 +39,7 @@ class SeasonController {
 // router.use('/:Season_id/episode',Episode);
 
 // get all Season
-router.get('/:series_id/Season/',SeasonController.getAllSeason);
+router.get('/:series_id/season/',SeasonController.getAllSeason);
 
 // get specific Season by id
 router.get('/:series_id/Season/:Season_id',SeasonController.getAnSeason);

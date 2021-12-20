@@ -1,4 +1,4 @@
-const Series = require("../../models/Series/series.model");
+  const Series = require("../../models/Series/series.model");
 
 class SeriesDomain {
   // create new Series
