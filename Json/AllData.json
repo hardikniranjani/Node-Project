@@ -76,17 +76,32 @@
     "IsActive": true
   },
   {
-      "FileName":"Session Model Data",
-      "_id":1,
-      "SessionName":"",
-      "SessionNumber":5,
-      "ShortDescription":"",
-      "Number_of_episodes":5,
-      "Vote_average":5,
-      "Vote_count":5,
-      "Poster_path":"",
-      "Episode":[1,2,3,4,5,6,7,8,9],
-      "IsActive":true
+    "FileName": "Session Model Data",
+    "_id": 1,
+    "SessionName": "",
+    "SessionNumber": 5,
+    "ShortDescription": "",
+    "Number_of_episodes": 5,
+    "Vote_average": 5,
+    "Vote_count": 5,
+    "Poster_path": "",
+    "Episode": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "IsActive": true
+  },
+  {
+    "FileName": "Episode model data",
+    "_id": 1,
+    "EpisodeName": "",
+    "EpisodeNumber": 1,
+    "ShortDescription": "",
+    "Series_Number": 1,
+    "Season_Number": 1,
+    "ReleaseDate":"",
+    "Poster_path": "",
+    "Video_path": "",
+    "Vote_average": 5,
+    "Vote_count": 5555,
+    "IsActive": true
   },
   {
     "FileName": "Certification model data ",
@@ -96,5 +111,4 @@
     "Meaning": "",
     "Order": ""
   }
-  
 ]
