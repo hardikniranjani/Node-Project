@@ -10,7 +10,7 @@ function verifyToken(req, res, next) {
       algorithm: 'HS256',
     });
     req.user = decoded;
-    console.log("token verified!!!!!!!!");
+    console.log(req.user,"line 13 auth.middleware");
     next();
   } catch (err) {
     console.log("err",err);

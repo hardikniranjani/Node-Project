@@ -69,7 +69,7 @@ class UserDomain {
     const user = req.body;
     console.log(user,"line 70");
     const findUser = await UserModel.findOne({ Email: user.email });
-   
+
     if (findUser && findUser.IsActive) {
       if(bcrypt.compareSync(user.password, findUser.Password)){
         const token = jwt.sign(

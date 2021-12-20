@@ -1,10 +1,24 @@
 const Country = require("../models/country.model");
 
 class CountryDomain {
+  async createBulkCountry(req,res){
+    
+    if(req.user !== "admin") res.status(401).send({msg : "You are not authorized!!!"});
+
+    var countryData = req.body;
+    Country.insertMany(countryData,(err,docs)=>{
+      if(err) res.status(400).send("error while inserting many documents "+err);
+      res.status(200).send(docs);
+    })
+    
+  }
+
   // create Country
   async createCountry(req, res) {
+    if (req.user !== "admin")
+      res.status(401).send({ msg: "You are not authorized!!!" });
     var data = req.body;
-
+    
     let country = new Country({
       _id: data._id,
       CountryName: data.CountryName,
@@ -12,12 +26,18 @@ class CountryDomain {
       CountryCode: data.CountryCode,
     });
 
-    const NewCountry = new country.save();
-    if (NewCountry) {
-      res.send(NewCountry);
-    } else {
-      res.send("can't create country");
+    try{
+      const NewCountry = await country.save();
+      console.log(NewCountry,"line 17");
+      if (NewCountry) {
+        res.status(200).send(NewCountry);
+      } else {
+        res.send("can't create country");
+      }
+    }catch(e){
+      res.status(500).send(e);
     }
+    
   }
 
   // get all country
@@ -46,6 +66,12 @@ class CountryDomain {
 
   // Soft delete Country by id
   async deleteAnCountry(req, res) {
+
+    if (req.user !== "admin") {
+      return res.status(401).json({ msg: "You are not authorized!!!" });
+    } 
+      
+
     var id = req.params.id;
     const Country = await Country.findById(id);
     if (Country) {
@@ -71,20 +97,25 @@ class CountryDomain {
 
   // Hard delete Country by id
   async HardDeleteAnCountry(req, res) {
+
+    if (req.user !== "admin")
+      res.status(401).send({ msg: "You are not authorized!!!" });
+    
     var id = req.params.id;
 
     const result = await Country.findByIdAndDelete(id);
 
-    if (result) {
-      res.send("Successfully deleted");
-    } else {
-      res.status(404).send("Country not found");
-    }
+    if (result)  res.status(200).send({"msg" : "Successfully deleted"});
+    else res.status(404).send({"err" : "Country not found"});
   }
 
   //  Edit Country
 
   async editAnCountry(req, res) {
+
+    if (req.user !== "admin")
+      res.status(401).send({ msg: "You are not authorized!!!" });
+
     var data = req.body;
     var id = req.params.id;
 
