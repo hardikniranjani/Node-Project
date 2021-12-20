@@ -43,14 +43,5 @@
         "Max_video_quality":"4K",
         "Devices":["Mobile","Tablet","Laptop","TV"],
         "IsActive":true
-    },
-    {
-      "SubcriptionNumber": 5,
-      "Monthly_price": 1799,
-      "Plan_name": "Diamond",
-      "Number_of_screen_available": 11,
-      "Max_video_quality": "4K",
-      "Devices": ["Mobile", "Tablet", "Laptop", "TV"],
-      "IsActive": true
     }
 ]
