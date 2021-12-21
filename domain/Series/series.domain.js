@@ -24,8 +24,7 @@ class SeriesDomain {
         Vote_average: data.Vote_average,
         Vote_count: data.Vote_count,
         LongDescription: data.LongDescription,
-        Session:data.Session,
-        Episode: data.Episode,
+        Season:data.Season,
         Poster_path: data.Poster_path,
         IsActive:data.IsActive
       });
@@ -109,8 +108,7 @@ class SeriesDomain {
             Vote_average: data.Vote_average,
             Vote_count: data.Vote_count,
             LongDescription: data.LongDescription,
-            Session:data.Session,
-            Episode: data.Episode,
+            Season:data.Season,
             Poster_path: data.Poster_path,
             IsActive:data.IsActive
           },

@@ -79,7 +79,7 @@ class episodeDomain {
 
     const findEpisode = await episode_Model.find({
       Series_Number: series_id,
-      Season_Number: series_id,
+      Season_Number: season_id,
     });
 
     if (!findEpisode) res.status(404).send({ msg: "data not found" });

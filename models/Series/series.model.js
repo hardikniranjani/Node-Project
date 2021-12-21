@@ -57,10 +57,6 @@ const seriesSchema = new mongoose.Schema({
     type: [Number],
     ref: "seasons",
   },
-  Episode:{
-    type: [Number],
-    ref: "episode",
-  },
   Vote_average: {
     type: Number,
   },

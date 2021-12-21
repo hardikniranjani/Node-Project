@@ -40,6 +40,6 @@ const seasonSchema = new mongoose.Schema({
   },
 });
 
-const Season = new mongoose.model("Seasons", seasonSchema);
+const Season = new mongoose.model("seasons", seasonSchema);
 
 module.exports = Season;
