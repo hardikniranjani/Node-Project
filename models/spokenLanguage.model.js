@@ -11,6 +11,10 @@ const languageSchema = new mongoose.Schema(({
             minlength:2,
             maxlength:30,
             required: true
+        },
+        IsActive : {
+            type : Boolean,
+            required : true
         }
 })) 
 

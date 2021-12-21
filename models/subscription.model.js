@@ -5,10 +5,6 @@ const subscriptionSchema = new mongoose.Schema({
         type : Number,
         required : true
     },
-    Subscription_Number : {
-        type : Number,
-        required : true
-    },
     Monthly_price : {
         type : Number,
         required : true
@@ -25,17 +21,17 @@ const subscriptionSchema = new mongoose.Schema({
         type : String,
         required : true,
     },
-    IsActive : {
-        type : Boolean,
-        required : true
-    },
     Devices : {
         type : [String],
         required : true
-    }  
+    },
+    IsActive : {
+        type : Boolean,
+        required : true
+    }
     
 });
 
 const SubscriptionModel = mongoose.model('Subscription',subscriptionSchema);
 
-module.exports = { SubscriptionModel };
+module.exports =  SubscriptionModel ;

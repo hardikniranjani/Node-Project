@@ -20,7 +20,7 @@ class GenreDomain {
   }
 
   // get all categories
-  async getAllCategories(req, res) {
+  async getAllGenre(req, res) {
     var data = await Genre.find();
 
     if (data.length > 0) {
