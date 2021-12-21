@@ -43,22 +43,22 @@ class EpisodeController {
 }
 
 // get all episode 
-router.get('/:series_id/:session_id/episode',EpisodeController.getAllEpisode);
+router.get('/:series_id/:season_id/episode',EpisodeController.getAllEpisode);
 
 // get specific Series by id
-router.get('/:series_id/:session_id/episode/:episode_id', EpisodeController.getEpisode);
+router.get('/:series_id/:season_id/episode/:episode_id', EpisodeController.getEpisode);
 
 // create episode 
-router.post('/:series_id/:session_id/episode',EpisodeController.createEpisode);
+router.post('/:series_id/:season_id/episode',EpisodeController.createEpisode);
 
 // create Multiple episode 
-router.post('/:series_id/:session_id/multiepisode',EpisodeController.createMultiEpisode);
+router.post('/:series_id/:season_id/multiepisode',EpisodeController.createMultiEpisode);
 
 // update episode
-router.put('/:series_id/:session_id/episode/:episode_id',EpisodeController.updateEpisode);
+router.put('/:series_id/:season_id/episode/:episode_id',EpisodeController.updateEpisode);
 
 //put delete episode
-router.put('/:series_id/:session_id/episode/:episode_id',EpisodeController.deleteEpisode);
+router.put('/:series_id/:season_id/episode/:episode_id',EpisodeController.deleteEpisode);
 
 
 module.exports = router;

@@ -45,12 +45,12 @@ router.get('/:series_id/season/',SeasonController.getAllSeason);
 router.get('/:series_id/Season/:Season_id',SeasonController.getAnSeason);
 
 // create Season
-router.post('/:series_id/Season/',SeasonController.createSeason);
+router.post('/:series_id/season/',SeasonController.createSeason);
 
 // update Season
-router.put('/:series_id/Season/:Season_id',SeasonController.updateSeason);
+router.put('/:series_id/season/:Season_id',SeasonController.updateSeason);
 
 //soft delete Season
-router.put('/:series_id/Season/:Season_id',SeasonController.deleteSeason);
+router.put('/:series_id/season/:season_id',SeasonController.deleteSeason);
 
 module.exports = router;

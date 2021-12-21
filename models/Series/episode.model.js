@@ -22,6 +22,9 @@ const episodeSchema = new mongoose.Schema({
     type: Number,
     ref: "seasons",
   },
+  ReleaseDate : {
+    type : Date
+  },
   Poster_path: {
     type: String,
   },

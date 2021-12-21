@@ -2,7 +2,6 @@ const Series = require("../../models/Series/series.model");
 const season = require("../../models/Series/season.model");
 
 class seasonDomain {
-
   // create new season
 
   async createAnseason(req, res) {
@@ -10,53 +9,56 @@ class seasonDomain {
     var id = req.params.series_id;
     const result = await Series.findById(id);
 
-    if (result) {
-      let season = new season({
-        _id: data._id,
-        SeasonName: data.SeasonName,
-        SeasonNumber: data.SeasonNumber,
-        SeriesNumber : data.SeriesNumber,
-        ShortDescription:data.ShortDescription,
-        Number_of_episodes: data.Number_of_episodes,
-        Vote_average: data.Vote_average,
-        Vote_count: data.Vote_count,
-        Poster_path: data.Poster_path,
-        Episode: data.Episode,
-        IsActive: data.IsActive,
-      });
-      const UpdateSeries = await Series.findByIdAndUpdate(id, {
-        $push: {
-          season:data._id
-        },
-      }, {new:true})
+    if (!result) {
+      res.status(404).send({ msg: `${id} not found` });
+      return;
+    }
 
-      const newseason = await season.save();
-      if (newseason) {
-        res.send(newseason);
-        res.send(UpdateSeries);
-      } else {
-        res.send("can't create new season");
-      }
+    let season = new season({
+      _id: data._id,
+      SeasonName: data.SeasonName,
+      SeasonNumber: data.SeasonNumber,
+      SeriesNumber: data.SeriesNumber,
+      ShortDescription: data.ShortDescription,
+      Number_of_episodes: data.Number_of_episodes,
+      Vote_average: data.Vote_average,
+      Vote_count: data.Vote_count,
+      Poster_path: data.Poster_path,
+      Episode: data.Episode,
+      IsActive: data.IsActive,
+    });
+    const UpdateSeries = await Series.findByIdAndUpdate(
+      id,
+      {
+        $push: {
+          season: data._id,
+        },
+      },
+      { new: true }
+    );
+
+    const newseason = await season.save();
+    if (newseason) {
+      res.send(newseason);
+      res.send(UpdateSeries);
     } else {
-      res.send("series not found");
+      res.send("can't create new season");
     }
   }
 
-
-  
   // get all season
   async getAllseason(req, res) {
-  
     var id = req.params.series_id;
-    const result = await Series.find(id);
+    const result = await Series.findById(id);
 
-    if(!result) res.status(404).send({msg : `Can't found series = ${id}`});
-    
-    
-    res.send(result);
+    if (!result)  return res.status(404).send({ msg: `Can't found series = ${id}` });
 
+    const findSeason = await season.find({ SeriesNumber: id });
+
+    if (!findSeason)  return res.status(404).send({ msg: "Not able to find." });
+
+    res.status(200).send({ seasons: findSeason });
   }
-   
 
   // get season by id
 
@@ -87,13 +89,17 @@ class seasonDomain {
 
     if (series_result) {
       if (season_result) {
-        const UpdateSeries =await Series.findOneAndUpdate({ _id: seriesID}, {
-          $pull: {
-            season: seasonID 
+        const UpdateSeries = await Series.findOneAndUpdate(
+          { _id: seriesID },
+          {
+            $pull: {
+              season: seasonID,
+            },
           },
-        }, {new:true})
+          { new: true }
+        );
 
-        console.log(UpdateSeries)
+        console.log(UpdateSeries);
         res.send("Successfully deleted");
         // res.send(UpdateSeries);
       } else {
@@ -119,17 +125,17 @@ class seasonDomain {
           seasonID,
           {
             $set: {
-                _id: data._id,
-                SeasonName: data.SeasonName,
-                SeasonNumber: data.SeasonNumber,
-                SeriesNumber : data.SeriesNumber,
-                ShortDescription:data.ShortDescription,
-                Number_of_episodes: data.Number_of_episodes,
-                Vote_average: data.Vote_average,
-                Vote_count: data.Vote_count,
-                Poster_path: data.Poster_path,
-                Episode: data.Episode,
-                IsActive: data.IsActive,
+              _id: data._id,
+              SeasonName: data.SeasonName,
+              SeasonNumber: data.SeasonNumber,
+              SeriesNumber: data.SeriesNumber,
+              ShortDescription: data.ShortDescription,
+              Number_of_episodes: data.Number_of_episodes,
+              Vote_average: data.Vote_average,
+              Vote_count: data.Vote_count,
+              Poster_path: data.Poster_path,
+              Episode: data.Episode,
+              IsActive: data.IsActive,
             },
           },
           { new: true }
@@ -149,5 +155,4 @@ class seasonDomain {
   }
 }
 
-
-module.exports = seasonDomain; 
+module.exports = seasonDomain;
