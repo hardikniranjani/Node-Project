@@ -14,7 +14,7 @@ class seasonDomain {
       return;
     }
 
-    let season = new season({
+    const Season = new season({
       _id: data._id,
       SeasonName: data.SeasonName,
       SeasonNumber: data.SeasonNumber,
@@ -24,23 +24,30 @@ class seasonDomain {
       Vote_average: data.Vote_average,
       Vote_count: data.Vote_count,
       Poster_path: data.Poster_path,
-      Episode: data.Episode,
+      Episodes: data.Episodes,
       IsActive: data.IsActive,
     });
     const UpdateSeries = await Series.findByIdAndUpdate(
       id,
       {
-        $push: {
-          season: data._id,
+        $addToSet: {
+          Seasons: data._id,
         },
       },
       { new: true }
     );
 
-    const newseason = await season.save();
+    const newseason = await Season.save();
     if (newseason) {
-      res.send(newseason);
-      res.send(UpdateSeries);
+      res.send({
+        season: newseason,
+        serires: {
+          series_id: UpdateSeries._id,
+          series_name: UpdateSeries.SeriesName,
+          seasons: UpdateSeries["Seasons"],
+        },
+      });
+      // res.send(UpdateSeries);
     } else {
       res.send("can't create new season");
     }
@@ -51,11 +58,12 @@ class seasonDomain {
     var id = req.params.series_id;
     const result = await Series.findById(id);
 
-    if (!result)  return res.status(404).send({ msg: `Can't found series = ${id}` });
+    if (!result)
+      return res.status(404).send({ msg: `Can't found series = ${id}` });
 
     const findSeason = await season.find({ SeriesNumber: id });
 
-    if (!findSeason)  return res.status(404).send({ msg: "Not able to find." });
+    if (!findSeason) return res.status(404).send({ msg: "Not able to find." });
 
     res.status(200).send({ seasons: findSeason });
   }
@@ -65,18 +73,18 @@ class seasonDomain {
   async getAnseason(req, res) {
     var seriesID = req.params.series_id;
     var seasonID = req.params.season_id;
+
     const series_result = await Series.findById(seriesID);
+
+    if (!series_result || !series_result.IsActive)
+      return res.status(404).json({ msg: `Series id ${seiresID} not found` });
+
     const season_result = await season.findById(seasonID);
 
-    if (series_result) {
-      if (season_result) {
-        res.send(season_result);
-      } else {
-        res.send("season not found");
-      }
-    } else {
-      res.send("series not found");
-    }
+    if (!season_result || !season_result.IsActive)
+      return res.status(404).json({ msg: `Season id ${seasonID} not found` });
+
+    res.status(200).send({ seasons: season_result });
   }
 
   // delete season by id
@@ -85,6 +93,7 @@ class seasonDomain {
     var seriesID = req.params.series_id;
     var seasonID = req.params.season_id;
     const series_result = await Series.findById(seriesID);
+
     const season_result = await season.findById(seasonID);
 
     if (series_result) {
@@ -115,44 +124,55 @@ class seasonDomain {
   async editAnseason(req, res) {
     var data = req.body;
     var seriesID = req.params.series_id;
-    var seasonID = req.params.season_id;
+    var SeasonNumber = req.query.SeasonNumber;
     const series_result = await Series.findById(seriesID);
-    const season_result = await season.findById(seasonID);
+    const season_result = await season.find({ SeasonNumber });
 
-    if (series_result) {
-      if (season_result) {
-        const updateseason = await season.findByIdAndUpdate(
-          seasonID,
-          {
-            $set: {
-              _id: data._id,
-              SeasonName: data.SeasonName,
-              SeasonNumber: data.SeasonNumber,
-              SeriesNumber: data.SeriesNumber,
-              ShortDescription: data.ShortDescription,
-              Number_of_episodes: data.Number_of_episodes,
-              Vote_average: data.Vote_average,
-              Vote_count: data.Vote_count,
-              Poster_path: data.Poster_path,
-              Episode: data.Episode,
-              IsActive: data.IsActive,
-            },
-          },
-          { new: true }
-        );
+    if (!series_result)
+      return res.status(404).json({ msg: `Series id ${seiresID} not found` });
 
-        if (updateseason) {
-          res.send(updateseason);
-        } else {
-          res.send("Can't update season");
-        }
-      } else {
-        res.send("season not found");
-      }
-    } else {
-      res.send("series not found");
-    }
+    if (!season_result)
+      return res.status(404).json({ msg: `Season id ${seasonID} not found` });
+
+    const updateseason = await season.findOneAndUpdate(
+      SeasonNumber,
+      {
+        $set: { ...data },
+      },
+      { new: true }
+    );
+
+    if(!updateseason) return res.status(500).send({msg : `Can't update season with id ${seasonID}`})
+
+    res.status(200).send(updateseason);
+
+  }
+
+  // get episode from season
+  async getEpisodesOfSeason(req, res) {
+      const SeasonNumber = req.query.SeasonNumber;
+
+      const findSeason = await season.find(SeasonNumber).populate("episode");
+
+      if (!findSeason)
+        return res
+          .status(404)
+          .json({ msg: `Season Number ${SeasonNumber} not found` });
+      
+      res.status(200).send(findSeason);
   }
 }
 
 module.exports = seasonDomain;
+
+// _id: data._id,
+// SeasonName: data.SeasonName,
+// SeasonNumber: data.SeasonNumber,
+// SeriesNumber: data.SeriesNumber,
+// ShortDescription: data.ShortDescription,
+// Number_of_episodes: data.Number_of_episodes,
+// Vote_average: data.Vote_average,
+// Vote_count: data.Vote_count,
+// Poster_path: data.Poster_path,
+// Episodes: data.Episodes,
+// IsActive: data.IsActive,

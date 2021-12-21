@@ -26,8 +26,8 @@ class episodeDomain {
 
     const dateParts = data.ReleaseDate.split("-");
     const year = dateParts[2];
-    const month = dateParts[1];
-    const day = dateParts[0];
+    const month = dateParts[1] - 1;
+    const day = dateParts[0] + 1;
     const date = new Date(year, month, day);
 
     const allEpisode = await episode_Model.find().sort({ _id: -1 });

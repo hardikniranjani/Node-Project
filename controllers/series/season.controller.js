@@ -34,23 +34,31 @@ class SeasonController {
         const seasonDomain = new SeasonDomain();
         seasonDomain.deleteAnseason(req, res);
     }
+
+    // get all episodes of season
+    static getEpisodesOfSeason(req,res){
+        const seasonDomain = new SeasonDomain();
+        seasonDomain.getEpisodesOfSeason(req,res);
+    }
 }
 
-// router.use('/:Season_id/episode',Episode);
+// router.use('/:season_id/episode',Episode);
 
 // get all Season
 router.get('/:series_id/season/',SeasonController.getAllSeason);
 
 // get specific Season by id
-router.get('/:series_id/Season/:Season_id',SeasonController.getAnSeason);
+router.get('/:series_id/season/:season_id',SeasonController.getAnSeason);
 
 // create Season
 router.post('/:series_id/season/',SeasonController.createSeason);
 
 // update Season
-router.put('/:series_id/season/:Season_id',SeasonController.updateSeason);
+router.put('/:series_id/season',SeasonController.updateSeason);
 
 //soft delete Season
 router.put('/:series_id/season/:season_id',SeasonController.deleteSeason);
 
+//get episodes
+router.get('/season',SeasonController.getEpisodesOfSeason);
 module.exports = router;

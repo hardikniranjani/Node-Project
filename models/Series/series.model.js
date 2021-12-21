@@ -16,7 +16,7 @@ const seriesSchema = new mongoose.Schema({
     ref: "spoken_languages",
   },
   Budget: {
-    type: Number,
+    type: String,
   },
   ShortDescription: {
     type: String,
@@ -38,14 +38,14 @@ const seriesSchema = new mongoose.Schema({
     type: Number,
   },
   Poster_path:{
-    type: String,
+    type: [String],
   },
   Production_companies: {
     type: [Number],
     ref: "compaines",
   },
   Revenue: {
-    type: Number,
+    type: String,
   },
   Status: {
     type: String,
