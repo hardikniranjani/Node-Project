@@ -11,7 +11,7 @@ const seasonSchema = new mongoose.Schema({
     type: Number,
     min: 1,
   },
-  SeriesNumber: {
+  SeriesID: {
     type: Number,
     ref: "series",
   },

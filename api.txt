@@ -14,3 +14,5 @@ fetch(
 )
   .then((res) => res.json())
   .then((res) => console.log(res));
+
+mongodb+srv://<username>:<password>@ottcluster.tapyt.mongodb.net/test

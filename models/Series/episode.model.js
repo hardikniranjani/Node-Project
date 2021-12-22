@@ -14,11 +14,11 @@ const episodeSchema = new mongoose.Schema({
   ShortDescription: {
     type: String,
   },
-  Series_Number: {
+  SeriesID: {
     type: Number,
     ref: "series",
   },
-  Season_Number: {
+  SeasonID: {
     type: Number,
     ref: "seasons",
   },

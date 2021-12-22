@@ -9,7 +9,8 @@ const countryController = require('./controllers/country.controller');
 // const logger = require("./middleware/logger");
 const Login = require("./controllers/login.controller");
 const verifytoken = require("./authentication/auth.middleware");
-var mongoDB = "mongodb://localhost/ottPlatform"
+var mongoDB =
+  "mongodb+srv://Hardik:Hardik@ottcluster.tapyt.mongodb.net/ottPlatform";
 const mongoose = require('mongoose');
 
 mongoose.connect(mongoDB, {useNewUrlParser:true, useUnifiedTopology:true})
@@ -31,7 +32,7 @@ app.use('/user', userController);
 app.use('/movies', moviesController);
 app.use('/series', seriesController);
 app.use('/series', seasonController);
-app.use('/series', episodeController);
+app.use('/episode', episodeController);
 app.use('/category', categoryController);
 app.use('/country',countryController);
 app.use('/',(req,res)=>{

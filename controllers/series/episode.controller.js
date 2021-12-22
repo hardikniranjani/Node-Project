@@ -49,7 +49,7 @@ router.get('/:series_id/:season_id/episode',EpisodeController.getAllEpisode);
 router.get('/:series_id/:season_id/episode/:episode_id', EpisodeController.getEpisode);
 
 // create episode 
-router.post('/:series_id/:season_id/episode',EpisodeController.createEpisode);
+router.post('/',EpisodeController.createEpisode);
 
 // create Multiple episode 
 router.post('/:series_id/:season_id/multiepisode',EpisodeController.createMultiEpisode);
