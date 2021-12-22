@@ -61,5 +61,5 @@ router.put('/:series_id/season',SeasonController.updateSeason);
 router.put('/:series_id/season/:season_id',SeasonController.deleteSeason);
 
 //get episodes
-router.get('/season',SeasonController.getEpisodesOfSeason);
+router.get('/season/getEpisodes',SeasonController.getEpisodesOfSeason);
 module.exports = router;

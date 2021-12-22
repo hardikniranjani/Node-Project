@@ -149,7 +149,7 @@ class seasonDomain {
 
       console.log(SeasonId,"line 155 season.domain");
       
-      const findSeason = await season.findById(SeasonId);
+      const findSeason = await season.findById(SeasonId).populate("Episodes");
 
       console.log(findSeason);
 
