@@ -72,15 +72,10 @@ class seasonDomain {
   // get season by id
 
   async getAnseason(req, res) {
-    var seriesID = req.params.series_id;
+    var SeriesID = req.params.series_id;
     var seasonID = req.params.season_id;
 
-    const series_result = await Series.findById(seriesID);
-
-    if (!series_result || !series_result.IsActive)
-      return res.status(404).json({ msg: `Series id ${seiresID} not found` });
-
-    const season_result = await season.findById(seasonID);
+    const season_result = await season.findOne({ SeriesID ,_id : seasonID }).populate("Episodes");
 
     if (!season_result || !season_result.IsActive)
       return res.status(404).json({ msg: `Season id ${seasonID} not found` });
@@ -150,9 +145,13 @@ class seasonDomain {
 
   // get episode from season
   async getEpisodesOfSeason(req, res) {
-      const SeasonId = req.query.SeasonId;
+      const SeasonId = Number(req.query.SeasonId);
 
-      const findSeason = await season.findById(SeasonId).populate("episode");
+      console.log(SeasonId,"line 155 season.domain");
+      
+      const findSeason = await season.findById(SeasonId);
+
+      console.log(findSeason);
 
       if (!findSeason)
         return res

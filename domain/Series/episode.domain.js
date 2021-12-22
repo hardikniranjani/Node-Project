@@ -9,8 +9,8 @@ class episodeDomain {
     //   res.status(401).send({ msg: "You are not authorized!!!" });
 
     const data = req.body;
-    const season_id = req.query.season_id;
-    const series_id = req.query.series_id;
+    const season_id = data.SeasonID;
+    const series_id = data.SeriesID;
 
     const findSeasonId = await season_Model.findById(season_id);
 
