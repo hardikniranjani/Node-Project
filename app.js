@@ -6,6 +6,7 @@ const categoryController = require("./controllers/genre.controller");
 const seasonController = require("./controllers/series/season.controller");
 const episodeController = require("./controllers/series/episode.controller");
 const countryController = require('./controllers/country.controller');
+const subscriptionController = require('./controllers/subscription.controller');
 // const logger = require("./middleware/logger");
 const Login = require("./controllers/login.controller");
 const verifytoken = require("./authentication/auth.middleware");
@@ -35,6 +36,8 @@ app.use('/series', seasonController);
 app.use('/episode', episodeController);
 app.use('/category', categoryController);
 app.use('/country',countryController);
+app.use('/subscription',subscriptionController);
+
 app.use('/',(req,res)=>{
     res.send("Home Page!");
 })

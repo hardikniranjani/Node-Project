@@ -1,6 +1,6 @@
 [
     {
-        "SubcriptionNumber":1,
+        "_id":1,
         "Monthly_price":119,
         "Plan_name":"Mobile-only plan",
         "Number_of_screen_available":1,
@@ -9,7 +9,7 @@
         "IsActive":true
     },
     {
-        "SubcriptionNumber":2,
+        "_id":2,
         "Monthly_price":449,
         "Plan_name":"Basic",
         "Number_of_screen_available":2,
@@ -18,7 +18,7 @@
         "IsActive":true
     },
     {
-        "SubcriptionNumber":3,
+        "_id":3,
         "Monthly_price":749,
         "Plan_name":"Standard ",
         "Number_of_screen_available":3,
@@ -27,7 +27,7 @@
         "IsActive":true
     },
     {
-        "SubcriptionNumber":4,
+        "_id":4,
         "Monthly_price":1199 ,
         "Plan_name":"Premium",
         "Number_of_screen_available":7,
@@ -36,7 +36,7 @@
         "IsActive":true
     },    
     {
-        "SubcriptionNumber":5,
+        "_id":5,
         "Monthly_price":1799,
         "Plan_name":"Diamond",
         "Number_of_screen_available":11,
