@@ -9,6 +9,7 @@ class CountryController {
     countryDomain.getAllCountry(req, res);
   }
 
+  // create bulk Country
   static async bulkwrite(req,res) {
     const countryDomain = new CountryDomain();
     countryDomain.createBulkCountry(req,res);
@@ -54,6 +55,9 @@ router.get("/:id", CountryController.getCountry);
 // create Country
 router.post("/", CountryController.createCountry);
 
+// create bulk Country
+router.post("/addCountry",CountryController.bulkwrite);
+
 // update Country
 router.put("/:id", CountryController.updateCountry);
 
@@ -63,6 +67,5 @@ router.put("/:id", CountryController.deleteCountry);
 //Hard delete Country
 router.delete("/:id", CountryController.HardDeleteCountry);
 
-router.post("/addCountry",CountryController.bulkwrite);
 
 module.exports = router;

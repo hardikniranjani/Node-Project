@@ -1,158 +1,250 @@
 [
     {
-        "_id":1,
-        "Name":"Paramount Pictures Studios",
+        "_id": 1,
+        "Name": "Paramount Pictures Studios",
+        "Origin_country": "United States",
+        "Founded": "8 May 1912, Hollywood, Los Angeles, California, United States",
+        "Founders": [
+            "Adolph Zukor",
+            "William Wadsworth Hodkinson",
+            " Jesse L. Lasky"
+        ],
+        "CEO": "Brian Robbins",
+        "Address": "5555 Melrose Ave, Los Angeles, CA 90038, United States",
+        "Headquaters": [
+            "Los Angeles"
+        ],
+        "Description": "Paramount Pictures Corporation (common metonym: Par)[1] is an American film and television production and distribution company and a subsidiary of ViacomCBS. It is the fifth oldest film studio in the world,[2] the second oldest film studio in the United States (behind Universal Pictures), and the sole member of the Big Five film studios still located in the city limits of Los Angeles.",
+        "Value": "$4 billion",
+        "IsActive": true
+    },
+    {
+        "_id": 2,
+        "Name": "20th Century Studios",
+        "Origin_country": "United States",
+        "Founded": "31 May 1935",
+        "Founders": [
+            "William Fox",
+            " Darryl F. Zanuck",
+            " Joseph M. Schenck"
+        ],
+        "CEO": "Joshua Miller",
+        "Address": "Fox Studio Lot Building 88, 10201 West Pico Boulevard, Century City, Los Angeles, California , United States",
+        "Headquaters": [
+            "Los Angeles"
+        ],
+        "Description": "20th Century Studios, Inc. is an American film production studio that is a subsidiary of Walt Disney Studios, a division of The Walt Disney Company. The studio is located on the Fox Studio Lot in the Century City area of Los Angeles",
+        "Value": "$52.4 billion",
+        "IsActive": true
+    },
+    {
+        "_id": 3,
+        "Name": "Lightstorm Entertainment",
+        "Origin_country": "United States",
+        "Founded": "1990",
+        "Founders": [
+            "James Cameron",
+            "Lawrence Kasanoff"
+        ],
+        "CEO": "James Cameron",
+        "Address": "Manhattan Beach, CA, United States",
+        "Headquaters": [
+            "Santa Monica"
+        ],
+        "Description": "Lightstorm Entertainment is an American independent production company founded in 1990 by filmmaker James Cameron and producer Lawrence Kasanoff. The majority of its films have been distributed and owned by 20th Century Studios",
+        "Value": "",
+        "IsActive": true
+    },
+    {
+        "_id": 4,
+        "Name": "Original Film",
+        "Origin_country": "United States",
+        "Founded": "1990",
+        "Founders": [
+            "Neal H. Moritz",
+            "Bruce Mellon"
+        ],
+        "CEO": "Mark LeCasse",
+        "Address": "Original Film , 11466 San Vicente Blvd. , Los Angeles, CA 90049",
+        "Headquaters": [
+            "Los Angeles"
+        ],
+        "Description": "Original Film is an American film and television production company founded by Neal H. Moritz. Notable films the company has produced include the Fast & Furious franchise",
+        "Value": "",
+        "IsActive": true
+    },
+    {
+        "_id": 5,
+        "Name": "Universal Pictures",
+        "Origin_country": "United States",
+        "Founded": "30 April 1912, New York, New York, United States",
+        "Founders": [
+            "Carl Laemmle",
+            "Jules Brulatour",
+            "David Horsley"
+        ],
+        "CEO": "Peter Cramer",
+        "Address": "100 Universal City Plaza Drive in Universal City, California.",
+        "Headquaters": [
+            "Universal City, California"
+        ],
+        "Description": "Universal Pictures is an American film production and distribution company owned by Comcast through the NBCUniversal Film and Entertainment division of NBCUniversal.",
+        "Value": "$6 billion",
+        "IsActive": true
+    },
+    {
+        "_id": 6,
+        "Name": "Warner Bros. Pictures",
+        "Origin_country": "United States",
+        "Founded": "4 April 1923, Hollywood, Los Angeles, California, United States",
+        "Founders": [
+            "Jack L. Warner",
+            "Harry Warner",
+            "Albert Warner",
+            "Sam Warner"
+        ],
+        "CEO": "",
+        "Address": "4000 Warner Blvd Bldg 168 Burbank, CA 91522 United States",
+        "Headquaters": [
+            "Burbank, California"
+        ],
+        "Description": "Warner Bros. Entertainment Inc. is an American diversified multinational mass media and entertainment conglomerate headquartered at the Warner Bros. Studios complex in Burbank, California, and a subsidiary of AT&T's WarnerMedia through its Studios & Networks division",
+        "Value": "$30.4 billion ",
+        "IsActive": true
+    },
+    {
+        "_id": 7,
+        "Name": "Heyday Films",
+        "Origin_country": "United Kingdom",
+        "Founded": "10 October 1996, London, United Kingdom",
+        "Founders": [
+            "David Heyman"
+        ],
+        "CEO": "David Jonathan Heyman",
+        "Address": "5 Denmark Street, London WC2H 8LP, UK",
+        "Headquaters": [
+            "London"
+        ],
+        "Description": "Heyday Films Ltd. is a British film studio founded in 1996 by producer David Heyman in London, England, and currently headquartered in Borehamwood, Hertfordshire. Its debut feature film production was Ravenous, directed by Antonia Bird",
+        "Value": "$175 million",
+        "IsActive": true
+    },
+    {
+        "_id": 8,
+        "Name": "Netflix",
+        "Origin_country": "United States",
+        "Founded": "29 August 1997, Scotts Valley, California",
+        "Founders": [
+            "Reed Hastings, Marc Randolph"
+        ],
+        "CEO": "Ted Sarandos",
+        "Address": "100 Winchester Cir, Los Gatos, CA 95032, United States",
+        "Headquaters": [
+            "Los Gatos, California"
+        ],
+        "Description": "Netflix, Inc. is an American subscription streaming service and production company. Launched on August 29, 1997, it offers a library of films and television series through distribution deals as well as its own productions, known as Netflix Originals",
+        "Value": "$7.48 billion",
+        "IsActive": true
+    },
+    {
+        "_id": 9,
+        "Name": "Yash Raj Films",
+        "Origin_country": "India",
+        "Founded": "1970, Mumbai",
+        "Founders": [
+            "Yash Chopra"
+        ],
+        "CEO": "Aditya Chopra",
+        "Address": "Yash Raj Films Private Limited. (Mumbai) 5, Shah Industrial Estate, Veera Desai Road,Andheri (West), Mumbai 400053, INDIA.",
+        "Headquaters": [
+            "Mumbai"
+        ],
+        "Description": "Yash Raj Films is an Indian film production and distribution company working in Hindi and Punjabi cinema which was founded by veteran filmmaker Yash Chopra in 1970. The company has grown to be one of the largest film studios in India.",
+        "Value": "$970 million",
+        "IsActive": true
+    },
+    {
+        "_id": 10,
+        "Name": "Dharma Productions",
+        "Origin_country": "India",
+        "Founded": "1976, Mumbai",
+        "Founders": [
+            "Yash Johar"
+        ],
+        "CEO": "Apoorva Mehta",
+        "Address": "Unit No 201& 202, 2nd Floor, Supreme Chambers, 17/18 Shah Industrial Estate, Off Veera Desai Road, Andheri (W), Mumbai, Maharashtra 400053",
+        "Headquaters": [
+            "Mumbai"
+        ],
+        "Description": "Dharma Productions Pvt. Ltd. is an Indian production and distribution company established by Yash Johar in 1979. It was taken over in 2004 after his death by his son Karan Johar",
+        "Value": "$200 million",
+        "IsActive": true
+    },
+    {
+        "_id": 11,
+        "Name": "Columbia Pictures",
+        "Origin_country": "United States",
+        "Founded": "10 January 1924, Los Angeles, California, United States",
+        "Founders": [
+            "Harry Cohn",
+            "Joe Brandt",
+            "Jack Cohn"
+        ],
+        "CEO": "Sanford Panitch",
+        "Address": "Thalberg Building, 10202 West Washington Boulevard, Culver City, California , United States",
+        "Headquaters": [
+            "Culver City, California"
+        ],
+        "Description": "Columbia Pictures Industries, Inc. is an American film production studio that is a member of the Sony Pictures Motion Picture Group, a division of Sony Entertainment's Sony Pictures Entertainment, which is one of the Big Five studios and a subsidiary of the multinational conglomerate Sony",
+        "Value": "$3.4 Billion",
+        "IsActive": true
+    },
+    {
+        "_id": 12,
+        "Name": "Sony Pictures",
+        "Origin_country": "United States",
+        "Founded": "21 December 1987",
+        "Founders": [
+            "Sony Corporation"
+        ],
+        "CEO": "Tony Vinciquerra ",
+        "Address": "10202 West Washington Boulevard Culver City, CA 90232 USA",
+        "Headquaters": [
+            "Culver City, California"
+        ],
+        "Description": "Sony Pictures Entertainment Inc. is an American diversified multinational mass media and entertainment studio conglomerate that produces, acquires, and distributes filmed entertainment through multiple platforms",
+        "Value": "$7.16 billion",
+        "IsActive": true
+    },
+    {
+        "_id": 13,
+        "Name": "Balaji Telefilms Ltd",
+        "Origin_country": "India",
+        "Founded": "11 November 1994",
+        "Founders": [
+            "Ekta Kapoor",
+            "Jeetendra"
+        ],
+        "CEO": "Nachiket Pantvaidya",
+        "Address": "C-13, Balaji House, Dalia Industrial Estate Opposite Laxmi Industrial Estate New Link Road, Andheri (West), Mumbai,India",
+        "Headquaters": [
+            "Mumbai"
+        ],
+        "Description": "Balaji Telefilms is an Indian company which produces Indian soap operas, reality TV, comedy, game shows, entertainment and factual programming in several Indian languages.",
+        "Value": "$170 million",
+        "IsActive": true
+    },
+    {
+        "_id": 14,
+        "Name": "HBO",
         "Origin_country":"United States",
-        "Founded":"8 May 1912, Hollywood, Los Angeles, California, United States",
-        "Founders":["Adolph Zukor","William Wadsworth Hodkinson"," Jesse L. Lasky"],
-        "CEO":"Brian Robbins",
-        "Address":"5555 Melrose Ave, Los Angeles, CA 90038, United States",
-        "Headquaters":["Los Angeles"],
-        "Description":"Paramount Pictures Corporation (common metonym: Par)[1] is an American film and television production and distribution company and a subsidiary of ViacomCBS. It is the fifth oldest film studio in the world,[2] the second oldest film studio in the United States (behind Universal Pictures), and the sole member of the Big Five film studios still located in the city limits of Los Angeles.",
-        "Value":"$4 billion",
-        "IsActive":true
-    },
-    {
-        "_id":2,
-        "Name":"20th Century Studios",
-        "Origin_country":"United States",
-        "Founded":"31 May 1935",
-        "Founders":["William Fox"," Darryl F. Zanuck"," Joseph M. Schenck"],
-        "CEO":"Joshua Miller",
-        "Address":"Fox Studio Lot Building 88, 10201 West Pico Boulevard, Century City, Los Angeles, California , United States",
-        "Headquaters":["Los Angeles"],
-        "Description":"20th Century Studios, Inc. is an American film production studio that is a subsidiary of Walt Disney Studios, a division of The Walt Disney Company. The studio is located on the Fox Studio Lot in the Century City area of Los Angeles",
-        "Value":"$52.4 billion",
-        "IsActive":true
-    },
-    {
-        "_id":3,
-        "Name":"Lightstorm Entertainment",
-        "Origin_country":"United States",
-        "Founded":"1990",
-        "Founders":["James Cameron","Lawrence Kasanoff"],
-        "CEO":"James Cameron",
-        "Address":"Manhattan Beach, CA, United States",
-        "Headquaters":["Santa Monica"],
-        "Description":"Lightstorm Entertainment is an American independent production company founded in 1990 by filmmaker James Cameron and producer Lawrence Kasanoff. The majority of its films have been distributed and owned by 20th Century Studios",
-        "Value":"",
-        "IsActive":true
-    },
-    {
-        "_id":4,
-        "Name":"Original Film",
-        "Origin_country":"United States",
-        "Founded":"1990",
-        "Founders":["Neal H. Moritz","Bruce Mellon"],
-        "CEO":"Mark LeCasse",
-        "Address":"Original Film , 11466 San Vicente Blvd. , Los Angeles, CA 90049",
-        "Headquaters":["Los Angeles"],
-        "Description":"Original Film is an American film and television production company founded by Neal H. Moritz. Notable films the company has produced include the Fast & Furious franchise",
-        "Value":"",
-        "IsActive":true
-    },
-    {
-        "_id":5,
-        "Name":"Universal Pictures",
-        "Origin_country":"United States",
-        "Founded":"30 April 1912, New York, New York, United States",
-        "Founders":["Carl Laemmle","Jules Brulatour","David Horsley"],
-        "CEO":"Peter Cramer",
-        "Address":"100 Universal City Plaza Drive in Universal City, California.",
-        "Headquaters":["Universal City, California"],
-        "Description":"Universal Pictures is an American film production and distribution company owned by Comcast through the NBCUniversal Film and Entertainment division of NBCUniversal.",
-        "Value":"$6 billion",
-        "IsActive":true
-    },
-    {
-        "_id":6,
-        "Name":"Warner Bros. Pictures",
-        "Origin_country":"United States",
-        "Founded":"4 April 1923, Hollywood, Los Angeles, California, United States",
-        "Founders":["Jack L. Warner","Harry Warner","Albert Warner","Sam Warner"],
-        "CEO":"",
-        "Address":"4000 Warner Blvd Bldg 168 Burbank, CA 91522 United States",
-        "Headquaters":["Burbank, California"],
-        "Description":"Warner Bros. Entertainment Inc. is an American diversified multinational mass media and entertainment conglomerate headquartered at the Warner Bros. Studios complex in Burbank, California, and a subsidiary of AT&T's WarnerMedia through its Studios & Networks division",
-        "Value":"$30.4 billion ",
-        "IsActive":true
-    },
-    {
-        "_id":7,
-        "Name":"Heyday Films",
-        "Origin_country":"United Kingdom",
-        "Founded":"10 October 1996, London, United Kingdom",
-        "Founders":["David Heyman"],
-        "CEO":"David Jonathan Heyman",
-        "Address":"5 Denmark Street, London WC2H 8LP, UK",
-        "Headquaters":["London"],
-        "Description":"Heyday Films Ltd. is a British film studio founded in 1996 by producer David Heyman in London, England, and currently headquartered in Borehamwood, Hertfordshire. Its debut feature film production was Ravenous, directed by Antonia Bird",
-        "Value":"$175 million",
-        "IsActive":true
-    },
-    {
-        "_id":8,
-        "Name":"Yash Raj Films",
-        "Origin_country":"India",
-        "Founded":"1970, Mumbai",
-        "Founders":["Yash Chopra"],
-        "CEO":"Aditya Chopra",
-        "Address":"Yash Raj Films Private Limited. (Mumbai) 5, Shah Industrial Estate, Veera Desai Road,Andheri (West), Mumbai 400053, INDIA.",
-        "Headquaters":["Mumbai"],
-        "Description":"Yash Raj Films is an Indian film production and distribution company working in Hindi and Punjabi cinema which was founded by veteran filmmaker Yash Chopra in 1970. The company has grown to be one of the largest film studios in India.",
-        "Value":"$970 million",
-        "IsActive":true
-    },
-    {
-        "_id":9,
-        "Name":"Balaji Telefilms Ltd",
-        "Origin_country":"India",
-        "Founded":"11 November 1994",
-        "Founders":["Ekta Kapoor","Jeetendra"],
-        "CEO":"Nachiket Pantvaidya",
-        "Address":"C-13, Balaji House, Dalia Industrial Estate Opposite Laxmi Industrial Estate New Link Road, Andheri (West), Mumbai,India",
-        "Headquaters":["Mumbai"],
-        "Description":"Balaji Telefilms is an Indian company which produces Indian soap operas, reality TV, comedy, game shows, entertainment and factual programming in several Indian languages.",
-        "Value":"$170 million",
-        "IsActive":true
-    },
-    {
-        "_id":10,
-        "Name":"Dharma Productions",
-        "Origin_country":"India",
-        "Founded":"1976, Mumbai",
-        "Founders":["Yash Johar"],
-        "CEO":"Apoorva Mehta",
-        "Address":"Unit No 201& 202, 2nd Floor, Supreme Chambers, 17/18 Shah Industrial Estate, Off Veera Desai Road, Andheri (W), Mumbai, Maharashtra 400053",
-        "Headquaters":["Mumbai"],
-        "Description":"Dharma Productions Pvt. Ltd. is an Indian production and distribution company established by Yash Johar in 1979. It was taken over in 2004 after his death by his son Karan Johar",
-        "Value":"$200 million",
-        "IsActive":true
-    },
-    {
-        "_id":11,
-        "Name":"Columbia Pictures",
-        "Origin_country":"United States",
-        "Founded":"10 January 1924, Los Angeles, California, United States",
-        "Founders":["Harry Cohn","Joe Brandt","Jack Cohn"],
-        "CEO":"Sanford Panitch",
-        "Address":"Thalberg Building, 10202 West Washington Boulevard, Culver City, California , United States",
-        "Headquaters":["Culver City, California"],
-        "Description":"Columbia Pictures Industries, Inc. is an American film production studio that is a member of the Sony Pictures Motion Picture Group, a division of Sony Entertainment's Sony Pictures Entertainment, which is one of the Big Five studios and a subsidiary of the multinational conglomerate Sony",
-        "Value":"$3.4 Billion",
-        "IsActive":true
-    },
-    {
-        "_id":12,
-        "Name":"Sony Pictures",
-        "Origin_country":"United States",
-        "Founded":"21 December 1987",
-        "Founders":["Sony Corporation"],
-        "CEO":"Tony Vinciquerra ",
-        "Address":"10202 West Washington Boulevard Culver City, CA 90232 USA",
-        "Headquaters":["Culver City, California"],
-        "Description":"Sony Pictures Entertainment Inc. is an American diversified multinational mass media and entertainment studio conglomerate that produces, acquires, and distributes filmed entertainment through multiple platforms",
-        "Value":"$7.16 billion",
-        "IsActive":true
+        "Founded": "8 November 1972, New York, New York, United States",
+        "Founders": ["Charles Dolan"],
+        "CEO": "Richard Plepler",
+        "Address":"1100 Avenue of the Americas New York, NY 10036 USA",
+        "Headquaters": ["New York, New York"],
+        "Description": "Home Box Office is an American pay television network owned by WarnerMedia Studios & Networks and the flagship property of namesake parent subsidiary Home Box Office, Inc.",
+        "Value": "$6.8 billion",
+        "IsActive": true
     }
 ]

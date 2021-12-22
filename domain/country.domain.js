@@ -73,8 +73,8 @@ class CountryDomain {
       
 
     var id = req.params.id;
-    const Country = await Country.findById(id);
-    if (Country) {
+    const country = await Country.findById(id);
+    if (country) {
       const result = await Country.findByIdAndUpdate(
         id,
         {

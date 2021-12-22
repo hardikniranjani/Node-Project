@@ -49,9 +49,9 @@ class SubscriptionDomain {
   // Soft delete Subscription by id
   async deleteAnSubscription(req, res) {
     var id = req.params.id;
-    const Subscription = await Subscription.findById(id);
+    const subscription = await Subscription.findById(id);
 
-    if (!Subscription)
+    if (!subscription)
       return res.status(500).send({ msg: `Subscription not found` });
 
     const result = await Subscription.findByIdAndUpdate(
@@ -85,9 +85,9 @@ class SubscriptionDomain {
     var data = req.body;
     var id = req.params.id;
 
-    const Subscription = await Subscription.findById(id);
+    const subscription = await Subscription.findById(id);
 
-    if (!Subscription)
+    if (!subscription)
       return res.status(500).send({ msg: `Subscription not found` });
     const UpdateSubscription = await Subscription.findByIdAndUpdate(
       id,
