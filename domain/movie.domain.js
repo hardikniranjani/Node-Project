@@ -217,13 +217,15 @@ class MovieDomain {
     const queryperam = req.query.item1;
     const queryName = req.query.item;
 
-    const movieData = await MovieModel.find({queryperam:queryName})
-                                      // .populate("Genres")
-                                      // .populate("Spoken_languages")
-                                      // .populate("Production_companies")
-                                      // .sort(`${queryperam}`);
-                                  
-      res.send(movieData)
+    const movieData = await MovieModel.find({[queryperam]:queryName})
+                                      .populate("Genres")
+                                      .populate("Spoken_languages")
+                                      .populate("Production_companies")
+                                      .sort(`${queryperam}`);
+
+       if(movieData.length<=0)  res.status(500).send({ msg: `Movies not found` }); 
+
+       res.status(200).send(movieData)
 
   }
 }
