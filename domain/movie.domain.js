@@ -59,6 +59,17 @@ class MovieDomain {
     }
   }
 
+  async sortMovie(req,res) {
+    var category = req.query.sortBy;
+    const result = await MovieModel.find()
+      .populate("Genres")
+      .populate("Spoken_languages")
+      .populate("Production_companies")
+      .sort(-category);
+
+    res.send(result);
+  }
+
   //soft delete Movie by id
   async deleteAnMovie(req, res) {
     var id = req.params.id;

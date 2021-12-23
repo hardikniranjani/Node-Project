@@ -8,6 +8,8 @@ const episodeController = require("./controllers/series/episode.controller");
 const countryController = require("./controllers/country.controller");
 const subscriptionController = require("./controllers/subscription.controller");
 const languages = require('./controllers/spokenLanguage.controller');
+const GenresController = require('./controllers/genre.controller');
+const companiesController = require('./controllers/company.controller');
 // const logger = require("./middleware/logger");
 const Login = require("./controllers/login.controller");
 const verifytoken = require("./authentication/auth.middleware");
@@ -34,6 +36,8 @@ app.use("/category", categoryController);
 app.use("/country", countryController);
 app.use("/subscription", subscriptionController);
 app.use("/languages",languages);
+app.use("/genre", GenresController);
+app.use("/company", companiesController);
 
 app.use("/", (req, res) => {
   res.send("Home Page!");

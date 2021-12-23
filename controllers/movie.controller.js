@@ -38,10 +38,17 @@ class MovieController {
     const movieDomain = new MovieDomain();
     movieDomain.hardDeleteMovie(req, res);
   }
+
+  static async sortMovie(req,res){
+    const movieDomain = new MovieDomain();
+    movieDomain.sortMovie(req,res);
+  }
 }
 
 // // verify uthantication
 // router.use(verifytoken);
+
+router.get("/", MovieController.sortMovie);
 
 // get all Movie
 router.get("/", MovieController.getAllMovie);

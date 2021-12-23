@@ -67,7 +67,7 @@ class UserDomain {
   //get user ,login path
   async getAnUser(req, res) {
     const user = req.body;
-    console.log(user, "line 70");
+    
     const findUser = await UserModel.findOne({ Email: user.email });
 
     if (findUser && findUser.IsActive) {
@@ -216,7 +216,7 @@ class UserDomain {
       .populate({
         path: "Episode",
         populate: { path: "SeasonID" },
-      });
+      }).sort();
 
     if (history.length == 0)
       return res.status(404).send({ msg: "History not available" });
@@ -241,7 +241,7 @@ class UserDomain {
     });
 
     res.status(200).send({
-      movies: movieArray.reverse(),
+      movies: movieArray,
       episodes: episodeArray,
     });
   }

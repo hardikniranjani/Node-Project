@@ -18,7 +18,7 @@ class GenreController {
   // create Genre
   static async createGenre(req, res) {
     const genreDomain = new GenreDomain();
-    genreDomain.createAnGenre(req, res);
+    genreDomain.createGenre(req, res);
   }
 
   // update Genre

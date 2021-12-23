@@ -15,8 +15,7 @@ const movieSchema = new mongoose.Schema({
   },
   Spoken_languages: {
     type: [Number],
-    ref: "spoken_languages",  
-    
+    ref: "Language",
   },
   Budget: {
     type: String,
@@ -47,7 +46,7 @@ const movieSchema = new mongoose.Schema({
   },
   Production_companies: {
     type: [Number],
-    ref: "compaines",
+    ref: "Companies",
     required: true,
   },
   Revenue: {

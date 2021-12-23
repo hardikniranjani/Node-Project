@@ -5,10 +5,10 @@ class GenreDomain {
 
  async createGenre(req, res) {
     var data = req.body;
-
+  
     let genre = new Genre({
       _id: data._id,
-      GenreName: data.GenreName,
+      GenresName: data.GenresName,
     });
 
     const NewGenre = await genre.save();
@@ -64,9 +64,6 @@ class GenreDomain {
     else{
       res.status(404).send("Genre not found");
     }
-    
-
-
   }
 
   // Hard delete Genre by id
@@ -88,16 +85,13 @@ class GenreDomain {
     var data = req.body;
     var id = req.params.id;
 
-    const Genre = await Genre.findById(id);
+    const result = await Genre.findById(id);
 
-    if (Genre) {
+    if (result) {
       const UpdateGenre = await Genre.findByIdAndUpdate(
         id,
         {
-          $set: {
-            _id: data._id,
-            GenreName: data.GenreName,
-          },
+          $set: { ...data },
         },
         { new: true }
       );
