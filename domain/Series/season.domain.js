@@ -2,8 +2,8 @@ const Series = require("../../models/Series/series.model");
 const season = require("../../models/Series/season.model");
 
 class seasonDomain {
+  
   // create new season
-
   async createAnseason(req, res) {
     var data = req.body;
     var id = req.params.series_id;
@@ -147,11 +147,7 @@ class seasonDomain {
   async getEpisodesOfSeason(req, res) {
       const SeasonId = Number(req.query.SeasonId);
 
-      console.log(SeasonId,"line 155 season.domain");
-      
       const findSeason = await season.findById(SeasonId).populate("Episodes");
-
-      console.log(findSeason);
 
       if (!findSeason)
         return res

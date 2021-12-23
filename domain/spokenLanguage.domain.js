@@ -6,12 +6,15 @@ class SpokenLanguageDomain {
   async createAnSpokenLanguage(req, res) {
     var data = req.body;
 
-    const result = await SpokenLanguage.findById({_id: data._id})
+    const result = await SpokenLanguage.findById({ _id: data._id });
 
-    if(result) return res.status(500).send({ msg: `This SpokenLanguage id ${data._id} already exists` });
+    if (result)
+      return res
+        .status(500)
+        .send({ msg: `This SpokenLanguage id ${data._id} already exists` });
 
     let spokenLanguage = new SpokenLanguage({
-        ...data
+      ...data,
     });
 
     const NewSpokenLanguage = await spokenLanguage.save();
@@ -23,11 +26,11 @@ class SpokenLanguageDomain {
 
   // get all SpokenLanguage
   async getAllSpokenLanguage(req, res) {
-    var data = await SpokenLanguage.find({IsActive: true});
+    var data = await SpokenLanguage.find({ IsActive: true });
 
     if (data.length <= 0)
       return res.status(500).send({ msg: `SpokenLanguage not found` });
-    res.status(200).send({SpokenLanguagePlan: data});
+    res.status(200).send({ SpokenLanguagePlan: data });
   }
 
   // get specific SpokenLanguage by id
@@ -36,7 +39,8 @@ class SpokenLanguageDomain {
 
     const result = await SpokenLanguage.findById(id);
 
-    if (!result || !result.IsActive) return res.status(500).send({ msg: `SpokenLanguage not found` });
+    if (!result || !result.IsActive)
+      return res.status(500).send({ msg: `SpokenLanguage not found` });
     res.status(200).send(result);
   }
 
@@ -69,7 +73,8 @@ class SpokenLanguageDomain {
 
     const result = await SpokenLanguage.findByIdAndDelete(id);
 
-    if (!result) return res.status(500).send({ msg: `SpokenLanguage not found` });
+    if (!result)
+      return res.status(500).send({ msg: `SpokenLanguage not found` });
     res.status(200).send("Hard delete Successfully");
   }
 

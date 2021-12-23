@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
 
-
 const languageSchema = new mongoose.Schema(({
         _id:{
             type:Number,
-            
         },
         Spoken_Language:{
             type:String,
@@ -14,7 +12,7 @@ const languageSchema = new mongoose.Schema(({
         },
         IsActive : {
             type : Boolean,
-            required : true
+            default : true
         }
 })) 
 

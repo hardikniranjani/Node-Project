@@ -67,11 +67,11 @@ class UserDomain {
   //get user ,login path
   async getAnUser(req, res) {
     const user = req.body;
-    console.log(user,"line 70");
+    console.log(user, "line 70");
     const findUser = await UserModel.findOne({ Email: user.email });
 
     if (findUser && findUser.IsActive) {
-      if(bcrypt.compareSync(user.password, findUser.Password)){
+      if (bcrypt.compareSync(user.password, findUser.Password)) {
         const token = jwt.sign(
           { _id: findUser._id, role: findUser.Role },
           process.env.ACCESS_TOKEN_SECRET,
@@ -82,11 +82,9 @@ class UserDomain {
         );
         console.log(token);
         res.header("x-access-token", token).send(findUser);
-      }
-      else{
+      } else {
         res.status(400).send("Invalid Email Or Password!!!");
       }
-        
     } else {
       res.status(404).send("Can't find User");
     }
@@ -151,10 +149,9 @@ class UserDomain {
   // soft delete of user by admin side
   // delete user by id
   async deleteAnUserByAdmin(req, res) {
-    
     var id = req.params.id;
 
-    if(!(req.user.role == "admin")) res.status(401).send("Access Denied!!!");
+    if (!(req.user.role == "admin")) res.status(401).send("Access Denied!!!");
 
     const result = await UserModel.findById(id);
 
@@ -172,23 +169,20 @@ class UserDomain {
 
   // get all users
   async getAllUsers(req, res) {
-
     if (req.user.role == "admin") res.status(401).send("Access Denied!!!");
 
-    const result = await UserModel.find({ "IsActive": true });
+    const result = await UserModel.find({ IsActive: true });
 
-    if (result) res.status(200).send(result); 
+    if (result) res.status(200).send(result);
     else res.status(404).send("Can't find User");
-
   }
 
   // get all deleted users
 
   async getAllDeletedUsers(req, res) {
-    
     if (req.user.role == "admin") res.status(401).send("Access Denied!!!");
 
-    const result = await UserModel.find({ "IsActive": false });
+    const result = await UserModel.find({ IsActive: false });
 
     if (result) res.status(200).send(result);
     else res.status(404).send("Can't find User");
@@ -215,94 +209,75 @@ class UserDomain {
     const history = await watchHistory
       .find({ User: User_id })
       .populate("Movies")
-      // .populate({
-      //   path: "Episode",
-      //   populate: { path: "Series_Number" },
-      // })
-      // .populate({
-      //   path: "Episode",
-      //   populate: { path: "Season_Number" },
-      // });
-      console.log(history,"Use History","line 226");
-    if (history) {
-      const movieArray = history[0]["Movies"].map((obj) => {
-        if (obj.MovieName) {
-          return obj.MovieName;
-        }
+      .populate({
+        path: "Episode",
+        populate: { path: "SeriesID" },
+      })
+      .populate({
+        path: "Episode",
+        populate: { path: "SeasonID" },
       });
-      // const episodeArray = history.Episode.map((obj) => {
-      //   if (obj.EpisodeName) {
-      //     return { name: obj.EpisodeName };
-      //   }
-      // });
-      res.status(200).send({"movies" : movieArray.reverse()});
-    } else {
-      res.send("History not available");
-    }
+
+    if (history.length == 0)
+      return res.status(404).send({ msg: "History not available" });
+
+    const movieArray = history[0]["Movies"].map((obj) => {
+      if (obj.MovieName) {
+        return { movie_name: obj.MovieName, movie_id: obj._id };
+      }
+    });
+
+    const episodeArray = history[0]["Episode"].map((obj) => {
+      if (obj.EpisodeName) {
+        return {
+          episode_name: obj.EpisodeName,
+          episode_id: obj._id,
+          seriesid: obj.SeriesID._id,
+          seriesName: obj.SeriesID.SeriesName,
+          seasonid : obj.SeasonID._id,
+          seasonName : obj.SeasonID.SeasonName
+        };
+      }
+    });
+
+    res.status(200).send({
+      movies: movieArray.reverse(),
+      episodes: episodeArray,
+    });
   }
 
   //add Movie to watch History of user
-  async addToWatchHistoryMovie(req, res) {
+  async addToWatchHistory(req, res) {
     var User_id = req.user._id;
-    var movie_id = req.query.movie_id;
-
+    var media_id = req.query.media_id;
+    var media_type = req.query.media_type;
+    console.log([media_type]);
     const history = await watchHistory.find({ User: User_id });
 
     if (history.length == 0) {
-      const watchedMovie = new watchHistory({
+      const watchedMedia = new watchHistory({
         User: User_id,
-        Movies: movie_id,
+        [media_type]: media_id,
       });
       try {
-        const result = await watchedMovie.save();
-        console.log("watched movie =", result, "line no 258");
-        res.status(200).send("Your History = "+result);
+        const result = await watchedMedia.save();
+
+        res.status(200).send({ History: result });
       } catch (e) {
-        res.status(500).send("error in line 260 "+e);
+        res.status(500).send("error in line 260 " + e);
       }
     } else {
       const watchedMovie = await watchHistory.findOneAndUpdate(
         { User: User_id },
-        { $addToSet: { Movies: movie_id } }
-        ,{new : true}
+        { $addToSet: { [media_type]: media_id } },
+        { new: true }
       );
       try {
         const result = await watchedMovie.save();
-        console.log("watched movie =",result,"line no 269");
-        res.status(200).send("Your History = "+ result);
+
+        res.status(200).send({ History: result });
       } catch (e) {
         res.status(500).send("error in line 271 " + e);
-      }
-    }
-  }
-
-  async addToWatchHistoryEpisode(req, res) {
-    var User_id = req.decoded._id;
-    var episode_id = req.query.episode_id;
-
-    const history = await watchHistory.find({ User: User_id });
-
-    if (history.length == 0) {
-      const watchedEpisode = new watchHistory({
-        User: User_id,
-        Episode: episode_id,
-      });
-      try {
-        const result = await watchedEpisode.save();
-        res.status(200).send(result);
-      } catch (e) {
-        res.status(500).send(e);
-      }
-    } else {
-      const watchedEpisode = await watchHistory.findOneAndUpdate(
-        { User: User_id },
-        { $addToSet: { Episode: episode_id } }
-      );
-      try {
-        const result = await watchedEpisode.save();
-        res.status(200).send(result);
-      } catch (e) {
-        res.status(500).send(e);
       }
     }
   }
@@ -316,7 +291,7 @@ class UserDomain {
       res.status(200).send("Nothing to delete!!!");
     } else {
       const deletedHistory = await watchHistory.findOneAndDelete({
-        User: User_id
+        User: User_id,
       });
       res.status(200).send("Your History has been Successfully deleted!!!");
     }

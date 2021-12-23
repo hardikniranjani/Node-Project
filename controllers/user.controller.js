@@ -36,9 +36,9 @@ class UserController {
   }
 
   //add to user watch history movie
-  static async addToWatchHistory_Movie(req, res) {
+  static async addToWatchHistory(req, res) {
     const userDomain = new UserDomain();
-    userDomain.addToWatchHistoryMovie(req, res);
+    userDomain.addToWatchHistory(req, res);
   }
 
   //add to user watch history episode
@@ -73,13 +73,11 @@ router.put('/delete', UserController.deleteUser);
 
 
 //get user watch history
-router.get('/watchHistory',UserController.getWatchHistory);
+router.get('/watch_history',UserController.getWatchHistory);
 
 //add to user watch history movie
-router.post('/watchedMovie',UserController.addToWatchHistory_Movie);
+router.post("/watch_history", UserController.addToWatchHistory);
 
-//add to user watch history episode
-router.post('/watchedEpisode',UserController.addToWatchHistory_Episode);
 
 //delete user watch history 
 router.delete('/deleteHistory',UserController.deleteHistory);

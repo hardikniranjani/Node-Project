@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const wishlistSchema = new mongoose.Schema({
-    User: {
+    UserId: {
         type: Number,
         ref: 'users'
     },
@@ -12,14 +12,6 @@ const wishlistSchema = new mongoose.Schema({
     Series:{
         type: [Number],
         ref: 'series'
-    },
-    Season:{
-        type: [Number],
-        ref: 'seasons'
-    },
-    Episode:{
-        type: [Number],
-        ref: 'episode'
     }
 })
 
