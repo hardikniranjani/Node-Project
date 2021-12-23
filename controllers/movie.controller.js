@@ -5,6 +5,7 @@ const router = express.Router();
 class MovieController {
   // get all Movie
   static async getAllMovie(req, res) {
+    console.log("getAllMovie")
     const movieDomain = new MovieDomain();
     movieDomain.getAllMovie(req, res);
   }
@@ -43,10 +44,22 @@ class MovieController {
     const movieDomain = new MovieDomain();
     movieDomain.sortMovie(req,res);
   }
+
+   // find and filter movie data by Revenue,Vote_average,Vote_count,Budget,popularity
+   static async findMovieBySort(req, res) {
+     console.log("findMovieBySort")
+    const movieDomain = new MovieDomain();
+    movieDomain.findMovieBySort(req, res);
+  }
+
+      // search movie by Original_language
+  static async findMovieBySearch(req, res) {
+    console.log("findMovieBySearch")
+   const movieDomain = new MovieDomain();
+   movieDomain.findMovieBySearch(req, res);
+ }
 }
 
-// // verify uthantication
-// router.use(verifytoken);
 
 router.get("/", MovieController.sortMovie);
 
@@ -68,4 +81,10 @@ router.put("/:id", MovieController.deleteMovie);
 //hard delete Movie
 router.delete("/:id", MovieController.HardDeleteMovie);
 
+
+// find and filter movie data
+router.get("/sorting/movie", MovieController.findMovieBySort);
+
+   // search movie by Original_language 
+router.get("/search/movie", MovieController.findMovieBySearch);
 module.exports = router;

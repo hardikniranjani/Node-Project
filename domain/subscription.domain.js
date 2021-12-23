@@ -70,6 +70,7 @@ class SubscriptionDomain {
   }
 
   // Hard delete Subscription by id
+  
   async HardDeleteAnSubscription(req, res) {
     var id = req.params.id;
 
