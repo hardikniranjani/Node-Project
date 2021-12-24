@@ -18,7 +18,6 @@ class UserDomain {
   // create new user, signup path
   async createAnUser(req, res) {
     const user = req.body;
-
     const { error } = userValidation(user);
     if (error) return res.status(500).send(error.details[0].message);
 
@@ -312,16 +311,12 @@ class UserDomain {
         [media_type]: media_id,
       });
       try {
-
         const result = await newlibrary.save();
         res.status(200).send({ Library: result });
-
-      } 
-      catch (e) {
+      } catch (e) {
         res.status(500).send("error in line 260 " + e);
       }
-    } 
-    else {
+    } else {
       const updatedLibrary = await watchLater.findOneAndUpdate(
         { User: User_id },
         { $addToSet: { [media_type]: media_id } },
@@ -385,105 +380,127 @@ class UserDomain {
     let User_id = req.user._id;
 
     const list = await watchLater.find({ User: User_id });
-    
+
     if (list.length == 0) {
       res.status(200).send({ msg: "No list is there." });
     } else {
       const deletedlist = await watchLater.findOneAndDelete({
         User: User_id,
       });
-      res.status(200).send({ msg : "Your list has been Successfully updated!!!"});
+      res
+        .status(200)
+        .send({ msg: "Your list has been Successfully updated!!!" });
     }
   }
 
+  async addToWishList(req, res) {
+    const User_id = req.user._id;
+    const media_id = req.query.media_id;
+    let media_type = req.query.media_type;
 
-  async addToWishList (req,res){
-        const User_id = req.user._id;
-        const media_id = req.query.media_id;
-        let media_type = req.query.media_type;
+    const findWishList = await wishlist.find({ UserId: User_id });
 
-        const findWishList = await wishlist.find({ UserId : User_id});
-
-      if(findWishList.length == 0) {
-            const list = new wishlist({
-                  UserId : User_id,
-                  [media_type] : media_id
-            });
-            try{
-                  const result =await list.save();
-                  res.status(200).send({wishlist : result});
-            }
-            catch(e){
-                  res.status(500).send({msg : `error : ${e.message}`});
-
-            }
+    if (findWishList.length == 0) {
+      const list = new wishlist({
+        UserId: User_id,
+        [media_type]: media_id,
+      });
+      try {
+        const result = await list.save();
+        res.status(200).send({ wishlist: result });
+      } catch (e) {
+        res.status(500).send({ msg: `error : ${e.message}` });
       }
-      else{
-            const updateWishlist = await wishlist.findOneAndUpdate(
-                  { UserId : User_id },
-                  { $addToSet :  { [media_type] : media_id } },
-                  { new : true}
-            );
+    } else {
+      const updateWishlist = await wishlist.findOneAndUpdate(
+        { UserId: User_id },
+        { $addToSet: { [media_type]: media_id } },
+        { new: true }
+      );
 
-            try{
-                  const result = await updateWishlist.save();
-                  res.status(200).send({wishlist : result});
-            }
-            catch(e){
-                  res.status(500).send({msg : `err : ${e.message}`})
-            }
+      try {
+        const result = await updateWishlist.save();
+        res.status(200).send({ wishlist: result });
+      } catch (e) {
+        res.status(500).send({ msg: `err : ${e.message}` });
       }
-        
+    }
   }
 
-  async getWishList (req,res) {
-        const user_id = req.user._id;
-        
-        const findWishList = await wishlist.find({ UserId : user_id}).populate("Series").populate("Movies");
+  async getWishList(req, res) {
+    const user_id = req.user._id;
 
-        if(findWishList.length == 0) return res.status(404).send({msg : "Empty Wishlist"});
+    const findWishList = await wishlist
+      .find({ UserId: user_id })
+      .populate("Series")
+      .populate("Movies");
 
-        const seriesArray = findWishList[0].Series.map((obj) => {
-              if(obj.IsActive == true){
-                    return {
-                          series_id : obj._id,                       
-                          series_name: obj.SeriesName,
-                          description: obj.ShortDescription,
-                          releasedata: obj.ReleaseDate,
-                    };
-              }
-        });
+    if (findWishList.length == 0)
+      return res.status(404).send({ msg: "Empty Wishlist" });
 
-        const movieArray = findWishList[0].Movies.map((obj) => {
-          if (obj.IsActive == true) {
-            return {
-              movie_id: obj._id,
-              movie_name: obj.SeriesName,
-              description: obj.ShortDescription,
-              releasedata: obj.ReleaseDate,
-            };
-          }
-        });
+    const seriesArray = findWishList[0].Series.map((obj) => {
+      if (obj.IsActive == true) {
+        return {
+          series_id: obj._id,
+          series_name: obj.SeriesName,
+          description: obj.ShortDescription,
+          releasedata: obj.ReleaseDate,
+        };
+      }
+    });
 
+    const movieArray = findWishList[0].Movies.map((obj) => {
+      if (obj.IsActive == true) {
+        return {
+          movie_id: obj._id,
+          movie_name: obj.SeriesName,
+          description: obj.ShortDescription,
+          releasedata: obj.ReleaseDate,
+        };
+      }
+    });
+
+    res.status(200).send({
+      series: seriesArray,
+      movies: movieArray,
+    });
+  }
+
+  async removeFromWishlist(req, res) {
+    const user_id = req.user._id;
+
+    const findUser = await wishlist.find({ UserId: user_id });
+
+    if (findUser.length == 0) {
+      res.status(404).send({ msg: "Empty wishlist!!!" });
+    } else {
+      const updateWishlist = await wishlist.findOneAndDelete({
+        UserId: user_id,
+      });
+
+      res.status(200).send({ msg: "Your wishlist deleted successfully." });
+    }
+  }
+
+  async upload(req, res) {
+    //   if(req.user.role !== "admin")  return res.status(400).send({ msg : "You are not authorized."});
+
+    if (req.files === null) res.status(404).send({ msg: "No file is found" });
+
+    const file = req.files.file;
+    const fileType = file.mimetype.split("/")[0];
+    if (fileType == "image") {
+      file.mv(`${__dirname}/public/images/${file.name}`, (err) => {
+        if (err) return res.status(500).send({ msg: `error : ${err.message}` });
 
         res.status(200).send({
-              series : seriesArray,
-              movies : movieArray
+          fileName: file.name,
+         
         });
-  }
+      });
+    }
 
-  async removeFromWishlist(req,res) {
-        const user_id = req.user._id;
-
-        const findUser = await wishlist.find({UserId : user_id});
-
-        if(findUser.length == 0){
-              res.status(404).send({msg : "Empty wishlist!!!"});
-        }else{
-              const updateWishlist = await wishlist.findOneAndDelete( { UserId : user_id } );
-
-              res.status(200).send({msg : "Your wishlist deleted successfully."});
-        }
+    
   }
 }
 

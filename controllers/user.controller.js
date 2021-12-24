@@ -77,7 +77,13 @@ class UserController {
     const userDomain = new UserDomain();
     userDomain.removeFromWishlist(req,res);
   }
+
+  static async upload(req,res){
+    const userDomain = new UserDomain();
+    userDomain.upload(req,res);
+  }
 }
+
 
 // create User
 router.post("/signup", UserController.createAnUser);
@@ -121,4 +127,5 @@ router.get("/wishlist", UserController.getWishList);
 //delete wishlist
 router.delete("/wishlist", UserController.deleteWishlist);
 
+router.post('/upload', UserController.upload);
 module.exports = router;

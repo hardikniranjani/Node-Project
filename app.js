@@ -15,7 +15,7 @@ const Login = require("./controllers/login.controller");
 const verifytoken = require("./authentication/auth.middleware");
 var mongoDB = "mongodb+srv://Hardik:Hardik@ottcluster.tapyt.mongodb.net/ottplatform";
 const mongoose = require("mongoose");
-
+const fileupload = require("express-fileupload");
 mongoose
   .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected to MongoDB"));
@@ -25,7 +25,7 @@ app.use(express.json());
 // app.use(logger);
 
 // app.use('/login',Login );
-
+app.use(fileupload());
 // app.use(verifytoken);
 app.use("/user", userController);
 app.use("/movies", moviesController);
