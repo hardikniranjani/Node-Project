@@ -7,7 +7,7 @@ const wishlistSchema = new mongoose.Schema({
     },
     Movies: {
         type: [Number],
-        ref: 'movies'
+        ref: 'Movies'
     },
     Series:{
         type: [Number],

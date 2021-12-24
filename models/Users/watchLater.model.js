@@ -7,7 +7,7 @@ const watchLaterSchema = new mongoose.Schema({
     },
     Movies: {
         type: [Number],
-        ref: 'movies'
+        ref: 'Movies'
     },
     Episode:{
         type: [Number],
