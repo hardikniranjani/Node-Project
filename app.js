@@ -39,7 +39,7 @@ app.use("/subscription", subscriptionController);
 app.use("/languages",languages);
 app.use("/genre", GenresController);
 app.use("/company", companiesController);
-app.use("/certification", companiesController);
+app.use("/certification", certificationController);
 
 app.use("/", (req, res) => {
   res.send("Home Page!");
