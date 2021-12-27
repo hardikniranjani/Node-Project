@@ -10,6 +10,7 @@ const subscriptionController = require("./controllers/subscription.controller");
 const languages = require('./controllers/spokenLanguage.controller');
 const GenresController = require('./controllers/genre.controller');
 const companiesController = require('./controllers/company.controller');
+const certificationController = require('./controllers/certification.controller');
 // const logger = require("./middleware/logger");
 const Login = require("./controllers/login.controller");
 const verifytoken = require("./authentication/auth.middleware");
@@ -30,7 +31,7 @@ app.use(fileupload());
 app.use("/user", userController);
 app.use("/movies", moviesController);
 app.use("/series", seriesController);
-app.use("/series", seasonController);
+app.use("/seasion", seasonController);
 app.use("/episode", episodeController);
 app.use("/category", categoryController);
 app.use("/country", countryController);
@@ -38,6 +39,7 @@ app.use("/subscription", subscriptionController);
 app.use("/languages",languages);
 app.use("/genre", GenresController);
 app.use("/company", companiesController);
+app.use("/certification", companiesController);
 
 app.use("/", (req, res) => {
   res.send("Home Page!");
