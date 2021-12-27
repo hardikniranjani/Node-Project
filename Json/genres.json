@@ -1,51 +1,63 @@
 [
     {
       "_id": 1,
-      "GenresName": "Drama"
+      "GenresName": "Drama",
+      "IsActive" : true
     },
     {
       "_id": 2,
-      "GenresName": "Adventure"
+      "GenresName": "Adventure",
+      "IsActive": true
     },
     {
       "_id": 3,
-      "GenresName": "Comedy"
+      "GenresName": "Comedy",
+      "IsActive": true
     },
     {
       "_id": 4,
-      "GenresName": "Action"
+      "GenresName": "Action",
+      "IsActive": true
     },
     {
       "_id": 5,
-      "GenresName": "Classic"
+      "GenresName": "Classic",
+      "IsActive": true
     },
     {
       "_id": 6,
-      "GenresName": "Anime"
+      "GenresName": "Anime",
+      "IsActive": true
     },
     {
       "_id": 7,
-      "GenresName": "Crime and mystery"
+      "GenresName": "Crime and mystery",
+      "IsActive": true
     },
     {
       "_id": 8,
-      "GenresName": "Documentaries"
+      "GenresName": "Documentaries",
+      "IsActive": true
     },
     {
       "_id": 9,
-      "GenresName": "Thriller"
+      "GenresName": "Thriller",
+      "IsActive": true
     },
     {
       "_id": 10,
-      "GenresName": "Romance"
+      "GenresName": "Romance",
+      "IsActive": true
     },
     {
       "_id": 11,
-      "GenresName": "Horror fiction"
+      "GenresName": "Horror fiction",
+      "IsActive": true
     },
     {
       "_id": 12,
-      "GenresName": "Fantasy"
+      "GenresName": "Fantasy",
+      "IsActive": true
     }
   
   ]

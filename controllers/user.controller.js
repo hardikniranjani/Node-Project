@@ -4,6 +4,13 @@ const router = express.Router();
 const verifyToken = require("../authentication/auth.middleware");
 
 class UserController {
+
+  //create a new admin
+  static async createAnAdmin(req,res){
+    const userDomain = new UserDomain();
+    userDomain.createAnAdmin(req,res);
+  }
+
   // get user by id
   static async getAnUser(req, res) {
     const userDomain = new UserDomain();
@@ -89,6 +96,8 @@ class UserController {
 router.post("/signup", UserController.createAnUser);
 
 router.post("/login", UserController.getAnUser);
+
+router.post("/create_admin", UserController.createAnAdmin);
 
 router.use(verifyToken);
 // get user by id

@@ -1,7 +1,7 @@
 const express = require("express");
 const EpisodeDomain = require("../../domain/Series/episode.domain");
 const router = express.Router();
-
+const verifyToken = require('../../authentication/auth.middleware');
 class EpisodeController {
   //   // get all episode
   //   static async getAllEpisode(req, res) {
@@ -62,39 +62,52 @@ class EpisodeController {
       const episodeDomain = new EpisodeDomain();
       episodeDomain.findEpisodeBySearch(req, res);
     }
-}
 
+    static async uploadEpisode(req,res){
+      const episodeDomain = new EpisodeDomain();
+      episodeDomain.uploadEpisode(req,res);
+    }
+}
+// get specific Series by id
+router.get("/", EpisodeController.getEpisode);
+
+// find and filter episode data
+router.get("/sort", EpisodeController.findEpisodeAndSort);
+
+// search episode
+router.get("/search", EpisodeController.findEpisodeBySearch);
+
+router.use(verifyToken);
 // // get all episode
 // router.get("/:series_id/:season_id/episode", EpisodeController.getAllEpisode);
+
 
 // create episode
 router.post("/", EpisodeController.createEpisode);
 
+//upload episode 
+router.post("/upload",EpisodeController.uploadEpisode);
+
 // create Multiple episode
 router.post("/multiepisode", EpisodeController.createMultiEpisode);
-// get specific Series by id
-router.get("/episode", EpisodeController.getEpisode);
+
 
 //soft bulk delete episode
 router.put(
-  "/episode/bulk_soft_delete",
+  "/bulk_soft_delete",
   EpisodeController.softDeleteBulkEpisode
 );
 
 //hard bulk delete episode
 router.delete(
-  "/episode/bulk_hard_delete",
+  "/bulk_hard_delete",
   EpisodeController.hardDeleteBulkEpisode
 );
 // update episode
-router.put("/episode/update", EpisodeController.updateEpisode);
+router.put("/update", EpisodeController.updateEpisode);
 
 //bulk update episode
-router.put("/episode/bulk_update", EpisodeController.updateBulkEpisode);
+router.put("/bulk_update", EpisodeController.updateBulkEpisode);
 
-// find and filter episode data
-router.get("/sort/episode", EpisodeController.findEpisodeAndSort);
 
-// search episode
-router.get("/search/episode", EpisodeController.findEpisodeBySearch);
 module.exports = router;

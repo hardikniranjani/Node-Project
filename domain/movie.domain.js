@@ -1,4 +1,5 @@
 const MovieModel = require("../models/movie.model");
+const path = require("path");
 
 class MovieDomain {
   // create movie
@@ -39,24 +40,19 @@ class MovieDomain {
 
   async uploadMovie(req, res) {
     const movie_id = req.query.movie_id;
-
+    const pathToUpload = path.normalize(`${__dirname}/..`);
     const findMovie = await MovieModel.findById(movie_id);
 
     if (!findMovie)
       return res
         .status(400)
         .send({ msg: `Can't found movie with id ${movie_id}` });
-    
+
     if (!req.files.banner || !req.files.video)
       return res.status(404).send({ msg: "Kindly upload all necessary data." });
 
     const banner = req.files.banner;
     const video = req.files.video;
-
-    let movie_path = {
-      videoPath: "",
-      bannerPath: "",
-    };
 
     const bannerType = banner.mimetype.split("/");
 
@@ -72,43 +68,37 @@ class MovieDomain {
         .status(400)
         .send({ msg: "Make sure your video must be an video." });
 
-    await video.mv(
-      `${__dirname}/public/videos/${findMovie.MovieName}.${videoType[1]}`,
-      (err) => {
-        if (err) return res.status(500).send({ msg: `error : ${err.message}` });
-      }
-    );
+    const vpath = `${pathToUpload}/public/Movies/videos/${findMovie.MovieName}.${videoType[1]}`;
+    const bpath = `${pathToUpload}/public/Movies/images/${findMovie.MovieName}.${bannerType[1]}`;
 
-    await banner.mv(
-      `${__dirname}/public/images/${findMovie.MovieName}.${bannerType[1]}`,
-      (err) => {
-        if (err) return res.status(500).send({ msg: `error : ${err.message}` });
-        movie_path.bannerPath = `${__dirname}/public/images/${findMovie.MovieName}.${bannerType[1]}`;
-      }
-    );
-    const vpath = `${__dirname}/public/videos/${findMovie.MovieName}.${videoType[1]}`;
-    const bpath =  `${__dirname}/public/images/${findMovie.MovieName}.${bannerType[1]}`;
+    await video.mv(vpath, (err) => {
+      if (err) return res.status(500).send({ msg: `error : ${err.message}` });
+    });
+
+    await banner.mv(bpath, (err) => {
+      if (err) return res.status(500).send({ msg: `error : ${err.message}` });
+    });
+
     const updateMovie = await MovieModel.findOneAndUpdate(
       { _id: movie_id },
       {
         $set: {
           Video_path: vpath,
-          Banner:bpath,
+          Banner: bpath,
         },
       },
       { new: true }
     );
 
-    if(!updateMovie) return res.status(400).send({msg : "not able to upload movie"});
+    if (!updateMovie)
+      return res.status(400).send({ msg: "not able to upload movie" });
 
-    console.log(updateMovie , "line 104");
-    console.log(movie_path, "line 105");
-    res.status(200).send({movie : updateMovie});
+    res.status(200).send({ movie: updateMovie });
   }
   // get all Movie
   async getAllMovie(req, res) {
-    var Movie_data = await MovieModel.find({IsActive: true});
-    if (Movie_data.length > 0 ) {
+    var Movie_data = await MovieModel.find({ IsActive: true });
+    if (Movie_data.length > 0) {
       res.send(Movie_data);
     } else {
       res.send("not found");

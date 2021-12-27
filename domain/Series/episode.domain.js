@@ -1,12 +1,13 @@
 const season_Model = require("../../models/Series/season.model");
 const series_Model = require("../../models/Series/season.model");
 const episode_Model = require("../../models/Series/episode.model");
+const path = require("path");
 
 class episodeDomain {
   //   create episode
   async createAnEpisode(req, res) {
-    // if (req.user !== "admin")
-    //   res.status(401).send({ msg: "You are not authorized!!!" });
+    if (req.user.role !== "admin")
+      res.status(401).send({ msg: "You are not authorized!!!" });
 
     const data = req.body;
     const season_id = data.SeasonID;
@@ -85,37 +86,106 @@ class episodeDomain {
     }
   }
 
+  async uploadEpisode(req, res) {
+    const episode_id = req.query.episode_id;
+    const pathToUpload = path.normalize(`${__dirname}/../..`);
+   
+    const findEpisode = await episode_Model.findById(episode_id);
+
+    if (!findEpisode)
+      return res
+        .status(400)
+        .send({ msg: `Can't found episode with id ${episode_id}` });
+
+    if (!req.files.banner || !req.files.video)
+      return res.status(404).send({ msg: "Kindly upload all necessary data." });
+
+    const banner = req.files.banner;
+    const video = req.files.video;
+
+    const bannerType = banner.mimetype.split("/");
+
+    if (bannerType[0] !== "image")
+      return res
+        .status(400)
+        .send({ msg: "Make sure your banner must be an image." });
+
+    const videoType = video.mimetype.split("/");
+
+    if (videoType[0] !== "video")
+      return res
+        .status(400)
+        .send({ msg: "Make sure your video must be an video." });
+
+    const vpath = `${pathToUpload}/public/Episodes/videos/${findEpisode.EpisodeName}.${videoType[1]}`;
+    const bpath = `${pathToUpload}/public/Episodes/images/${findEpisode.EpisodeName}.${bannerType[1]}`;
+
+    await video.mv(vpath, (err) => {
+      if (err) return res.status(500).send({ msg: `error : ${err.message}` });
+    });
+
+    await banner.mv(bpath, (err) => {
+      if (err) return res.status(500).send({ msg: `error : ${err.message}` });
+    
+    });
+
+    const updatedEpisode = await episode_Model.findOneAndUpdate(
+      { _id: episode_id },
+      {
+        $set: {
+          Video_path: vpath,
+          Poster_path: bpath,
+        },
+      },
+      { new: true }
+    );
+
+    if (!updatedEpisode)
+      return res.status(400).send({ msg: "not able to upload movie" });
+
+    res.status(200).send({ Episode: updatedEpisode });
+  }
+
   //   write bulk episodes
   async createBulkEpisode(req, res) {
-    if (req.user !== "admin")
-      res.status(401).send({ msg: "You are not authorized!!!" });
+    if (req.user.role !== "admin")
+      return res.status(401).send({ msg: "You are not authorized!!!" });
 
     const season_id = req.query.season_id;
     const arrayOfEpisode = req.body;
+    const dateUpdatedEpisode = arrayOfEpisode.map((obj) => {
+      const oldDate = obj.ReleaseDate;
+      const dateParts = oldDate.split("-");
+
+      const year = Number(dateParts[2]);
+      const month = Number(dateParts[1]) - 1;
+      const day = Number(dateParts[0]) + 1;
+      const date = new Date(year, month, day);
+
+      obj.ReleaseDate = date;
+      return obj;
+    });
 
     const season = await season_Model.find({ _id: season_id });
 
-    if (!season)
+    if (season.length <= 0)
       return res.status(404).send(`Season of id ${season_id} not found`);
 
-    episode_Model.insertMany(arrayOfEpisode, (err, docs) => {
-      if (err) return res.status(400).send("error while inserting the data");
-      res.status(200).send(docs);
-    });
+    await episode_Model.insertMany(dateUpdatedEpisode);
 
-    for (let i = 0; i < arrayOfEpisode.length; i++) {
-      await season_Model.findByIdAndUpdate(
-        { _id: season_id },
-        {
-          $addToSet: {
-            Episodes: arrayOfEpisode[i]._id,
-          },
+    const updateIdsToSeason = dateUpdatedEpisode.map((obj) => obj._id);
+
+    const updateSeason = await season_Model.findByIdAndUpdate(
+      { _id: season_id },
+      {
+        $addToSet: {
+          Episodes: [...updateIdsToSeason],
         },
-        { new: true }
-      );
-    }
+      },
+      { new: true }
+    );
 
-    res.status(200).send("Insert successfully");
+    res.status(200).send({ seasonEpisodes: updateSeason.Episodes });
   }
 
   //   get an episodes
@@ -172,7 +242,7 @@ class episodeDomain {
   // Hard delete episode
   async hardDeleteBulkEpisode(req, res) {
     if (req.user !== "admin")
-      res.status(401).send({ msg: "You are not authorized!!!" });
+      return res.status(401).send({ msg: "You are not authorized!!!" });
 
     const season_id = req.params.season_id;
     const arrayOfEpisode = req.body;
@@ -271,8 +341,8 @@ class episodeDomain {
 
     const episode = await episode_Model
       .find({ SeriesID: series_id, SeasonID: season_id })
-      .populate("series")
-      .populate("seasons")
+      .populate("SeriesID")
+      .populate("SeasonID")
       .sort(queryperam);
 
     if (!episode) return res.status(404).send({ msg: `episode not found` });

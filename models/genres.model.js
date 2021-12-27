@@ -13,15 +13,18 @@ const GenresSchema = new mongoose.Schema(({
         }
 })) 
 
-GenresSchema.pre('deleteOne',(next)=>{
-    let genre = this;
-    genre.model("Movies").deleteOne({
-      $pull: {
-        Genres: genre._id,
-      },
-    });
+// GenresSchema.pre('deleteMany',(next)=>{
+//     let genre = this;
+//     console.log(genre);
+//     console.log(this)
+//     genre.model("Movies").deleteOne({
+//       $pull: {
+//         Genres: genre._id,
+//       },
+//       next
+//     });
 
-})
+// })
 
 
 const genres = mongoose.model('genres', GenresSchema);

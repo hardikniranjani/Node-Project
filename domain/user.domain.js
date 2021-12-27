@@ -9,10 +9,52 @@ const wishlist = require("../models/Users/wishlist.model");
 class UserDomain {
   // create Admin
   async createAnAdmin(req, res) {
-    const Admin = req.body;
-    const { error } = userValidation(Admin);
+    const admin = req.body;
+    const { error } = userValidation(admin);
+    if (error) return res.status(500).send(error.details[0].message);
 
-    if (error) return res.send("error");
+    const findAdmin = await UserModel.findOne({ Email: admin.email });
+
+    if (findAdmin)
+      return res.status(400).send({ msg: "User already registered" });
+
+    const allUser = await UserModel.find().sort({ _id: -1 });
+
+    let id = 1;
+
+    if (allUser.length == 0) {
+      id = 1;
+    } else {
+      id = allUser[0]._id + 1;
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const newPassword = await bcrypt.hash(admin.password, salt);
+
+    let newAdmin = new UserModel({
+      _id: id,
+      Name: admin.name,
+      Email: admin.email,
+      Password: newPassword,
+      Role : "admin"
+    });
+
+    try {
+      const result = await newAdmin.save();
+
+      const token = jwt.sign(
+        { _id: newAdmin._id, role: "admin" },
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+          algorithm: "HS256",
+          expiresIn: "7200m",
+        }
+      );
+      console.log(token);
+      res.header("x-access-token", token).send(result);
+    } catch (e) {
+      res.send(e.message);
+    }
   }
 
   // create new user, signup path
@@ -168,7 +210,8 @@ class UserDomain {
 
   // get all users
   async getAllUsers(req, res) {
-    if (req.user.role !== "admin") return res.status(401).send("Access Denied!!!");
+    if (req.user.role !== "admin")
+      return res.status(401).send("Access Denied!!!");
 
     const result = await UserModel.find({ IsActive: true });
 
@@ -495,7 +538,7 @@ class UserDomain {
 
   //       res.status(200).send({
   //         fileName: file.name,
-         
+
   //       });
   //     });
   //   }
