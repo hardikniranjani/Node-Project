@@ -4,42 +4,48 @@
     "Country_id": 1,
     "Certification": "G",
     "Meaning": "All ages admitted. There is no content that would be objectionable to most parents. This is one of only two ratings dating back to 1968 that still exists today.",
-    "Order": 1
+    "Order": 1,
+    "IsActive":true
   },
   {
     "_id": 2,
     "Country_id": 1,
     "Certification": "PG-13",
     "Meaning": "Some material may be inappropriate for children under 13. Films given this rating may contain sexual content, brief or partial nudity, some strong language and innuendo, humor, mature themes, political themes, terror and/or intense action violence. However, bloodshed is rarely present. This is the minimum rating at which drug content is present.",
-    "Order": 3
+    "Order": 3,
+    "IsActive":true
   },
   {
     "_id": 3,
     "Country_id": 1,
     "Certification": "R",
     "Meaning": "Under 17 requires accompanying parent or adult guardian 21 or older. The parent/guardian is required to stay with the child under 17 through the entire movie, even if the parent gives the child/teenager permission to see the film alone. These films may contain strong profanity, graphic sexuality, nudity, strong violence, horror, gore, and strong drug use. A movie rated R for profanity often has more severe or frequent language than the PG-13 rating would permit. An R-rated movie may have more blood, gore, drug use, nudity, or graphic sexuality than a PG-13 movie would admit.",
-    "Order": 4
+    "Order": 4,
+    "IsActive":true
   },
   {
     "_id": 5,
     "Country_id": 1,
     "Certification": "NC-17",
     "Meaning": "These films contain excessive graphic violence, intense or explicit sex, depraved, abhorrent behavior, explicit drug abuse, strong language, explicit nudity, or any other elements which, at present, most parents would consider too strong and therefore off-limits for viewing by their children and teens. NC-17 does not necessarily mean obscene or pornographic in the oft-accepted or legal Meaning of those words.",
-    "Order": 5
+    "Order": 5,
+    "IsActive":true
   },
   {
     "_id": 6,
     "Country_id": 1,
     "Certification": "NR",
     "Meaning": "No rating information.",
-    "Order": 0
+    "Order": 0,
+    "IsActive":true
   },
   {
     "_id": 7,
     "Country_id": 1,
     "Certification": "PG",
     "Meaning": "Some material may not be suitable for children under 10. These films may contain some mild language, crude/suggestive humor, scary moments and/or violence. No drug content is present. There are a few exceptions to this rule. A few racial insults may also be heard.",
-    "Order": 2
+    "Order": 2,
+    "IsActive":true
   },
 
   {
@@ -47,35 +53,40 @@
     "Country_id": 2,
     "Certification": "18A",
     "Meaning": "Persons under 18 years of age must be accompanied by an adult. In the Maritimes & Manitoba, children under the age of 14 are prohibited from viewing the film.",
-    "Order": 4
+    "Order": 4,
+    "IsActive":true
   },
   {
     "_id": 9,
     "Country_id": 2,
     "Certification": "G",
     "Meaning": "All ages.",
-    "Order": 1
+    "Order": 1,
+    "IsActive":true
   },
   {
     "_id": 10,
     "Country_id": 2,
     "Certification": "PG",
     "Meaning": "Parental guidance advised. There is no age restriction but some material may not be suitable for all children.",
-    "Order": 2
+    "Order": 2,
+    "IsActive":true
   },
   {
     "_id": 11,
     "Country_id": 2,
     "Certification": "14A",
     "Meaning": "Persons under 14 years of age must be accompanied by an adult.",
-    "Order": 3
+    "Order": 3,
+    "IsActive":true
   },
   {
     "_id": 12,
     "Country_id": 2,
     "Certification": "A",
     "Meaning": "Admittance restricted to people 18 years of age or older. Sole purpose of the film is the portrayal of sexually explicit activity and/or explicit violence.",
-    "Order": 5
+    "Order": 5,
+    "IsActive":true
   },
 
   {
@@ -83,91 +94,104 @@
     "Country_id": 11,
     "Certification": "E",
     "Meaning": "Exempt from classification. Films that are exempt from classification must not contain contentious material (i.e. material that would ordinarily be rated M or higher).",
-    "Order": 1
+    "Order": 1,
+    "IsActive":true
   },
   {
     "_id": 14,
     "Country_id": 11,
     "Certification": "G",
     "Meaning": "General. The content is very mild in impact.",
-    "Order": 2
+    "Order": 2,
+    "IsActive":true
   },
   {
     "_id": 15,
     "Country_id": 11,
     "Certification": "R18+",
     "Meaning": "Restricted to 18 years and over. Adults only. The content is high in impact.",
-    "Order": 6
+    "Order": 6,
+    "IsActive":true
   },
   {
     "_id": 16,
     "Country_id": 11,
     "Certification": "RC",
     "Meaning": "Refused Classification. Banned from sale or hire in Australia; also generally applies to importation (if inspected by and suspicious to Customs). Private Internet viewing is unenforced and attempts to legally censor such online material has resulted in controversy. Films are rated RC if their content exceeds the guidelines. The content is very high in impact.",
-    "Order": 8
+    "Order": 8,
+    "IsActive":true
   },
   {
     "_id": 17,
     "Country_id": 11,
     "Certification": "PG",
     "Meaning": "Parental guidance recommended. There are no age restrictions. The content is mild in impact.",
-    "Order": 3
+    "Order": 3,
+    "IsActive":true
   },
   {
     "_id": 18,
     "Country_id": 11,
     "Certification": "M",
     "Meaning": "Recommended for mature audiences. There are no age restrictions. The content is moderate in impact.",
-    "Order": 4
+    "Order": 4,
+    "IsActive":true
   },
   {
     "_id": 19,
     "Country_id": 11,
     "Certification": "MA15+",
     "Meaning": "Mature Accompanied. Unsuitable for children younger than 15. Children younger than 15 years must be accompanied by a parent or guardian. The content is strong in impact.",
-    "Order": 5
+    "Order": 5,
+    "IsActive":true
   },
   {
     "_id": 20,
     "Country_id": 11,
     "Certification": "X18+",
     "Meaning": "Restricted to 18 years and over. Films with this rating have pornographic content. Films classified as X18+ are banned from being sold or rented in all Australian states and are only legally available in the Australian Capital Territory and the Northern Territory. However, importing X18+ material from the two territories to any of the Australian states is legal.The content is sexually explicit in impact.",
-    "Order": 7
+    "Order": 7,
+    "IsActive":true
   },
   {
     "_id": 21,
     "Country_id": 3,
     "Certification": "0",
     "Meaning": "No age restriction.",
-    "Order": 1
+    "Order": 1,
+    "IsActive":true
   },
   {
     "_id": 22,
     "Country_id": 3,
     "Certification": "6",
     "Meaning": "No children younger than 6 years admitted.",
-    "Order": 2
+    "Order": 2,
+    "IsActive":true
   },
   {
     "_id": 23,
     "Country_id": 3,
     "Certification": "12",
     "Meaning": "Children 12 or older admitted, children between 6 and 11 only when accompanied by parent or a legal guardian.",
-    "Order": 3
+    "Order": 3,
+    "IsActive":true
   },
   {
     "_id": 24,
     "Country_id": 3,
     "Certification": "16",
     "Meaning": "Children 16 or older admitted, nobody under this age admitted.",
-    "Order": 4
+    "Order": 4,
+    "IsActive":true
   },
   {
     "_id": 25,
     "Country_id": 3,
     "Certification": "18",
     "Meaning": "No youth admitted, only adults.",
-    "Order": 5
+    "Order": 5,
+    "IsActive":true
   },
 
   {
@@ -175,20 +199,23 @@
     "Country_id": 6,
     "Certification": "U",
     "Meaning": "Unrestricted Public Exhibition throughout India, suitable for all age groups. Films under this category should not upset children over 4. Such films may contain educational, social or family-oriented themes. Films under this category may also contain fantasy violence and/or mild bad language.",
-    "Order": 0
+    "Order": 0,
+    "IsActive":true
   },
   {
     "_id": 27,
     "Country_id": 6,
     "Certification": "UA",
     "Meaning": "All ages admitted, but it is advised that children below 12 be accompanied by a parent as the theme or content may be considered intense or inappropriate for young children. Films under this category may contain mature themes, sexual references, mild sex scenes, violence with brief gory images and/or infrequent use of crude language.",
-    "Order": 1
+    "Order": 1,
+    "IsActive":true
   },
   {
     "_id": 28,
     "Country_id": 6,
     "Certification": "A",
     "Meaning": "Restricted to adult audiences (18 years or over). Nobody below the age of 18 may buy/rent an A-rated DVD, VHS, UMD or watch a film in the cinema with this rating. Films under this category may contain adult/disturbing themes, frequent crude language, brutal violence with blood and gore, strong sex scenes and/or scenes of drug abuse which is considered unsuitable for minors.",
-    "Order": 2
+    "Order": 2,
+    "IsActive":true
   }
 ]

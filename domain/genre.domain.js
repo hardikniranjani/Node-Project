@@ -1,4 +1,6 @@
 const Genre = require('../models/genres.model');
+const series_Model = require("../../models/Series/season.model");
+
 
 class GenreDomain {
  // create Genre

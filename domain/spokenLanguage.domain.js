@@ -1,5 +1,6 @@
 const SpokenLanguage = require("../models/spokenLanguage.model");
 
+
 class SpokenLanguageDomain {
   // create SpokenLanguage
 
@@ -61,6 +62,7 @@ class SpokenLanguageDomain {
       },
       { new: true }
     );
+
 
     if (!result)
       return res.status(500).send({ msg: `Can't delete SpokenLanguage` });
