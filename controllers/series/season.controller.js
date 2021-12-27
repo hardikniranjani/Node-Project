@@ -1,7 +1,7 @@
 const express = require("express");
 const SeasonDomain = require("../../domain/Series/season.domain");
 const router = express.Router();
-const Episode = require("./episode.controller");
+
 
 class SeasonController {
   // get all Season
@@ -45,9 +45,20 @@ class SeasonController {
     const seasonDomain = new SeasonDomain();
     seasonDomain.getAnEpisodeOfSeason(req, res);
   }
+  // find and filter Season data
+  static async findSeasionAndSort(req, res) {
+    const seasonDomain = new SeasonDomain();
+    seasonDomain.findSeasionAndSort(req, res);
+  }
+
+  // search Season
+  static async findseasionBySearch(req, res) {
+    const seasonDomain = new SeasonDomain();
+    seasonDomain.findseasionBySearch(req, res);
+  }
 }
 
-// router.use('/:season_id/episode',Episode);
+
 
 // get all Season
 router.get("/:series_id/season/", SeasonController.getAllSeason);
@@ -69,4 +80,10 @@ router.get("/season/Episodes", SeasonController.getAllEpisodesOfSeason);
 
 // get specific episode from season
 router.get("/season/Episode", SeasonController.getAnEpisodeOfSeason);
+
+// find and filter season data
+router.get("/sort/season", SeasonController.findSeasionAndSort);
+
+// search season
+router.get("/search/season", SeasonController.findseasionBySearch);
 module.exports = router;

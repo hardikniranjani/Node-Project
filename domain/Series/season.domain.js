@@ -128,10 +128,10 @@ class seasonDomain {
     const season_result = await season.find({ SeasonNumber });
 
     if (!series_result)
-      return res.status(404).json({ msg: `Series id ${seiresID} not found` });
+      return res.status(404).json({ msg: `Series id ${seriesID} not found` });
 
     if (!season_result)
-      return res.status(404).json({ msg: `Season id ${seasonID} not found` });
+      return res.status(404).json({ msg: `Season id ${seriesID} not found` });
 
     const updateseason = await season.findOneAndUpdate(
       SeasonNumber,
@@ -144,7 +144,7 @@ class seasonDomain {
     if (!updateseason)
       return res
         .status(500)
-        .send({ msg: `Can't update season with id ${seasonID}` });
+        .send({ msg: `Can't update season with id ${SeasonNumber}` });
 
     res.status(200).send(updateseason);
   }
@@ -178,6 +178,47 @@ class seasonDomain {
 
     res.status(200).send(findEpisode);
   }
+
+    // find and filter seasion data
+    async findSeasionAndSort(req, res) {
+      const series_id = req.query.series_id;
+      const queryperam = req.query.filter;
+      const Ascending = req.query.ascending;
+  
+      const seasion = await season
+        .find({ SeriesID: series_id})
+        .populate("series")
+        .populate("episode")
+        .sort(queryperam);
+  
+      if (!seasion) return res.status(404).send({ msg: `seasion not found` });
+  
+      if (Ascending == "descending")
+        return res.status(200).send(seasion.reverse());
+  
+      return res.status(200).send(seasion);
+    }
+  
+    // search seasion
+    async findseasionBySearch(req, res) {
+      const series_id = req.query.series_id;
+      const queryperam = req.query.item1;
+      const queryName = req.query.item;
+  
+      const seasionData = await season
+        .find({
+          SeriesID: series_id,
+          [queryperam]: queryName,
+        })
+        .populate("series")
+        .populate("seasons")
+        .sort(`${queryperam}`);
+  
+      if (seasionData.length <= 0)
+        res.status(500).send({ msg: `seasion not found` });
+  
+      return res.status(200).send(seasionData);
+    }
 }
 
 module.exports = seasonDomain;

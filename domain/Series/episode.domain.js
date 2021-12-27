@@ -90,12 +90,13 @@ class episodeDomain {
     if (req.user !== "admin")
       res.status(401).send({ msg: "You are not authorized!!!" });
 
-    const season_id = req.params.season_id;
+    const season_id = req.query.season_id;
     const arrayOfEpisode = req.body;
 
-    const season = await season_Model.find({_id: season_id});
+    const season = await season_Model.find({ _id: season_id });
 
-    if(!season) return res.status(404).send(`Season of id ${season_id} not found`);
+    if (!season)
+      return res.status(404).send(`Season of id ${season_id} not found`);
 
     episode_Model.insertMany(arrayOfEpisode, (err, docs) => {
       if (err) return res.status(400).send("error while inserting the data");
@@ -104,24 +105,25 @@ class episodeDomain {
 
     for (let i = 0; i < arrayOfEpisode.length; i++) {
       await season_Model.findByIdAndUpdate(
-        { _id: season_id },{
+        { _id: season_id },
+        {
           $addToSet: {
-            Episodes: arrayOfEpisode[i]._id
-          }
-        },{new:true})
+            Episodes: arrayOfEpisode[i]._id,
+          },
+        },
+        { new: true }
+      );
     }
 
-    res.status(200).send("Insert successfully")
+    res.status(200).send("Insert successfully");
   }
 
   //   get an episodes
   async getAnEpisode(req, res) {
-    const season_id = req.params.season_id;
-    const series_id = req.params.series_id;
+    const episode_id = req.query.episode_id;
 
     const findEpisode = await episode_Model.find({
-      SeriesID: series_id,
-      SeasonID: season_id,
+      _id: episode_id,
     });
 
     if (!findEpisode) res.status(404).send({ msg: "data not found" });
@@ -134,12 +136,13 @@ class episodeDomain {
     if (req.user !== "admin")
       res.status(401).send({ msg: "You are not authorized!!!" });
 
-    const season_id = req.params.season_id;
+    const season_id = req.query.season_id;
     const arrayOfEpisode = req.body;
 
-    const season = await season_Model.find({_id: season_id});
+    const season = await season_Model.find({ _id: season_id });
 
-    if(!season) return res.status(404).send(`Season of id ${season_id} not found`);
+    if (!season)
+      return res.status(404).send(`Season of id ${season_id} not found`);
 
     for (let i = 0; i < arrayOfEpisode.length; i++) {
       await episode_Model.findByIdAndUpdate(
@@ -148,7 +151,8 @@ class episodeDomain {
           $set: {
             IsActive: false,
           },
-        },{new:true}
+        },
+        { new: true }
       );
 
       await season_Model.findByIdAndUpdate(
@@ -157,93 +161,149 @@ class episodeDomain {
           $pull: {
             Episodes: arrayOfEpisode[i]._id,
           },
-        },{new:true}
+        },
+        { new: true }
       );
     }
 
-    res.status(200).send("delete successfully")
-
+    res.status(200).send("delete successfully");
   }
 
-    // Hard delete episode
-    async hardDeleteBulkEpisode(req, res) {
-      if (req.user !== "admin")
-        res.status(401).send({ msg: "You are not authorized!!!" });
-  
-      const season_id = req.params.season_id;
-      const arrayOfEpisode = req.body;
-  
-      const season = await season_Model.find({_id: season_id});
-  
-      if(!season) return res.status(404).send(`Season of id ${season_id} not found`);
-  
-      for (let i = 0; i < arrayOfEpisode.length; i++) {
-        await episode_Model.findByIdAndDelete(
-          { _id: arrayOfEpisode[i]}
-        );
-  
-        await season_Model.findByIdAndUpdate(
-          { _id: season_id },
-          {
-            $pull: {
-              Episodes: arrayOfEpisode[i]._id,
-            },
-          },{new:true}
-        );
-      }
-  
-      res.status(200).send("Hard delete successfully")
-  
+  // Hard delete episode
+  async hardDeleteBulkEpisode(req, res) {
+    if (req.user !== "admin")
+      res.status(401).send({ msg: "You are not authorized!!!" });
+
+    const season_id = req.params.season_id;
+    const arrayOfEpisode = req.body;
+
+    const season = await season_Model.find({ _id: season_id });
+
+    if (!season)
+      return res.status(404).send(`Season of id ${season_id} not found`);
+
+    for (let i = 0; i < arrayOfEpisode.length; i++) {
+      await episode_Model.findByIdAndDelete({ _id: arrayOfEpisode[i] });
+
+      await season_Model.findByIdAndUpdate(
+        { _id: season_id },
+        {
+          $pull: {
+            Episodes: arrayOfEpisode[i]._id,
+          },
+        },
+        { new: true }
+      );
     }
 
-    //update episode
+    res.status(200).send("Hard delete successfully");
+  }
 
-    async updateAnEpisode(req, res) {
-        const episode_data = req.body;
-        const season_id = req.params.season_id;
-        const series_id = req.params.series_id;
+  //update episode
 
-        const series = await episode_Model.find({SeriesID: series_id});
-        if(!series) return res.status(404).send(`Series of id ${series_id} not found`);
-    
-        const season = await episode_Model.find({SeasonID: season_id});
-        if(!season) return res.status(404).send(`Season of id ${season_id} not found`);
-    
-        const UpdatedEpisode = await episode_Model.findByIdAndUpdate({
+  async updateAnEpisode(req, res) {
+    const episode_data = req.body;
+    const season_id = req.query.season_id;
+    const series_id = req.query.series_id;
+
+    const series = await episode_Model.find({ SeriesID: series_id });
+    if (!series)
+      return res.status(404).send(`Series of id ${series_id} not found`);
+
+    const season = await episode_Model.find({ SeasonID: season_id });
+    if (!season)
+      return res.status(404).send(`Season of id ${season_id} not found`);
+
+    const UpdatedEpisode = await episode_Model.findByIdAndUpdate(
+      {
+        SeriesID: series_id,
+        SeasonID: season_id,
+      },
+      {
+        $set: {
+          ...episode_data,
+        },
+      },
+      { new: true }
+    );
+
+    res.status(200).send(UpdatedEpisode);
+  }
+
+  //bulk update episode
+  async updateBulkEpisode(req, res) {
+    const arrayOfEpisode = req.body;
+    const season_id = req.query.season_id;
+    const series_id = req.query.series_id;
+
+    const series = await episode_Model.find({ SeriesID: series_id });
+    if (!series)
+      return res.status(404).send(`Series of id ${series_id} not found`);
+
+    const season = await episode_Model.find({ SeasonID: season_id });
+    if (!season)
+      return res.status(404).send(`Season of id ${season_id} not found`);
+
+    for (let i = 0; i < arrayOfEpisode.length; i++) {
+      await episode_Model.findByIdAndUpdate(
+        {
           SeriesID: series_id,
           SeasonID: season_id,
-        },{
-          $set:{
-            ...episode_data
-          }
-        },{new:true})
-
-          res.status(200).send(UpdatedEpisode)
-}
-
- //bulk update episode
- async updateAnEpisode(req, res) {
-  const arrayOfEpisode = req.body;
-  const season_id = req.params.season_id;
-  const series_id = req.params.series_id;
-
-  const series = await episode_Model.find({SeriesID: series_id});
-  if(!series) return res.status(404).send(`Series of id ${series_id} not found`);
-
-  const season = await episode_Model.find({SeasonID: season_id});
-  if(!season) return res.status(404).send(`Season of id ${season_id} not found`);
-
-  for (let i = 0; i < arrayOfEpisode.length; i++) {
-  await episode_Model.findByIdAndUpdate({
-    SeriesID: series_id,
-    SeasonID: season_id,
-  },{
-    $set:{
-      ...arrayOfEpisode
+        },
+        {
+          $set: {
+            ...arrayOfEpisode[i],
+          },
+        },
+        { new: true }
+      );
     }
-  },{new:true})}
 
-    res.status(200).send("update successfully")
-}
+    res.status(200).send("update successfully");
+  }
+
+  // find and filter episode data
+  async findEpisodeAndSort(req, res) {
+    const season_id = req.query.season_id;
+    const series_id = req.query.series_id;
+    const queryperam = req.query.filter;
+    const Ascending = req.query.ascending;
+
+    const episode = await episode_Model
+      .find({ SeriesID: series_id, SeasonID: season_id })
+      .populate("series")
+      .populate("seasons")
+      .sort(queryperam);
+
+    if (!episode) return res.status(404).send({ msg: `episode not found` });
+
+    if (Ascending == "descending")
+      return res.status(200).send(episode.reverse());
+
+    return res.status(200).send(episode);
+  }
+
+  // search Episode
+  async findEpisodeBySearch(req, res) {
+    const season_id = req.query.season_id;
+    const series_id = req.query.series_id;
+    const queryperam = req.query.item1;
+    const queryName = req.query.item;
+
+    const EpisodeData = await episode_Model
+      .find({
+        SeriesID: series_id,
+        SeasonID: season_id,
+        [queryperam]: queryName,
+      })
+      .populate("series")
+      .populate("seasons")
+      .sort(`${queryperam}`);
+
+    if (EpisodeData.length <= 0)
+      res.status(500).send({ msg: `Episode not found` });
+
+    return res.status(200).send(EpisodeData);
+  }
 }
 module.exports = episodeDomain;
