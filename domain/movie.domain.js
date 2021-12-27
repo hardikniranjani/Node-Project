@@ -39,8 +39,8 @@ class MovieDomain {
 
   // get all Movie
   async getAllMovie(req, res) {
-    var Movie_data = await MovieModel.find();
-    if (Movie_data.length > 0) {
+    var Movie_data = await MovieModel.find({IsActive: true});
+    if (Movie_data.length > 0 ) {
       res.send(Movie_data);
     } else {
       res.send("not found");
@@ -212,7 +212,7 @@ class MovieDomain {
     // }
   }
 
-  // search movie by Original_language
+  // search movie 
   async findMovieBySearch(req,res){
     const queryperam = req.query.item1;
     const queryName = req.query.item;
@@ -223,7 +223,7 @@ class MovieDomain {
                                       .populate("Production_companies")
                                       .sort(`${queryperam}`);
 
-       if(movieData.length<=0)  res.status(500).send({ msg: `Movies not found` }); 
+       if(movieData.length<=0) return res.status(500).send({ msg: `Movies not found` }); 
 
        res.status(200).send(movieData)
 

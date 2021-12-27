@@ -21,7 +21,7 @@ class GenreDomain {
 
   // get all categories
   async getAllGenre(req, res) {
-    var data = await Genre.find();
+    var data = await Genre.find({IsActive: true});
 
     if (data.length > 0) {
       res.send(data);

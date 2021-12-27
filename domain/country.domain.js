@@ -42,7 +42,7 @@ class CountryDomain {
 
   // get all country
   async getAllCountry(req, res) {
-    var data = await Country.find();
+    var data = await Country.find({IsActive: true});
 
     if (data.length > 0) {
       res.send(data);
