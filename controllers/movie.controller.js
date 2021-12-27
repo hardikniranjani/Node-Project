@@ -58,6 +58,11 @@ class MovieController {
    const movieDomain = new MovieDomain();
    movieDomain.findMovieBySearch(req, res);
  }
+
+    static async uploadMovie (req,res){
+      const movieDomain = new MovieDomain();
+      movieDomain.uploadMovie(req,res);
+    }
 }
 
 
@@ -71,6 +76,9 @@ router.get("/:id", MovieController.getMovie);
 
 // create Movie
 router.post("/", MovieController.createMovie);
+
+// upload movie
+router.post("/upload", MovieController.uploadMovie);
 
 // update Movie
 router.put("/:id", MovieController.updateMovie);

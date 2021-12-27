@@ -168,7 +168,7 @@ class UserDomain {
 
   // get all users
   async getAllUsers(req, res) {
-    if (req.user.role == "admin") res.status(401).send("Access Denied!!!");
+    if (req.user.role !== "admin") return res.status(401).send("Access Denied!!!");
 
     const result = await UserModel.find({ IsActive: true });
 
@@ -482,26 +482,28 @@ class UserDomain {
     }
   }
 
-  async upload(req, res) {
-    //   if(req.user.role !== "admin")  return res.status(400).send({ msg : "You are not authorized."});
+  // async upload(req, res) {
+  //   //   if(req.user.role !== "admin")  return res.status(400).send({ msg : "You are not authorized."});
 
-    if (req.files === null) res.status(404).send({ msg: "No file is found" });
+  //   if (req.files === null) res.status(404).send({ msg: "No file is found" });
 
-    const file = req.files.file;
-    const fileType = file.mimetype.split("/")[0];
-    if (fileType == "image") {
-      file.mv(`${__dirname}/public/images/${file.name}`, (err) => {
-        if (err) return res.status(500).send({ msg: `error : ${err.message}` });
+  //   const file = req.files.file;
+  //   const fileType = file.mimetype.split("/")[0];
+  //   if (fileType == "jpeg" || fileType == "png") {
+  //     file.mv(`${__dirname}/public/images/${file.name}`, (err) => {
+  //       if (err) return res.status(500).send({ msg: `error : ${err.message}` });
 
-        res.status(200).send({
-          fileName: file.name,
+  //       res.status(200).send({
+  //         fileName: file.name,
          
-        });
-      });
-    }
+  //       });
+  //     });
+  //   }
 
-    
-  }
+  //   if(fileType == "mp4"){
+
+  //   }
+  // }
 }
 
 module.exports = UserDomain;

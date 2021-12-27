@@ -9,6 +9,7 @@ function verifyToken(req, res, next) {
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, {
       algorithm: 'HS256',
     });
+    
     req.user = decoded;
     console.log(req.user,"line 13 auth.middleware");
     next();

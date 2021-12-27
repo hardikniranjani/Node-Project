@@ -37,6 +37,74 @@ class MovieDomain {
     }
   }
 
+  async uploadMovie(req, res) {
+    const movie_id = req.query.movie_id;
+
+    const findMovie = await MovieModel.findById(movie_id);
+
+    if (!findMovie)
+      return res
+        .status(400)
+        .send({ msg: `Can't found movie with id ${movie_id}` });
+    
+    if (!req.files.banner || !req.files.video)
+      return res.status(404).send({ msg: "Kindly upload all necessary data." });
+
+    const banner = req.files.banner;
+    const video = req.files.video;
+
+    let movie_path = {
+      videoPath: "",
+      bannerPath: "",
+    };
+
+    const bannerType = banner.mimetype.split("/");
+
+    if (bannerType[0] !== "image")
+      return res
+        .status(400)
+        .send({ msg: "Make sure your banner must be an image." });
+
+    const videoType = video.mimetype.split("/");
+
+    if (videoType[0] !== "video")
+      return res
+        .status(400)
+        .send({ msg: "Make sure your video must be an video." });
+
+    await video.mv(
+      `${__dirname}/public/videos/${findMovie.MovieName}.${videoType[1]}`,
+      (err) => {
+        if (err) return res.status(500).send({ msg: `error : ${err.message}` });
+        movie_path.videoPath = `${__dirname}/public/videos/${findMovie.MovieName}.${videoType[1]}`;
+      }
+    );
+
+    await banner.mv(
+      `${__dirname}/public/images/${findMovie.MovieName}.${bannerType[1]}`,
+      (err) => {
+        if (err) return res.status(500).send({ msg: `error : ${err.message}` });
+        movie_path.bannerPath = `${__dirname}/public/images/${findMovie.MovieName}.${bannerType[1]}`;
+      }
+    );
+
+    const updateMovie = await MovieModel.findOneAndUpdate(
+      { _id: movie_id },
+      {
+        $set: {
+          Video_path : movie_path.videoPath,
+          Banner : movie_path.bannerPath,
+        },
+      },
+      { new: true }
+    );
+
+    if(!updateMovie) return res.status(400).send({msg : "not able to upload movie"});
+
+    console.log(updateMovie , "line 104");
+    console.log(movie_path, "line 105");
+    res.status(200).send({movie : updateMovie});
+  }
   // get all Movie
   async getAllMovie(req, res) {
     var Movie_data = await MovieModel.find({IsActive: true});
@@ -59,7 +127,7 @@ class MovieDomain {
     }
   }
 
-  async sortMovie(req,res) {
+  async sortMovie(req, res) {
     var category = req.query.sortBy;
     const result = await MovieModel.find()
       .populate("Genres")
@@ -149,7 +217,7 @@ class MovieDomain {
   // }
 
   // find and filter movie data by Name, Revenue,Vote_average,Vote_count,Budget,popularity
-  async findMovieBySort(req, res){
+  async findMovieBySort(req, res) {
     const queryperam = req.query.filter;
     const Ascending = req.query.ascending;
 
@@ -157,17 +225,27 @@ class MovieDomain {
 
     if (!movie) return res.status(404).send({ msg: `Movies not found` });
 
-    if(Ascending == 'ascending'){
-      const movieData = await MovieModel.find().populate("Genres").populate("Spoken_languages").populate("Production_companies").sort(`${queryperam}`);
-      return  res.status(200).send(movieData);
-    }
-    else if(Ascending == 'descending') {
-      const movieData = await MovieModel.find().populate("Genres").populate("Spoken_languages").populate("Production_companies").sort(`-${queryperam}`);
-      return  res.status(200).send(movieData);
-    }
-    else{
-      const movieData = await MovieModel.find().populate("Genres").populate("Spoken_languages").populate("Production_companies").sort(`${queryperam}`);
-      return  res.status(200).send(movieData);
+    if (Ascending == "ascending") {
+      const movieData = await MovieModel.find()
+        .populate("Genres")
+        .populate("Spoken_languages")
+        .populate("Production_companies")
+        .sort(`${queryperam}`);
+      return res.status(200).send(movieData);
+    } else if (Ascending == "descending") {
+      const movieData = await MovieModel.find()
+        .populate("Genres")
+        .populate("Spoken_languages")
+        .populate("Production_companies")
+        .sort(`-${queryperam}`);
+      return res.status(200).send(movieData);
+    } else {
+      const movieData = await MovieModel.find()
+        .populate("Genres")
+        .populate("Spoken_languages")
+        .populate("Production_companies")
+        .sort(`${queryperam}`);
+      return res.status(200).send(movieData);
     }
 
     // if(queryperam == 'Revenue' && Ascending == 'ascending'){
@@ -212,21 +290,21 @@ class MovieDomain {
     // }
   }
 
-  // search movie 
-  async findMovieBySearch(req,res){
+  // search movie by Original_language
+  async findMovieBySearch(req, res) {
     const queryperam = req.query.item1;
     const queryName = req.query.item;
 
-    const movieData = await MovieModel.find({[queryperam]:queryName})
-                                      .populate("Genres")
-                                      .populate("Spoken_languages")
-                                      .populate("Production_companies")
-                                      .sort(`${queryperam}`);
+    const movieData = await MovieModel.find({ [queryperam]: queryName })
+      .populate("Genres")
+      .populate("Spoken_languages")
+      .populate("Production_companies")
+      .sort(`${queryperam}`);
 
-       if(movieData.length<=0) return res.status(500).send({ msg: `Movies not found` }); 
+    if (movieData.length <= 0)
+      res.status(500).send({ msg: `Movies not found` });
 
-       res.status(200).send(movieData)
-
+    res.status(200).send(movieData);
   }
 }
 

@@ -64,6 +64,9 @@ const movieSchema = new mongoose.Schema({
   LongDescription: {
     type: String,
   },
+  Video_path : {
+    type : String
+  },
   Banner: {
     type: String,
   },
