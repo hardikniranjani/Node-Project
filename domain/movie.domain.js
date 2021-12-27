@@ -76,7 +76,6 @@ class MovieDomain {
       `${__dirname}/public/videos/${findMovie.MovieName}.${videoType[1]}`,
       (err) => {
         if (err) return res.status(500).send({ msg: `error : ${err.message}` });
-        movie_path.videoPath = `${__dirname}/public/videos/${findMovie.MovieName}.${videoType[1]}`;
       }
     );
 
@@ -87,13 +86,14 @@ class MovieDomain {
         movie_path.bannerPath = `${__dirname}/public/images/${findMovie.MovieName}.${bannerType[1]}`;
       }
     );
-
+    const vpath = `${__dirname}/public/videos/${findMovie.MovieName}.${videoType[1]}`;
+    const bpath =  `${__dirname}/public/images/${findMovie.MovieName}.${bannerType[1]}`;
     const updateMovie = await MovieModel.findOneAndUpdate(
       { _id: movie_id },
       {
         $set: {
-          Video_path : movie_path.videoPath,
-          Banner : movie_path.bannerPath,
+          Video_path: vpath,
+          Banner:bpath,
         },
       },
       { new: true }
