@@ -21,6 +21,10 @@ const movieCertificaionSchema = new mongoose.Schema({
     Order : {
       type : Number,
       required : true
+    },
+    IsActive: {
+      type: Boolean,
+      default: true,
     }
 });
 

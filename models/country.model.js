@@ -20,7 +20,11 @@ const CountrySchema = new mongoose.Schema(({
             type : Number,
             minlength : 1,
             maxlength : 4
-        }
+        },
+        IsActive: {
+            type: Boolean,
+            default: true,
+          }
 })) 
 
 

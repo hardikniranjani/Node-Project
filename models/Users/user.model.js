@@ -34,6 +34,14 @@ const userSchema = new mongoose.Schema({
     type: Number,
     ref: "watchHistory",
   },
+  watchLater: {
+    type: Number,
+    ref: "watchLater",
+  },
+  wishlist: {
+    type: Number,
+    ref: "wishlist",
+  },
   IsActive: {
     type: Boolean,
     default: true,
