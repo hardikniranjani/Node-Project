@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     type: Number,
   },
   Name: {
-    type: String,
+    type: String
   },
   Email: {
     type: String,
@@ -45,9 +45,9 @@ const UserModel = mongoose.model('users',userSchema);
 function userValidation(){
     const schema = Joi.object({
         _id:Joi.number(),
-        Name:Joi.string().max(25),
-        Email:Joi.string().email(),
-        Password:Joi.string().max(25),
+        Name:Joi.string().max(25).required(),
+        Email:Joi.string().email().required(),
+        Password:Joi.string().max(25).required(),
     })
     
     return schema.validate()

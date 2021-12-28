@@ -6,6 +6,8 @@ const watchHistory = require("../models/Users/watchHistory.model");
 const watchLater = require("../models/Users/watchLater.model");
 const wishlist = require("../models/Users/wishlist.model");
 
+const SubscriptionModel = require("../models/subscription.model");
+
 class UserDomain {
   // create Admin
   async createAnAdmin(req, res) {
@@ -121,8 +123,11 @@ class UserDomain {
             expiresIn: "7200m",
           }
         );
-        console.log(token);
-        res.header("x-access-token", token).send(findUser);
+        console.log(token,"line 124 user.domain");
+        res
+          .header("x-access-token", token)
+          .send(findUser)
+          
       } else {
         res.status(400).send("Invalid Email Or Password!!!");
       }
@@ -525,28 +530,30 @@ class UserDomain {
     }
   }
 
-  // async upload(req, res) {
-  //   //   if(req.user.role !== "admin")  return res.status(400).send({ msg : "You are not authorized."});
+  async addSubscription(req,res){
+    const user_id = req.user._id;
+    const plan_id = req.query.plan_id;
+    
 
-  //   if (req.files === null) res.status(404).send({ msg: "No file is found" });
+    const getPlan = await SubscriptionModel.findById(plan_id);
+    
+    const findUser = await UserModel.findById(user_id);
 
-  //   const file = req.files.file;
-  //   const fileType = file.mimetype.split("/")[0];
-  //   if (fileType == "jpeg" || fileType == "png") {
-  //     file.mv(`${__dirname}/public/images/${file.name}`, (err) => {
-  //       if (err) return res.status(500).send({ msg: `error : ${err.message}` });
+    if(!findUser) return res.status(404).send({msg : "Can't find user. Please login again"});
 
-  //       res.status(200).send({
-  //         fileName: file.name,
+    const addplanToUser = await UserModel.findByIdAndUpdate(
+      { _id: user_id },
+      {
+        $set: {
+          Subscription_plan_id: plan_id,
+          Subscription_duration:1,
+        },
+      },
+      { new : true }
+    );
+    res.status(200).send(addplanToUser);
 
-  //       });
-  //     });
-  //   }
-
-  //   if(fileType == "mp4"){
-
-  //   }
-  // }
+  }
 }
 
 module.exports = UserDomain;

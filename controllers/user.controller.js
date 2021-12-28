@@ -89,6 +89,11 @@ class UserController {
     const userDomain = new UserDomain();
     userDomain.upload(req,res);
   }
+
+  static async addSubscription(req,res){
+     const userDomain = new UserDomain();
+     userDomain.addSubscription(req, res);
+  }
 }
 
 
@@ -136,5 +141,6 @@ router.get("/wishlist", UserController.getWishList);
 //delete wishlist
 router.delete("/wishlist", UserController.deleteWishlist);
 
-router.post('/upload', UserController.upload);
+router.post("/addsubscription", UserController.addSubscription);
+
 module.exports = router;

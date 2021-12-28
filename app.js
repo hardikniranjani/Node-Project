@@ -31,7 +31,7 @@ app.use(fileupload());
 app.use("/user", userController);
 app.use("/movies", moviesController);
 app.use("/series", seriesController);
-app.use("/seasion", seasonController);
+app.use("/season", seasonController);
 app.use("/episode", episodeController);
 app.use("/category", categoryController);
 app.use("/country", countryController);
