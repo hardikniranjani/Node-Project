@@ -111,8 +111,9 @@ class UserDomain {
   async getAnUser(req, res) {
     const user = req.body;
 
-    const findUser = await UserModel.findOne({ Email: user.email });
-
+    const findUser = await UserModel.findOne({ Email: user.email })
+      .populate("Subscription_plan_id")
+      
     if (findUser && findUser.IsActive) {
       if (bcrypt.compareSync(user.password, findUser.Password)) {
         const token = jwt.sign(
