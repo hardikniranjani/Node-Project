@@ -22,6 +22,10 @@ const tvCertificaionSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  IsActive: {
+    type: Boolean,
+    default: true,
+  }
 });
 
 const tvCertificaion = mongoose.model(

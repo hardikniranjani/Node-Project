@@ -10,6 +10,10 @@ const GenresSchema = new mongoose.Schema(({
             type:String,
             minlength:2,
             maxlength:30
+        },
+        IsActive: {
+          type: Boolean,
+          default: true,
         }
 })) 
 
