@@ -169,9 +169,7 @@ class MovieDomain {
     const UpdateMovie = await MovieModel.findByIdAndUpdate(
       id,
       {
-        $set: {
-          ...data,
-        },
+        $set: {  ...data  },
       },
       { new: true }
     );
