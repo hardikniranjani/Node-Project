@@ -65,31 +65,31 @@ class UserController {
     userDomain.showWatchLater(req, res);
   }
 
+  // remove watch later list
   static async removeFromWatchLater(req, res) {
     const userDomain = new UserDomain();
     userDomain.removeFromWatchLater(req, res);
   }
 
+  // add wishlist of user
   static async addToWishList(req, res) {
     const userDomain = new UserDomain();
     userDomain.addToWishList(req, res);
   }
 
+  // show wishlist of user
   static async getWishList(req,res){
     const userDomain = new UserDomain();
     userDomain.getWishList(req,res);
   }
 
+  // delete wishlist of user
   static async deleteWishlist(req,res){
     const userDomain = new UserDomain();
     userDomain.removeFromWishlist(req,res);
   }
 
-  static async upload(req,res){
-    const userDomain = new UserDomain();
-    userDomain.upload(req,res);
-  }
-
+  // add subscription of user
   static async addSubscription(req,res){
      const userDomain = new UserDomain();
      userDomain.addSubscription(req, res);
@@ -100,13 +100,14 @@ class UserController {
 // create User
 router.post("/signup", UserController.createAnUser);
 
+// login user
 router.post("/login", UserController.getAnUser);
 
+// signup admin
 router.post("/create_admin", UserController.createAnAdmin);
 
+// middleware 
 router.use(verifyToken);
-// get user by id
-// router.get('/:id', UserController.getUser);
 
 // update user
 router.put("/update", UserController.updateAnUser);
@@ -141,6 +142,7 @@ router.get("/wishlist", UserController.getWishList);
 //delete wishlist
 router.delete("/wishlist", UserController.deleteWishlist);
 
+// add subscription plan of user
 router.post("/addsubscription", UserController.addSubscription);
 
 module.exports = router;
