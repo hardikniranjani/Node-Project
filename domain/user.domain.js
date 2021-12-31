@@ -137,6 +137,8 @@ class UserDomain {
     }
   }
 
+
+  // update an user
   async updateAnUser(req, res) {
     const user = req.body;
     const user_id = req.user._id;
@@ -536,7 +538,7 @@ class UserDomain {
     if (findUser.length == 0) {
       res.status(404).send({ msg: "Empty wishlist!!!" });
     } else {
-      const updateWishlist = await wishlist.findOneAndDelete({
+         await wishlist.findOneAndDelete({
         UserId: user_id,
       });
 
