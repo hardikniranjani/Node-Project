@@ -4,11 +4,10 @@ const router = express.Router();
 const verifyToken = require("../authentication/auth.middleware");
 
 class UserController {
-
   //create a new admin
-  static async createAnAdmin(req,res){
+  static async createAnAdmin(req, res) {
     const userDomain = new UserDomain();
-    userDomain.createAnAdmin(req,res);
+    userDomain.createAnAdmin(req, res);
   }
 
   // get user by id
@@ -78,24 +77,28 @@ class UserController {
   }
 
   // show wishlist of user
-  static async getWishList(req,res){
+  static async getWishList(req, res) {
     const userDomain = new UserDomain();
-    userDomain.getWishList(req,res);
+    userDomain.getWishList(req, res);
   }
 
   // delete wishlist of user
-  static async deleteWishlist(req,res){
+  static async deleteWishlist(req, res) {
     const userDomain = new UserDomain();
-    userDomain.removeFromWishlist(req,res);
+    userDomain.removeFromWishlist(req, res);
   }
 
   // add subscription of user
-  static async addSubscription(req,res){
-     const userDomain = new UserDomain();
-     userDomain.addSubscription(req, res);
+  static async addSubscription(req, res) {
+    const userDomain = new UserDomain();
+    userDomain.addSubscription(req, res);
   }
 
-  
+  // add subscription of user
+  static async removeFromHistory(req, res) {
+    const userDomain = new UserDomain();
+    userDomain.removeFromHisoty(req, res);
+  }
 }
 
 
@@ -146,5 +149,7 @@ router.delete("/wishlist", UserController.deleteWishlist);
 
 // add subscription plan of user
 router.post("/addsubscription", UserController.addSubscription);
+
+router.put("/removeonehistory",UserController.removeFromHistory);
 
 module.exports = router;

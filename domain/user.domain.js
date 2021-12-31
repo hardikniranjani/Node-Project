@@ -358,7 +358,7 @@ class UserDomain {
     if (list.length == 0) {
       res.status(200).send({ msg: "No list is there." });
     } else {
-      const deletedlist = await watchLater.findOneAndUpdate({
+      const deletedlist = await watchHistory.findOneAndUpdate({
         User: User_id,
         $pull: {
           [media_type]: media_id,
@@ -366,7 +366,7 @@ class UserDomain {
       });
       res
         .status(200)
-        .send({ msg: "Your list has been Successfully updated!!!" });
+        .send({ msg: `Your list has been Successfully updated!!! ${deletedlist}` });
     }
   }
 
