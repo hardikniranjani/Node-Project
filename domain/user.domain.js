@@ -38,7 +38,7 @@ class UserDomain {
       Name: admin.name,
       Email: admin.email,
       Password: newPassword,
-      Role : "admin"
+      Role: "admin",
     });
 
     try {
@@ -111,9 +111,10 @@ class UserDomain {
   async getAnUser(req, res) {
     const user = req.body;
 
-    const findUser = await UserModel.findOne({ Email: user.email })
-      .populate("Subscription_plan_id")
-      
+    const findUser = await UserModel.findOne({ Email: user.email }).populate(
+      "Subscription_plan_id"
+    );
+
     if (findUser && findUser.IsActive) {
       if (bcrypt.compareSync(user.password, findUser.Password)) {
         const token = jwt.sign(
@@ -124,11 +125,8 @@ class UserDomain {
             expiresIn: "7200m",
           }
         );
-        console.log(token,"line 124 user.domain");
-        res
-          .header("x-access-token", token)
-          .send(findUser)
-          
+        console.log(token, "line 124 user.domain");
+        res.header("x-access-token", token).send(findUser);
       } else {
         res.status(400).send("Invalid Email Or Password!!!");
       }
@@ -136,7 +134,6 @@ class UserDomain {
       res.status(404).send("Can't find User");
     }
   }
-
 
   // update an user
   async updateAnUser(req, res) {
@@ -333,7 +330,6 @@ class UserDomain {
     }
   }
 
-
   // delete watch history of user
   async deleteWatchHistory(req, res) {
     let User_id = req.user._id;
@@ -341,12 +337,36 @@ class UserDomain {
     const history = await watchHistory.find({ User: User_id });
     console.log(history);
     if (history.length == 0) {
-      res.status(200).send("Nothing to delete!!!");
+      res.status(200).send({ msg: "Nothing to delete!!!" });
     } else {
       const deletedHistory = await watchHistory.findOneAndDelete({
         User: User_id,
       });
-      res.status(200).send("Your History has been Successfully deleted!!!");
+      res
+        .status(200)
+        .send({ msg: "Your History has been Successfully deleted!!!" });
+    }
+  }
+
+  //remove particular media
+  async removeFromHisoty(req, res) {
+    let User_id = req.user._id;
+    let media_id = req.query.media_id;
+    let media_type = req.query.media_type;
+    const list = await watchHistory.find({ User: User_id });
+
+    if (list.length == 0) {
+      res.status(200).send({ msg: "No list is there." });
+    } else {
+      const deletedlist = await watchLater.findOneAndUpdate({
+        User: User_id,
+        $pull: {
+          [media_type]: media_id,
+        },
+      });
+      res
+        .status(200)
+        .send({ msg: "Your list has been Successfully updated!!!" });
     }
   }
 
@@ -385,7 +405,6 @@ class UserDomain {
       }
     }
   }
-
 
   // show watch history of user
   async showWatchLater(req, res) {
@@ -432,25 +451,27 @@ class UserDomain {
     });
   }
 
-
   // remove watch history of user
   async removeFromWatchLater(req, res) {
     let User_id = req.user._id;
-
+    let media_id = req.query.media_id;
+    let media_type = req.query.media_type;
     const list = await watchLater.find({ User: User_id });
 
     if (list.length == 0) {
       res.status(200).send({ msg: "No list is there." });
     } else {
-      const deletedlist = await watchLater.findOneAndDelete({
+      const deletedlist = await watchLater.findOneAndUpdate({
         User: User_id,
+        $pull: {
+          [media_type]: media_id,
+        },
       });
       res
         .status(200)
         .send({ msg: "Your list has been Successfully updated!!!" });
     }
   }
-
 
   // add ro wishlist of user
   async addToWishList(req, res) {
@@ -487,8 +508,7 @@ class UserDomain {
     }
   }
 
-
-  // show wishlist of user 
+  // show wishlist of user
   async getWishList(req, res) {
     const user_id = req.user._id;
 
@@ -528,51 +548,55 @@ class UserDomain {
     });
   }
 
-
   // remove wishlist of user
   async removeFromWishlist(req, res) {
     const user_id = req.user._id;
-
+    const media_id = req.query.media_id;
+    let media_type = req.query.media_type;
     const findUser = await wishlist.find({ UserId: user_id });
 
     if (findUser.length == 0) {
       res.status(404).send({ msg: "Empty wishlist!!!" });
     } else {
-         await wishlist.findOneAndDelete({
+      await wishlist.findOneAndUpdate({
         UserId: user_id,
+        $pull: {
+          [media_type]: media_id,
+        },
       });
 
       res.status(200).send({ msg: "Your wishlist deleted successfully." });
     }
   }
 
-
-  // add subscription on user id 
-  async addSubscription(req,res){
+  // add subscription on user id
+  async addSubscription(req, res) {
     const user_id = req.user._id;
     const plan_id = req.query.plan_id;
-    
 
     const getPlan = await SubscriptionModel.findById(plan_id);
-    
-    if(!getPlan) return res.status(404).send({msg : `Plan id ${plan_id} not found`});
+
+    if (!getPlan)
+      return res.status(404).send({ msg: `Plan id ${plan_id} not found` });
 
     const findUser = await UserModel.findById(user_id);
 
-    if(!findUser) return res.status(404).send({msg : "Can't find user. Please login again"});
+    if (!findUser)
+      return res
+        .status(404)
+        .send({ msg: "Can't find user. Please login again" });
 
     const addplanToUser = await UserModel.findByIdAndUpdate(
       { _id: user_id },
       {
         $set: {
           Subscription_plan_id: plan_id,
-          Subscription_duration:1,
+          Subscription_duration: 1,
         },
       },
-      { new : true }
+      { new: true }
     );
     res.status(200).send(addplanToUser);
-
   }
 }
 

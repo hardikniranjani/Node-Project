@@ -94,6 +94,8 @@ class UserController {
      const userDomain = new UserDomain();
      userDomain.addSubscription(req, res);
   }
+
+  
 }
 
 
@@ -130,7 +132,7 @@ router.post("/watch_later", UserController.addToWatchLater);
 router.get("/watch_later", UserController.getWatchLaterList);
 
 //remove from watchlater
-router.delete("/remove", UserController.removeFromWatchLater);
+router.put("/remove", UserController.removeFromWatchLater);
 
 //add to wishlist
 router.post("/wishlist", UserController.addToWishList);

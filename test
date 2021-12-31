@@ -17,3 +17,5 @@ video and episode title to database and to local data and
 add controllers related to that
 
 populate plan and hisotry and wishlist
+
+mediatype = movies and series
