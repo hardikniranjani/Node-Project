@@ -535,7 +535,7 @@ class UserDomain {
       if (obj.IsActive == true) {
         return {
           movie_id: obj._id,
-          movie_name: obj.SeriesName,
+          movie_name: obj.MovieName,
           description: obj.ShortDescription,
           releasedata: obj.ReleaseDate,
         };
