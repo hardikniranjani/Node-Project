@@ -38,6 +38,7 @@ class MovieDomain {
     }
   }
 
+  // uplode movie video
   async uploadMovie(req, res) {
     const movie_id = req.query.movie_id;
     const pathToUpload = path.normalize(`${__dirname}/..`);
@@ -95,6 +96,7 @@ class MovieDomain {
 
     res.status(200).send({ movie: updateMovie });
   }
+
   // get all Movie
   async getAllMovie(req, res) {
     var Movie_data = await MovieModel.find({ IsActive: true });
@@ -117,6 +119,7 @@ class MovieDomain {
     }
   }
 
+  // sorting movie
   async sortMovie(req, res) {
     var category = req.query.sortBy;
     const result = await MovieModel.find()
@@ -206,81 +209,100 @@ class MovieDomain {
   //   res.status(200).send(movieData);
   // }
 
-  // find and filter movie data by Name, Revenue,Vote_average,Vote_count,Budget,popularity
+  // // find and filter movie data by Name, Revenue,Vote_average,Vote_count,Budget,popularity
+  // async findMovieBySort(req, res) {
+  //   const queryperam = req.query.filter;
+  //   const Ascending = req.query.ascending;
+
+  //   const movie = await MovieModel.find();
+
+  //   if (!movie) return res.status(404).send({ msg: `Movies not found` });
+
+  //   if (Ascending == "ascending") {
+  //     const movieData = await MovieModel.find()
+  //       .populate("Genres")
+  //       .populate("Spoken_languages")
+  //       .populate("Production_companies")
+  //       .sort(`${queryperam}`);
+  //     return res.status(200).send(movieData);
+  //   } else if (Ascending == "descending") {
+  //     const movieData = await MovieModel.find()
+  //       .populate("Genres")
+  //       .populate("Spoken_languages")
+  //       .populate("Production_companies")
+  //       .sort(`-${queryperam}`);
+  //     return res.status(200).send(movieData);
+  //   } else {
+  //     const movieData = await MovieModel.find()
+  //       .populate("Genres")
+  //       .populate("Spoken_languages")
+  //       .populate("Production_companies")
+  //       .sort(`${queryperam}`);
+  //     return res.status(200).send(movieData);
+  //   }
+
+  // if(queryperam == 'Revenue' && Ascending == 'ascending'){
+  //   const movieData = await MovieModel.find().sort(`${queryperam}`);
+  //   return  res.status(200).send(movieData);
+  // }
+  // else if(queryperam == 'Revenue' && Ascending == 'descending'){
+  //   const movieData = await MovieModel.find().sort(`-${queryperam}`);
+  //   return  res.status(200).send(movieData);
+  // }
+  // else if(queryperam == 'Budget' && Ascending == 'ascending'){
+  //   const movieData = await MovieModel.find().sort(`${queryperam}`);
+  //   return  res.status(200).send(movieData);
+  // }
+  // else if(queryperam == 'Budget' && Ascending == 'descending'){
+  //   const movieData = await MovieModel.find().sort(`-${queryperam}`);
+  //   return  res.status(200).send(movieData);
+  // }
+  // else if(queryperam == 'Vote_average' && Ascending == 'ascending'){
+  //   const movieData = await MovieModel.find().sort(`${queryperam}`);
+  //   return  res.status(200).send(movieData);
+  // }
+  // else if(queryperam == 'Vote_average' && Ascending == 'descending'){
+  //   const movieData = await MovieModel.find().sort(`-${queryperam}`);
+  //   return  res.status(200).send(movieData);
+  // }
+  // else if(queryperam == 'Vote_count' && Ascending == 'ascending'){
+  //   const movieData = await MovieModel.find().sort(`${queryperam}`);
+  //   return  res.status(200).send(movieData);
+  // }
+  // else if(queryperam == 'Vote_count' && Ascending == 'descending'){
+  //   const movieData = await MovieModel.find().sort(`-${queryperam}`);
+  //   return  res.status(200).send(movieData);
+  // }
+  // else if(queryperam == 'Popularity' && Ascending == 'ascending'){
+  //   const movieData = await MovieModel.find().sort(`${queryperam}`);
+  //   return  res.status(200).send(movieData);
+  // }
+  // else if(queryperam == 'Popularity' && Ascending == 'descending'){
+  //   const movieData = await MovieModel.find().sort(`-${queryperam}`);
+  //   return  res.status(200).send(movieData);
+  // }
+  // }
+
+  // find and movie series data
   async findMovieBySort(req, res) {
     const queryperam = req.query.filter;
     const Ascending = req.query.ascending;
 
-    const movie = await MovieModel.find();
+    const movieData = await MovieModel.find()
+      .populate("Genres")
+      .populate("Spoken_languages")
+      .populate("Production_companies")
+      .sort(queryperam);
 
-    if (!movie) return res.status(404).send({ msg: `Movies not found` });
+    if (!movieData) return res.status(404).send({ msg: `movie not found` });
 
-    if (Ascending == "ascending") {
-      const movieData = await MovieModel.find()
-        .populate("Genres")
-        .populate("Spoken_languages")
-        .populate("Production_companies")
-        .sort(`${queryperam}`);
-      return res.status(200).send(movieData);
-    } else if (Ascending == "descending") {
-      const movieData = await MovieModel.find()
-        .populate("Genres")
-        .populate("Spoken_languages")
-        .populate("Production_companies")
-        .sort(`-${queryperam}`);
-      return res.status(200).send(movieData);
-    } else {
-      const movieData = await MovieModel.find()
-        .populate("Genres")
-        .populate("Spoken_languages")
-        .populate("Production_companies")
-        .sort(`${queryperam}`);
-      return res.status(200).send(movieData);
-    }
+    if (Ascending == "descending")
+      return res.status(200).send(movieData.reverse());
 
-    // if(queryperam == 'Revenue' && Ascending == 'ascending'){
-    //   const movieData = await MovieModel.find().sort(`${queryperam}`);
-    //   return  res.status(200).send(movieData);
-    // }
-    // else if(queryperam == 'Revenue' && Ascending == 'descending'){
-    //   const movieData = await MovieModel.find().sort(`-${queryperam}`);
-    //   return  res.status(200).send(movieData);
-    // }
-    // else if(queryperam == 'Budget' && Ascending == 'ascending'){
-    //   const movieData = await MovieModel.find().sort(`${queryperam}`);
-    //   return  res.status(200).send(movieData);
-    // }
-    // else if(queryperam == 'Budget' && Ascending == 'descending'){
-    //   const movieData = await MovieModel.find().sort(`-${queryperam}`);
-    //   return  res.status(200).send(movieData);
-    // }
-    // else if(queryperam == 'Vote_average' && Ascending == 'ascending'){
-    //   const movieData = await MovieModel.find().sort(`${queryperam}`);
-    //   return  res.status(200).send(movieData);
-    // }
-    // else if(queryperam == 'Vote_average' && Ascending == 'descending'){
-    //   const movieData = await MovieModel.find().sort(`-${queryperam}`);
-    //   return  res.status(200).send(movieData);
-    // }
-    // else if(queryperam == 'Vote_count' && Ascending == 'ascending'){
-    //   const movieData = await MovieModel.find().sort(`${queryperam}`);
-    //   return  res.status(200).send(movieData);
-    // }
-    // else if(queryperam == 'Vote_count' && Ascending == 'descending'){
-    //   const movieData = await MovieModel.find().sort(`-${queryperam}`);
-    //   return  res.status(200).send(movieData);
-    // }
-    // else if(queryperam == 'Popularity' && Ascending == 'ascending'){
-    //   const movieData = await MovieModel.find().sort(`${queryperam}`);
-    //   return  res.status(200).send(movieData);
-    // }
-    // else if(queryperam == 'Popularity' && Ascending == 'descending'){
-    //   const movieData = await MovieModel.find().sort(`-${queryperam}`);
-    //   return  res.status(200).send(movieData);
-    // }
+    return res.status(200).send(movieData);
   }
 
-  // search movie by Original_language
+  // search movie and filter results
   async findMovieBySearch(req, res) {
     const queryperam = req.query.item1;
     const queryName = req.query.item;

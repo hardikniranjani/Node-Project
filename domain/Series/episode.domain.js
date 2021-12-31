@@ -86,6 +86,9 @@ class episodeDomain {
     }
   }
 
+
+
+  // uplode episode video 
   async uploadEpisode(req, res) {
     const episode_id = req.query.episode_id;
     const pathToUpload = path.normalize(`${__dirname}/../..`);
@@ -146,6 +149,9 @@ class episodeDomain {
     res.status(200).send({ Episode: updatedEpisode });
   }
 
+
+
+
   //   write bulk episodes
   async createBulkEpisode(req, res) {
     if (req.user.role !== "admin")
@@ -188,6 +194,9 @@ class episodeDomain {
     res.status(200).send({ seasonEpisodes: updateSeason.Episodes });
   }
 
+
+
+
   //   get an episodes
   async getAnEpisode(req, res) {
     const episode_id = req.query.episode_id;
@@ -200,6 +209,9 @@ class episodeDomain {
 
     res.status(200).send(findEpisode);
   }
+
+
+
 
   // soft delete episode
   async deleteBulkEpisode(req, res) {
@@ -239,6 +251,8 @@ class episodeDomain {
     res.status(200).send("delete successfully");
   }
 
+
+
   // Hard delete episode
   async hardDeleteBulkEpisode(req, res) {
     if (req.user !== "admin")
@@ -268,6 +282,9 @@ class episodeDomain {
 
     res.status(200).send("Hard delete successfully");
   }
+
+
+
 
   //update episode
 
@@ -299,6 +316,8 @@ class episodeDomain {
 
     res.status(200).send(UpdatedEpisode);
   }
+
+
 
   //bulk update episode
   async updateBulkEpisode(req, res) {
@@ -332,7 +351,9 @@ class episodeDomain {
     res.status(200).send("update successfully");
   }
 
-  // find and filter episode data
+
+
+  // find and sorting episode data
   async findEpisodeAndSort(req, res) {
     const season_id = req.query.season_id;
     const series_id = req.query.series_id;
@@ -353,7 +374,7 @@ class episodeDomain {
     return res.status(200).send(episode);
   }
 
-  // search Episode
+  // search Episode and filter results
   async findEpisodeBySearch(req, res) {
     const season_id = req.query.season_id;
     const series_id = req.query.series_id;

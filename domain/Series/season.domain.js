@@ -54,12 +54,7 @@ class seasonDomain {
   // get all season
   async getAllseason(req, res) {
     var id = req.params.series_id;
-    // const result = await Series.findById(id);
 
-    // if (!result)
-    //   return res.status(404).send({ msg: `Can't found series = ${id}` });
-
-    // finding season with given seriesId
     const findSeason = await season.find({ SeriesID: id });
 
     if (!findSeason) return res.status(404).send({ msg: "Not able to find." });
@@ -223,14 +218,4 @@ class seasonDomain {
 
 module.exports = seasonDomain;
 
-// _id: data._id,
-// SeasonName: data.SeasonName,
-// SeasonNumber: data.SeasonNumber,
-// SeriesNumber: data.SeriesNumber,
-// ShortDescription: data.ShortDescription,
-// Number_of_episodes: data.Number_of_episodes,
-// Vote_average: data.Vote_average,
-// Vote_count: data.Vote_count,
-// Poster_path: data.Poster_path,
-// Episodes: data.Episodes,
-// IsActive: data.IsActive,
+

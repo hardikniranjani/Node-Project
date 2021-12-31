@@ -1,6 +1,8 @@
 const Country = require("../models/country.model");
 
 class CountryDomain {
+
+  // create bulk Country
   async createBulkCountry(req,res){
     
     if(req.user !== "admin") res.status(401).send({msg : "You are not authorized!!!"});

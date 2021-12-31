@@ -331,6 +331,8 @@ class UserDomain {
     }
   }
 
+
+  // delete watch history of user
   async deleteWatchHistory(req, res) {
     let User_id = req.user._id;
 
@@ -346,6 +348,7 @@ class UserDomain {
     }
   }
 
+  // add to watch history of user
   async addToWatchLater(req, res) {
     let User_id = req.user._id;
     let media_id = req.query.media_id;
@@ -381,6 +384,8 @@ class UserDomain {
     }
   }
 
+
+  // show watch history of user
   async showWatchLater(req, res) {
     let User_id = req.user._id;
 
@@ -425,6 +430,8 @@ class UserDomain {
     });
   }
 
+
+  // remove watch history of user
   async removeFromWatchLater(req, res) {
     let User_id = req.user._id;
 
@@ -442,6 +449,8 @@ class UserDomain {
     }
   }
 
+
+  // add ro wishlist of user
   async addToWishList(req, res) {
     const User_id = req.user._id;
     const media_id = req.query.media_id;
@@ -476,6 +485,8 @@ class UserDomain {
     }
   }
 
+
+  // show wishlist of user 
   async getWishList(req, res) {
     const user_id = req.user._id;
 
@@ -515,6 +526,8 @@ class UserDomain {
     });
   }
 
+
+  // remove wishlist of user
   async removeFromWishlist(req, res) {
     const user_id = req.user._id;
 
@@ -531,6 +544,8 @@ class UserDomain {
     }
   }
 
+
+  // add subscription on user id 
   async addSubscription(req,res){
     const user_id = req.user._id;
     const plan_id = req.query.plan_id;

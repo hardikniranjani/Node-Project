@@ -153,7 +153,7 @@ class SeriesDomain {
   //   res.send(series);
   // }
 
-  // find and filter series data
+  // find and sorting series data
   async findSeriesAndSort(req, res) {
     const queryperam = req.query.filter;
     const Ascending = req.query.ascending;
@@ -173,7 +173,7 @@ class SeriesDomain {
     return res.status(200).send(series);
   }
 
-  // search series
+  // search series and filter results
   async findSeriesBySearch(req, res) {
     const queryperam = req.query.item1;
     const queryName = req.query.item;
