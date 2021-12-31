@@ -127,12 +127,7 @@ class CountryDomain {
       const UpdateCountry = await Country.findByIdAndUpdate(
         id,
         {
-          $set: {
-            _id: data._id,
-            CountryName: data.CountryName,
-            CountryShortForm: data.CountryShortForm,
-            CountryCode: data.CountryCode,
-          },
+          $set: { ...data },
         },
         { new: true }
       );

@@ -98,29 +98,7 @@ class SeriesDomain {
     const UpdateSeries = await Series.findByIdAndUpdate(
       id,
       {
-        $set: {
-          _id: data._id,
-          SeriesName: data.SeriesName,
-          Original_language: data.Original_language,
-          Spoken_languages: data.Spoken_languages,
-          Budget: data.Budget,
-          ShortDescription: data.ShortDescription,
-          Genres: data.Genres,
-          Number_of_seasons: data.Number_of_seasons,
-          Number_of_episodes: data.Number_of_episodes,
-          ReleaseDate: data.ReleaseDate,
-          Popularity: data.Popularity,
-          Production_companies: data.Production_companies,
-          Revenue: data.Revenue,
-          Status: data.Status,
-          DirectorName: data.DirectorName,
-          Vote_average: data.Vote_average,
-          Vote_count: data.Vote_count,
-          LongDescription: data.LongDescription,
-          Season: data.Season,
-          Poster_path: data.Poster_path,
-          IsActive: data.IsActive,
-        },
+        $set: {  ...data },
       },
       { new: true }
     );
