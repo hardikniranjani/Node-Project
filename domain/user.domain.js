@@ -553,6 +553,8 @@ class UserDomain {
 
     const getPlan = await SubscriptionModel.findById(plan_id);
     
+    if(!getPlan) return res.status(404).send({msg : `Plan id ${plan_id} not found`});
+
     const findUser = await UserModel.findById(user_id);
 
     if(!findUser) return res.status(404).send({msg : "Can't find user. Please login again"});
