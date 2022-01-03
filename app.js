@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 require("dotenv").config();
 const userController = require("./controllers/user.controller");
 const moviesController = require("./controllers/movie.controller");
@@ -12,16 +13,19 @@ const languages = require('./controllers/spokenLanguage.controller');
 const GenresController = require('./controllers/genre.controller');
 const companiesController = require('./controllers/company.controller');
 const certificationController = require('./controllers/certification.controller');
-var mongoDB = process.env.db_path;
+
 const mongoose = require("mongoose");
 const fileupload = require("express-fileupload");
 mongoose
-  .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.db_path, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Connected to MongoDB"));
 
 const app = express();
 app.use(express.json());
-
+app.use(cors());
 //middleware for uploading video and images
 app.use(fileupload());
 

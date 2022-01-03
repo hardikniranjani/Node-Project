@@ -99,6 +99,10 @@ class UserController {
     const userDomain = new UserDomain();
     userDomain.removeFromHisoty(req, res);
   }
+  static async removeCommon(req, res) {
+    const userDomain = new UserDomain();
+    userDomain.removeCommon(req, res);
+  }
 }
 
 
@@ -151,5 +155,8 @@ router.delete("/wishlist", UserController.deleteWishlist);
 router.post("/addsubscription", UserController.addSubscription);
 
 router.put("/removeonehistory",UserController.removeFromHistory);
+
+
+router.put("/removecommon", UserController.removeCommon);
 
 module.exports = router;

@@ -366,7 +366,9 @@ class UserDomain {
       });
       res
         .status(200)
-        .send({ msg: `Your list has been Successfully updated!!! ${deletedlist}` });
+        .send({
+          msg: `Your list has been Successfully updated!!! ${deletedlist}`,
+        });
     }
   }
 
@@ -470,6 +472,31 @@ class UserDomain {
       res
         .status(200)
         .send({ msg: "Your list has been Successfully updated!!!" });
+    }
+  }
+
+  // remove watch common of user
+  async removeCommon(req, res) {
+    let User_id = req.user._id;
+    let media_id = req.query.media_id;
+    let media_type = req.query.media_type;
+    let media_model = req.query.media_model;
+    console.log(req.query);
+    const list = await [media_model].find({ User: User_id });
+
+    if (list.length == 0) {
+      res.status(200).send({ msg: "No list is there." });
+    } else {
+      const updatedlist = await [media_model].findOneAndUpdate({
+        User: User_id,
+        $pull: {
+          [media_type]: media_id,
+        },
+      });
+      res
+        .status(200)
+        .send({list : updatedlist});
+        // .send({ msg: "Your list has been Successfully updated!!!" });
     }
   }
 
