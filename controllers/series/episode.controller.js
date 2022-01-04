@@ -2,13 +2,10 @@ const express = require("express");
 const EpisodeDomain = require("../../domain/Series/episode.domain");
 const router = express.Router();
 const verifyToken = require('../../authentication/auth.middleware');
-class EpisodeController {
-  //   // get all episode
-  //   static async getAllEpisode(req, res) {
-  //     const episodeDomain = new EpisodeDomain();
-  //     episodeDomain.getAllEpisodes(req, res);
-  //   }
+const checkRole = require('../../middleware/middleware');
 
+class EpisodeController {
+  
   // get specific  episode by id
   static async getEpisode(req, res) {
     const episodeDomain = new EpisodeDomain();
@@ -68,6 +65,9 @@ class EpisodeController {
       episodeDomain.uploadEpisode(req,res);
     }
 }
+
+router.use(verifyToken);
+
 // get specific Series by id
 router.get("/", EpisodeController.getEpisode);
 
@@ -77,10 +77,10 @@ router.get("/sort", EpisodeController.findEpisodeAndSort);
 // search episode
 router.get("/search", EpisodeController.findEpisodeBySearch);
 
-router.use(verifyToken);
-// // get all episode
-// router.get("/:series_id/:season_id/episode", EpisodeController.getAllEpisode);
 
+
+//verify role
+router.use(checkRole);
 
 // create episode
 router.post("/", EpisodeController.createEpisode);

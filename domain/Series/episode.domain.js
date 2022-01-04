@@ -6,8 +6,6 @@ const path = require("path");
 class episodeDomain {
   //   create episode
   async createAnEpisode(req, res) {
-    if (req.user.role !== "admin")
-      res.status(401).send({ msg: "You are not authorized!!!" });
 
     const data = req.body;
     const season_id = data.SeasonID;
@@ -154,9 +152,7 @@ class episodeDomain {
 
   //   write bulk episodes
   async createBulkEpisode(req, res) {
-    if (req.user.role !== "admin")
-      return res.status(401).send({ msg: "You are not authorized!!!" });
-
+    
     const season_id = req.query.season_id;
     const arrayOfEpisode = req.body;
     const dateUpdatedEpisode = arrayOfEpisode.map((obj) => {
@@ -215,8 +211,6 @@ class episodeDomain {
 
   // soft delete episode
   async deleteBulkEpisode(req, res) {
-    if (req.user !== "admin")
-      res.status(401).send({ msg: "You are not authorized!!!" });
 
     const season_id = req.query.season_id;
     const arrayOfEpisode = req.body;
@@ -255,8 +249,6 @@ class episodeDomain {
 
   // Hard delete episode
   async hardDeleteBulkEpisode(req, res) {
-    if (req.user !== "admin")
-      return res.status(401).send({ msg: "You are not authorized!!!" });
 
     const season_id = req.params.season_id;
     const arrayOfEpisode = req.body;

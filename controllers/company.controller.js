@@ -1,6 +1,7 @@
 const express = require("express");
 const CompanyDomain = require("../domain/company.domain");
 const router = express.Router();
+const checkRole = require('../middleware/middleware');
 
 class CompanyController {
   // get all Company
@@ -45,6 +46,9 @@ router.get("/", CompanyController.getAllCompany);
 
 // get specific Company by id
 router.get("/:id", CompanyController.getCompany);
+
+//verify role 
+router.use(checkRole);
 
 // create Company
 router.post("/", CompanyController.createCompany);

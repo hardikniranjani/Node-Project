@@ -215,9 +215,7 @@ class UserDomain {
 
   // get all users
   async getAllUsers(req, res) {
-    if (req.user.role !== "admin")
-      return res.status(401).send("Access Denied!!!");
-
+    
     const result = await UserModel.find({ IsActive: true });
 
     if (result) res.status(200).send(result);
@@ -227,7 +225,7 @@ class UserDomain {
   // get all deleted users
 
   async getAllDeletedUsers(req, res) {
-    if (req.user.role !== "admin") res.status(401).send("Access Denied!!!");
+    
 
     const result = await UserModel.find({ IsActive: false });
 
@@ -239,6 +237,7 @@ class UserDomain {
 
   // Hard Delete user by id
   async HardDeleteUser(req, res) {
+
     let id = req.params.id;
 
     const result = await UserModel.findByIdAndDelete(id);

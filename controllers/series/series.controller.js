@@ -1,7 +1,8 @@
 const express = require("express");
 const SeriesDomain = require("../../domain/Series/series.domain");
 const router = express.Router();
-
+const verifyToken = require('../../authentication/auth.middleware');
+const checkRole = require('../../middleware/middleware');
 class seriesController {
   // get all Series
   static getAllSeries(req, res) {
@@ -51,12 +52,17 @@ class seriesController {
   }
 }
 
+//authentication of user
+router.use(verifyToken);
+
 // get all Series
 router.get("/", seriesController.getAllSeries);
 
 // get specific Series by id
 router.get("/:id", seriesController.getSeries);
 
+//check role
+router.use(checkRole);
 // create series
 router.post("/", seriesController.createSeries);
 

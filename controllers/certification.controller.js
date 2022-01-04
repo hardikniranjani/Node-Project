@@ -1,5 +1,6 @@
 const express = require("express");
 const CertificationDomain = require("../domain/certification.domain");
+const checkRole = require('../middleware/middleware');
 const router = express.Router();
 
 class CertificationController {
@@ -62,13 +63,20 @@ class CertificationController {
   }
 }
 
-// ++++++ For Movies +++++++ //
-
-// create movie Certification
-router.post("/movie", CertificationController.createMovieCertificate);
 
 // get all movie Certification by country id
 router.get("/movie", CertificationController.getMovieCerificate);
+
+// get all Tv Certification by country id
+router.get("/tv", CertificationController.getTvCerificate);
+
+
+router.use(checkRole);
+
+  // ++++++ For Movies +++++++ //
+
+// create movie Certification
+router.post("/movie", CertificationController.createMovieCertificate);
 
 // update movie Certification
 router.put("/movie", CertificationController.updateMovieCertificate);
@@ -84,9 +92,6 @@ router.delete("/:id/movie", CertificationController.hardDeleteMovieCertificate);
 
   // create Tv Certification
 router.post("/tv", CertificationController.createTvCertificate);
-
-// get all Tv Certification by country id
-router.get("/tv", CertificationController.getTvCerificate);
 
 // update Tv Certification
 router.put("/tv", CertificationController.updateTvCertificate);

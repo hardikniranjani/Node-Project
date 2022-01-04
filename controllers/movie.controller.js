@@ -1,6 +1,7 @@
 const express = require("express");
 const MovieDomain = require("../domain/movie.domain");
 const router = express.Router();
+const checkRole = require('../middleware/middleware');
 
 class MovieController {
   // get all Movie
@@ -74,6 +75,15 @@ router.get("/", MovieController.getAllMovie);
 // get specific Movie by id
 router.get("/:id", MovieController.getMovie);
 
+// find and filter movie data
+router.get("/sorting/movie", MovieController.findMovieBySort);
+
+// search movie and filter results
+router.get("/search/movie", MovieController.findMovieBySearch);
+
+//verify role
+router.use(checkRole);
+
 // create Movie
 router.post("/", MovieController.createMovie);
 
@@ -88,11 +98,5 @@ router.put("/:id", MovieController.deleteMovie);
 
 //hard delete Movie
 router.delete("/:id", MovieController.HardDeleteMovie);
-
-// find and filter movie data
-router.get("/sorting/movie", MovieController.findMovieBySort);
-
-// search movie and filter results
-router.get("/search/movie", MovieController.findMovieBySearch);
 
 module.exports = router;

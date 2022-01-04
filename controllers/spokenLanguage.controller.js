@@ -1,6 +1,7 @@
 const express = require("express");
 const SpokenLanguageDomain = require("../domain/spokenLanguage.domain");
 const router = express.Router();
+const checkRole = require('../middleware/middleware')
 
 class SpokenLanguageController {
   // get all SpokenLanguage
@@ -45,6 +46,9 @@ router.get("/", SpokenLanguageController.getAllSpokenLanguage);
 
 // get specific SpokenLanguage by id
 router.get("/:id", SpokenLanguageController.getSpokenLanguage);
+
+//verify role and allow operation
+app.use(checkRole);
 
 // create SpokenLanguage
 router.post("/", SpokenLanguageController.createSpokenLanguage);

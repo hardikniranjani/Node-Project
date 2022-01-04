@@ -1,6 +1,7 @@
 const express = require("express");
 const GenreDomain = require("../domain/genre.domain");
 const router = express.Router();
+const checkRole = require('../middleware/middleware');
 
 class GenreController {
   // get all Genre
@@ -47,6 +48,10 @@ router.get("/", GenreController.getAllGenre);
 
 // get specific Genre by id
 router.get("/:id", GenreController.getGenre);
+
+//verify role
+
+router.use(checkRole);
 
 // create Genre
 router.post("/", GenreController.createGenre);

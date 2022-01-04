@@ -1,7 +1,8 @@
 const express = require("express");
 const SeasonDomain = require("../../domain/Series/season.domain");
 const router = express.Router();
-
+const checkRole = require('../../middleware/middleware');
+const verifyToken = require('../../authentication/auth.middleware');
 
 class SeasonController {
   // get all Season
@@ -58,13 +59,17 @@ class SeasonController {
   }
 }
 
-
+//authenticate user
+router.use(verifyToken);
 
 // get all Season
 router.get("/:series_id/season/", SeasonController.getAllSeason);
 
 // get specific Season by id
 router.get("/:series_id/season/:season_id", SeasonController.getAnSeason);
+
+//verify role
+router.use(checkRole);
 
 // create Season
 router.post("/:series_id/season/", SeasonController.createSeason);

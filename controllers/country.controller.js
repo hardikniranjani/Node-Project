@@ -1,7 +1,7 @@
 const express = require('express');
 const CountryDomain = require('../domain/country.domain');
 const router = express.Router();
-
+const checkRole = require('../middleware/middleware');
 class CountryController {
       // get all Country
   static async getAllCountry(req, res) {
@@ -51,6 +51,9 @@ router.get("/", CountryController.getAllCountry);
 
 // get specific Country by id
 router.get("/:id", CountryController.getCountry);
+
+//verify role
+router.use(checkRole);
 
 // create Country
 router.post("/", CountryController.createCountry);

@@ -2,6 +2,7 @@ const express = require("express");
 const UserDomain = require("../domain/user.domain");
 const router = express.Router();
 const verifyToken = require("../authentication/auth.middleware");
+const checkRole = require('../middleware/middleware');
 
 class UserController {
   //create a new admin
@@ -16,6 +17,23 @@ class UserController {
     userDomain.getAnUser(req, res);
   }
 
+  // get all user 
+  static async getAllUsers(req,res){
+    const userDomain = new UserDomain();
+    userDomain.getAllUsers(req,res);
+  }
+
+  //get all soft deleted user
+  static async softDeletedUsers(req,res){
+    const userDomain = new UserDomain();
+    userDomain.getAllDeletedUsers(req,res);
+  }
+
+  //hard delete a user
+  static async hardDeleteUser(req,res){
+    const userDomain = new UserDomain();
+    userDomain.HardDeleteUser(req,res);
+  }
   // create User
   static async createAnUser(req, res) {
     const userDomain = new UserDomain();
@@ -154,9 +172,21 @@ router.delete("/wishlist", UserController.deleteWishlist);
 // add subscription plan of user
 router.post("/addsubscription", UserController.addSubscription);
 
+//remove selected history
 router.put("/removeonehistory",UserController.removeFromHistory);
 
-
 router.put("/removecommon", UserController.removeCommon);
+
+// verify role
+router.use(checkRole);
+
+// get all users 
+router.get('/getallusers', UserController.getAllUsers);
+
+//get all soft deleted users
+router.get('/softdeleteduser', UserController.softDeletedUsers);
+
+//delete a user permanently
+router.delete('/deleteuser',UserController.hardDeleteUser);
 
 module.exports = router;
