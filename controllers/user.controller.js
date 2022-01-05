@@ -148,6 +148,9 @@ router.get("/watch_history", UserController.getWatchHistory);
 //add to user watch history movie
 router.post("/watch_history", UserController.addToWatchHistory);
 
+//remove selected history
+router.put("/removeonehistory",UserController.removeFromHistory);
+
 //delete user watch history
 router.delete("/delete_history", UserController.deleteHistory);
 
@@ -159,6 +162,8 @@ router.get("/watch_later", UserController.getWatchLaterList);
 
 //remove from watchlater
 router.put("/remove", UserController.removeFromWatchLater);
+
+
 
 //add to wishlist
 router.post("/wishlist", UserController.addToWishList);
@@ -172,8 +177,7 @@ router.delete("/wishlist", UserController.deleteWishlist);
 // add subscription plan of user
 router.post("/addsubscription", UserController.addSubscription);
 
-//remove selected history
-router.put("/removeonehistory",UserController.removeFromHistory);
+
 
 router.put("/removecommon", UserController.removeCommon);
 

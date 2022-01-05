@@ -135,11 +135,15 @@ class MovieDomain {
   async deleteAnMovie(req, res) {
     var id = req.params.id;
 
+    const findMovie = await MovieModel.find({_id:id});
+    if(!findMovie) return res.status(404).send({msg : "Can't find movie"});
+
     const result = await MovieModel.findByIdAndUpdate(id, {
       $set: {
         IsActive: false,
       },
     });
+    console.log(result);
     if (result) {
       res.send("Successfully deleted");
     } else {

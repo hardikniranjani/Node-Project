@@ -366,7 +366,7 @@ class UserDomain {
       res
         .status(200)
         .send({
-          msg: `Your list has been Successfully updated!!! ${deletedlist}`,
+          list : deletedlist
         });
     }
   }
