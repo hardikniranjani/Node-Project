@@ -48,7 +48,7 @@ router.get("/", SpokenLanguageController.getAllSpokenLanguage);
 router.get("/:id", SpokenLanguageController.getSpokenLanguage);
 
 //verify role and allow operation
-app.use(checkRole);
+router.use(checkRole);
 
 // create SpokenLanguage
 router.post("/", SpokenLanguageController.createSpokenLanguage);
