@@ -187,6 +187,6 @@ router.get('/getallusers', UserController.getAllUsers);
 router.get('/softdeleteduser', UserController.softDeletedUsers);
 
 //delete a user permanently
-router.delete('/deleteuser',UserController.hardDeleteUser);
+router.delete('/deleteuser/:id',UserController.hardDeleteUser);
 
 module.exports = router;
