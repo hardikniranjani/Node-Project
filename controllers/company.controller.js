@@ -2,6 +2,7 @@ const express = require("express");
 const CompanyDomain = require("../domain/company.domain");
 const router = express.Router();
 const checkRole = require('../middleware/middleware');
+const verifyToken = require("../authentication/auth.middleware");
 
 class CompanyController {
   // get all Company
@@ -46,6 +47,9 @@ router.get("/", CompanyController.getAllCompany);
 
 // get specific Company by id
 router.get("/:id", CompanyController.getCompany);
+
+//verify token
+router.use(verifyToken);
 
 //verify role 
 router.use(checkRole);

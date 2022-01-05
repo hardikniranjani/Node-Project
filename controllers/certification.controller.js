@@ -2,7 +2,7 @@ const express = require("express");
 const CertificationDomain = require("../domain/certification.domain");
 const checkRole = require('../middleware/middleware');
 const router = express.Router();
-
+const verifyToken = require("../authentication/auth.middleware");
 class CertificationController {
   // ++++++ For Movies +++++++ //
 
@@ -70,7 +70,9 @@ router.get("/movie", CertificationController.getMovieCerificate);
 // get all Tv Certification by country id
 router.get("/tv", CertificationController.getTvCerificate);
 
+router.use(verifyToken);
 
+//verify role
 router.use(checkRole);
 
   // ++++++ For Movies +++++++ //

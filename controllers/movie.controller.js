@@ -2,7 +2,7 @@ const express = require("express");
 const MovieDomain = require("../domain/movie.domain");
 const router = express.Router();
 const checkRole = require('../middleware/middleware');
-
+const verifyToken = require('../authentication/auth.middleware');
 class MovieController {
   // get all Movie
   static async getAllMovie(req, res) {
@@ -80,6 +80,9 @@ router.get("/sorting/movie", MovieController.findMovieBySort);
 
 // search movie and filter results
 router.get("/search/movie", MovieController.findMovieBySearch);
+
+// verify token
+router.use(verifyToken);
 
 //verify role
 router.use(checkRole);

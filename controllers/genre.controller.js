@@ -2,6 +2,7 @@ const express = require("express");
 const GenreDomain = require("../domain/genre.domain");
 const router = express.Router();
 const checkRole = require('../middleware/middleware');
+const verifyToken = require('../authentication/auth.middleware');
 
 class GenreController {
   // get all Genre
@@ -49,6 +50,8 @@ router.get("/", GenreController.getAllGenre);
 // get specific Genre by id
 router.get("/:id", GenreController.getGenre);
 
+
+router.use(verifyToken);
 //verify role
 
 router.use(checkRole);
