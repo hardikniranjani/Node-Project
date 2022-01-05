@@ -61,7 +61,7 @@ router.post("/", SubscriptionController.createSubscription);
 router.put("/:id", SubscriptionController.updateSubscription);
 
 //soft delete Subscription
-router.put("/:id", SubscriptionController.deleteSubscription);
+router.put("/delete/:id", SubscriptionController.deleteSubscription);
 
 //Hard delete Subscription
 router.delete("/:id", SubscriptionController.HardDeleteSubscription);

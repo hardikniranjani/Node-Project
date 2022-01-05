@@ -97,7 +97,7 @@ router.post("/upload", MovieController.uploadMovie);
 router.put("/:id", MovieController.updateMovie);
 
 //soft delete Movie
-router.put("/:id", MovieController.deleteMovie);
+router.put("/delete/:id", MovieController.deleteMovie);
 
 //hard delete Movie
 router.delete("/:id", MovieController.HardDeleteMovie);

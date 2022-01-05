@@ -61,7 +61,7 @@ router.post("/", SpokenLanguageController.createSpokenLanguage);
 router.put("/:id", SpokenLanguageController.updateSpokenLanguage);
 
 //soft delete SpokenLanguage
-router.put("/:id", SpokenLanguageController.deleteSpokenLanguage);
+router.put("/delete/:id", SpokenLanguageController.deleteSpokenLanguage);
 
 //Hard delete SpokenLanguage
 router.delete("/:id", SpokenLanguageController.HardDeleteSpokenLanguage);

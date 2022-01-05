@@ -70,7 +70,7 @@ router.post("/", seriesController.createSeries);
 router.put("/:id", seriesController.updateSeries);
 
 //soft delete series
-router.put("/:id", seriesController.deleteSeries);
+router.put("/delete/:id", seriesController.deleteSeries);
 
 //Hard delete series
 router.delete("/:id", seriesController.HardDeleteSeries);
