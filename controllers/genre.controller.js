@@ -63,7 +63,7 @@ router.post("/", GenreController.createGenre);
 router.put("/:id", GenreController.updateGenre);
 
 //soft delete Genre
-router.put("/:id", GenreController.deleteGenre);
+router.put("/delete/:id", GenreController.deleteGenre);
 
 //Hard delete Genre
 router.delete("/:id", GenreController.HardDeleteGenre);

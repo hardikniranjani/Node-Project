@@ -69,7 +69,7 @@ router.post("/addCountry",CountryController.bulkwrite);
 router.put("/:id", CountryController.updateCountry);
 
 //soft delete Country
-router.put("/:id", CountryController.deleteCountry);
+router.put("/delete/:id", CountryController.deleteCountry);
 
 //Hard delete Country
 router.delete("/:id", CountryController.HardDeleteCountry);

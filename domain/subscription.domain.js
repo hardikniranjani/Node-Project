@@ -54,8 +54,8 @@ class SubscriptionDomain {
     if (!subscription)
       return res.status(500).send({ msg: `Subscription not found` });
 
-    const result = await Subscription.findByIdAndUpdate(
-      id,
+    const result = await Subscription.findOneAndUpdate(
+    {_id:id},
       {
         $set: {
           IsActive: false,

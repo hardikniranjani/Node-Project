@@ -61,7 +61,7 @@ router.post("/", CompanyController.createCompany);
 router.put("/:id", CompanyController.updateCompany);
 
 //soft delete Company
-router.put("/:id", CompanyController.deleteCompany);
+router.put("/delete/:id", CompanyController.deleteCompany);
 
 //Hard delete Company
 router.delete("/:id", CompanyController.HardDeleteCompany);
