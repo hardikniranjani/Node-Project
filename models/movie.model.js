@@ -10,7 +10,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   Original_language: {
-    type: String,
+    type: String, 
     required: true,
   },
   Spoken_languages: {
@@ -18,11 +18,11 @@ const movieSchema = new mongoose.Schema({
     ref: "Language",
   },
   Budget: {
-    type: String,
+    type: String, 
     required: true,
   },
   ShortDescription: {
-    type: String,
+    type: String, 
     required: true,
     minlength: 100,
   },
@@ -72,7 +72,7 @@ const movieSchema = new mongoose.Schema({
   },
   IsActive: {
     type: Boolean,
-    default: true,
+    default: true, 
   },
 });
 
