@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "e9317db0-adae-4ec2-9749-c1ace7c7f4a9",
-		"name": "Ott Platform",
+		"_postman_id": "305681aa-8f01-46a1-862d-6ed6dc81dcbd",
+		"name": "OttPlatform",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"user@gmail.com\",\r\n    \"password\": \"pass123\"  \r\n}",
+							"raw": "{\r\n    \"email\":\"user@gmail.com\",\r\n    \"password\": \"pass123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -34,15 +34,6 @@
 								"login"
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "New Request",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": null
 					},
 					"response": []
 				}
