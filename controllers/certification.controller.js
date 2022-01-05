@@ -70,6 +70,7 @@ router.get("/movie", CertificationController.getMovieCerificate);
 // get all Tv Certification by country id
 router.get("/tv", CertificationController.getTvCerificate);
 
+//authentication of user
 router.use(verifyToken);
 
 //verify role

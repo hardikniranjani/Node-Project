@@ -48,8 +48,8 @@ class GenreDomain {
   // Soft delete Genre by id
   async deleteAnGenre(req, res) {
     var id = req.params.id;
-    const Genre = await Genre.findById(id);
-    if(Genre) {
+    const genre = await Genre.findById(id);
+    if(genre  ) {
       const result = await Genre.findByIdAndUpdate(id,
         {
           $set:{

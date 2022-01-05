@@ -59,14 +59,22 @@ class SeasonController {
   }
 }
 
-//authenticate user
-router.use(verifyToken);
+
+
+// find and filter season data
+router.get("/sort/season", SeasonController.findSeasionAndSort);
+
+// search season
+router.get("/search/season", SeasonController.findseasionBySearch);
 
 // get all Season
 router.get("/:series_id/season/", SeasonController.getAllSeason);
 
 // get specific Season by id
 router.get("/:series_id/season/:season_id", SeasonController.getAnSeason);
+
+//authenticate user
+router.use(verifyToken);
 
 //verify role
 router.use(checkRole);
@@ -86,9 +94,5 @@ router.get("/season/Episodes", SeasonController.getAllEpisodesOfSeason);
 // get specific episode from season
 router.get("/season/Episode", SeasonController.getAnEpisodeOfSeason);
 
-// find and filter season data
-router.get("/sort/season", SeasonController.findSeasionAndSort);
 
-// search season
-router.get("/search/season", SeasonController.findseasionBySearch);
 module.exports = router;

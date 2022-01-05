@@ -1,11 +1,10 @@
 const express = require("express");
 const EpisodeDomain = require("../../domain/Series/episode.domain");
 const router = express.Router();
-const verifyToken = require('../../authentication/auth.middleware');
-const checkRole = require('../../middleware/middleware');
+const verifyToken = require("../../authentication/auth.middleware");
+const checkRole = require("../../middleware/middleware");
 
 class EpisodeController {
-  
   // get specific  episode by id
   static async getEpisode(req, res) {
     const episodeDomain = new EpisodeDomain();
@@ -48,25 +47,24 @@ class EpisodeController {
     episodeDomain.hardDeleteBulkEpisode(req, res);
   }
 
-    // find and filter series data
-    static async findEpisodeAndSort(req, res) {
-      const episodeDomain = new EpisodeDomain();
-      episodeDomain.findEpisodeAndSort(req, res);
-    }
-  
-    // search series
-    static async findEpisodeBySearch(req, res) {
-      const episodeDomain = new EpisodeDomain();
-      episodeDomain.findEpisodeBySearch(req, res);
-    }
+  // find and filter series data
+  static async findEpisodeAndSort(req, res) {
+    const episodeDomain = new EpisodeDomain();
+    episodeDomain.findEpisodeAndSort(req, res);
+  }
 
-    static async uploadEpisode(req,res){
-      const episodeDomain = new EpisodeDomain();
-      episodeDomain.uploadEpisode(req,res);
-    }
+  // search series
+  static async findEpisodeBySearch(req, res) {
+    const episodeDomain = new EpisodeDomain();
+    episodeDomain.findEpisodeBySearch(req, res);
+  }
+
+  //upload episode
+  static async uploadEpisode(req, res) {
+    const episodeDomain = new EpisodeDomain();
+    episodeDomain.uploadEpisode(req, res);
+  }
 }
-
-router.use(verifyToken);
 
 // get specific Series by id
 router.get("/", EpisodeController.getEpisode);
@@ -77,7 +75,7 @@ router.get("/sort", EpisodeController.findEpisodeAndSort);
 // search episode
 router.get("/search", EpisodeController.findEpisodeBySearch);
 
-
+router.use(verifyToken);
 
 //verify role
 router.use(checkRole);
@@ -85,29 +83,21 @@ router.use(checkRole);
 // create episode
 router.post("/", EpisodeController.createEpisode);
 
-//upload episode 
-router.post("/upload",EpisodeController.uploadEpisode);
+//upload episode
+router.post("/upload", EpisodeController.uploadEpisode);
 
 // create Multiple episode
 router.post("/multiepisode", EpisodeController.createMultiEpisode);
 
-
 //soft bulk delete episode
-router.put(
-  "/bulk_soft_delete",
-  EpisodeController.softDeleteBulkEpisode
-);
+router.put("/bulk_soft_delete", EpisodeController.softDeleteBulkEpisode);
 
 //hard bulk delete episode
-router.delete(
-  "/bulk_hard_delete",
-  EpisodeController.hardDeleteBulkEpisode
-);
+router.delete("/bulk_hard_delete", EpisodeController.hardDeleteBulkEpisode);
 // update episode
 router.put("/update", EpisodeController.updateEpisode);
 
 //bulk update episode
 router.put("/bulk_update", EpisodeController.updateBulkEpisode);
-
 
 module.exports = router;

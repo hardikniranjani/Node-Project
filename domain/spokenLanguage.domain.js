@@ -48,9 +48,9 @@ class SpokenLanguageDomain {
   // Soft delete SpokenLanguage by id
   async deleteAnSpokenLanguage(req, res) {
     var id = req.params.id;
-    const SpokenLanguage = await SpokenLanguage.findById(id);
+    const spokenLanguage = await SpokenLanguage.findById(id);
 
-    if (!SpokenLanguage)
+    if (!spokenLanguage)
       return res.status(500).send({ msg: `SpokenLanguage not found` });
 
     const result = await SpokenLanguage.findByIdAndUpdate(
@@ -86,9 +86,9 @@ class SpokenLanguageDomain {
     var data = req.body;
     var id = req.params.id;
 
-    const SpokenLanguage = await SpokenLanguage.findById(id);
+    const spokenLanguage = await SpokenLanguage.findById(id);
 
-    if (!SpokenLanguage)
+    if (!spokenLanguage)
       return res.status(500).send({ msg: `SpokenLanguage not found` });
     const UpdateSpokenLanguage = await SpokenLanguage.findByIdAndUpdate(
       id,

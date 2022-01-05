@@ -18,7 +18,7 @@
         "Vote_average":8.1,
         "Vote_count":7805004,
         "LongDescription":"Squid Game (Korean: 오징어 게임; RR: Ojing-eo Geim) is a South Korean survival drama television series created by Hwang Dong-hyuk for Netflix. Its cast includes Lee Jung-jae, Park Hae-soo, Wi Ha-joon, Jung Ho-yeon, O Yeong-su, Heo Sung-tae, Anupam Tripathi, and Kim Joo-ryoung.",
-        "Season":[1],
+        "Seasons":[1],
         "Poster_path":["https://images7.alphacoders.com/118/1181582.jpg"],
         "IsActive":true
     },
@@ -41,7 +41,7 @@
         "Vote_average":9.2,
         "Vote_count":980780410,
         "LongDescription":"Game of Thrones is an American fantasy drama television series created by David Benioff and D. B. Weiss for HBO. It is an adaptation of A Song of Ice and Fire, a series of fantasy novels by George R. R. Martin, the first of which is A Game of Thrones. The show was shot in the United Kingdom, Canada, Croatia, Iceland, Malta, Morocco, and Spain. It premiered on HBO in the United States on April 17, 2011, and concluded on May 19, 2019, with 73 episodes broadcast over eight seasons.",
-        "Season":[2,3,4],
+        "Seasons":[2,3,4],
         "Poster_path":["https://c4.wallpaperflare.com/wallpaper/956/258/378/sean-bean-iron-throne-sword-game-of-thrones-wallpaper-preview.jpg","https://c4.wallpaperflare.com/wallpaper/135/443/590/game-of-thrones-sigils-house-stark-wallpaper-preview.jpg"],
         "IsActive":true
     }

@@ -52,14 +52,22 @@ class seriesController {
   }
 }
 
-//authentication of user
-router.use(verifyToken);
+
 
 // get all Series
 router.get("/", seriesController.getAllSeries);
 
 // get specific Series by id
 router.get("/:id", seriesController.getSeries);
+
+// find and filter series data
+router.get("/sort/series", seriesController.findSeriesAndSort);
+
+// search series
+router.get("/search/series", seriesController.findSeriesBySearch);
+
+//authentication of user
+router.use(verifyToken);
 
 //check role
 router.use(checkRole);
@@ -75,9 +83,5 @@ router.put("/delete/:id", seriesController.deleteSeries);
 //Hard delete series
 router.delete("/:id", seriesController.HardDeleteSeries);
 
-// find and filter series data
-router.get("/sort/series", seriesController.findSeriesAndSort);
 
-// search series
-router.get("/search/series", seriesController.findSeriesBySearch);
 module.exports = router;

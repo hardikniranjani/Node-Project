@@ -5,8 +5,6 @@ class CountryDomain {
   // create bulk Country
   async createBulkCountry(req,res){
     
-    if(req.user !== "admin") res.status(401).send({msg : "You are not authorized!!!"});
-
     var countryData = req.body;
     Country.insertMany(countryData,(err,docs)=>{
       if(err) res.status(400).send("error while inserting many documents "+err);
@@ -17,8 +15,7 @@ class CountryDomain {
 
   // create Country
   async createCountry(req, res) {
-    if (req.user !== "admin")
-      res.status(401).send({ msg: "You are not authorized!!!" });
+   
     var data = req.body;
     
     let country = new Country({
@@ -69,11 +66,6 @@ class CountryDomain {
   // Soft delete Country by id
   async deleteAnCountry(req, res) {
 
-    if (req.user !== "admin") {
-      return res.status(401).json({ msg: "You are not authorized!!!" });
-    } 
-      
-
     var id = req.params.id;
     const country = await Country.findById(id);
     if (country) {
@@ -99,10 +91,7 @@ class CountryDomain {
 
   // Hard delete Country by id
   async HardDeleteAnCountry(req, res) {
-
-    if (req.user !== "admin")
-      res.status(401).send({ msg: "You are not authorized!!!" });
-    
+  
     var id = req.params.id;
 
     const result = await Country.findByIdAndDelete(id);
@@ -114,9 +103,6 @@ class CountryDomain {
   //  Edit Country
 
   async editAnCountry(req, res) {
-
-    if (req.user !== "admin")
-      res.status(401).send({ msg: "You are not authorized!!!" });
 
     var data = req.body;
     var id = req.params.id;

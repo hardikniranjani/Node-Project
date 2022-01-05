@@ -27,13 +27,13 @@ class CertificationDomain {
 
   // get all movie certificate by country id
   async getMovieCerificate(req, res) {
-    const country_id = req.query.country_id;
-    const movieCertificate = movieCertificaion.findOne({
-      Country_id: country_id,
+    const country_id1 = req.query.country_id;
+    const movieCertificate =await movieCertificaion.find({
+      Country_id: country_id1
     });
 
     if (movieCertificate)
-      res.status(200).send({ certificates: movieCertificate });
+      res.status(200).send(movieCertificate);
     else res.status(404).send({ msg: "No data found with this country." });
   }
 

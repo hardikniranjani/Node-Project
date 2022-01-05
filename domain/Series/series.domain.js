@@ -39,7 +39,7 @@ class SeriesDomain {
 
   // get all series
   async getAllSeries(req, res) {
-    var series_data = await Series.find();
+    var series_data = await Series.find({IsActive: true});
     if (series_data.length > 0) {
       res.send(series_data);
     } else {
@@ -52,7 +52,7 @@ class SeriesDomain {
     var id = req.params.id;
 
     const result = await Series.findById(id);
-    if (result) {
+    if (result && result.IsActive) {
       res.send(result);
     } else {
       res.status(404).send("Can't find series");
@@ -71,7 +71,7 @@ class SeriesDomain {
 
     if (!result) return res.status(404).send({ msg: `Series not found` });  
 
-    res.send(200).send(result);
+    res.send(200).send("Soft Deleted Successfully");
   }
 
   // Hard Delete series by id
@@ -90,9 +90,7 @@ class SeriesDomain {
   async editAnSeries(req, res) {
     var data = req.body;
     const id = req.params.id;
-    const { error } = seriesVerify(data);
 
-    if (error) return res.send("Erorr!!");
     const series = await Series.findById(id);
     if (!series) res.send("Not Found");
     const UpdateSeries = await Series.findByIdAndUpdate(
@@ -137,10 +135,6 @@ class SeriesDomain {
     const Ascending = req.query.ascending;
 
     const series = await Series.find()
-      .populate("spoken_languages")
-      .populate("genres")
-      .populate("compaines")
-      .populate("seasons")
       .sort(queryperam);
 
     if (!series) return res.status(404).send({ msg: `Series not found` });
@@ -157,10 +151,6 @@ class SeriesDomain {
     const queryName = req.query.item;
 
     const seriesData = await Series.find({ [queryperam]: queryName })
-      .populate("spoken_languages")
-      .populate("genres")
-      .populate("compaines")
-      .populate("seasons")
       .sort(`${queryperam}`);
 
     if (seriesData.length <= 0)
@@ -171,3 +161,8 @@ class SeriesDomain {
 }
 
 module.exports = SeriesDomain;
+
+// .populate("spoken_languages")
+// .populate("genres")
+// .populate("compaines")
+// .populate("seasons")
