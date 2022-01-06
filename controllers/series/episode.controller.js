@@ -65,7 +65,7 @@ class EpisodeController {
     episodeDomain.uploadEpisode(req, res);
   }
 }
-
+router.use(verifyToken);
 // get specific Series by id
 router.get("/", EpisodeController.getEpisode);
 
@@ -75,7 +75,7 @@ router.get("/sort", EpisodeController.findEpisodeAndSort);
 // search episode
 router.get("/search", EpisodeController.findEpisodeBySearch);
 
-router.use(verifyToken);
+
 
 //verify role
 router.use(checkRole);

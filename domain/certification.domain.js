@@ -39,10 +39,10 @@ class CertificationDomain {
 
   // update movie certificate
   async updateMovieCertificate(req, res) {
-    const movieCId = req.query.movie_certi_id;
+    const movieCId = req.params.id;
     const data = req.body;
     const movieCertificate = await movieCertificaion.findByIdAndUpdate(
-      { movieCId},
+      { _id:movieCId},
       { $set: { ...data } },
       { new: true }
     );
@@ -57,35 +57,35 @@ class CertificationDomain {
 
   // soft delete movie certificate
   async softDeleteMovieCertificate(req, res) {
-    const movieCId = req.params.movie_certi_id;
-    const data = req.body;
+    const movieCId = Number(req.query.movie_certi_id);
+  
     const movieCertificate = await movieCertificaion.findByIdAndUpdate(
-      { movieCId },
+      {_id : movieCId },
       { $set: { IsActive: false } },
       { new: true }
     );
 
     try {
-      if (movieCertificate) res.status(200).send("Soft delete successfully");
-      else res.status(400).send("Not able to delete this certificate");
+      if (movieCertificate) res.status(200).send({msg:"Soft delete successfully"});
+      else res.status(400).send({msg :"Not able to delete this certificate"});
     } catch (e) {
-      res.status(500).send(`some error ${e}`);
+      res.status(500).send({err :`some error ${e}`});
     }
   }
 
   // Hard delete movie certificate
   async hardDeleteMovieCertificate(req, res) {
-    const movieCId = req.params.movie_certi_id;
-    const data = req.body;
+    const movieCId = req.params.id;
+    
     const movieCertificate = await movieCertificaion.findByIdAndDelete({
-      movieCId
+      _id:movieCId
     });
 
     try {
-      if (movieCertificate) res.status(200).send("Hard delete successfully");
-      else res.status(400).send("Not able to delete this certificate");
+      if (movieCertificate) res.status(200).send({msg : "Hard delete successfully"});
+      else res.status(400).send({msg : "Not able to delete this certificate"});
     } catch (e) {
-      res.status(500).send(`some error ${e}`);
+      res.status(500).send({err :`some error ${e}`});
     }
   }
 
@@ -118,7 +118,7 @@ class CertificationDomain {
   // get all Tv certificate by country id
   async getTvCerificate(req, res) {
     const country_id = req.query.country_id;
-    const TvCertificate = TvCertificaion.findOne({
+    const TvCertificate =await TvCertificaion.find({
       Country_id: country_id,
     });
 
@@ -131,7 +131,7 @@ class CertificationDomain {
     const TvCId = req.query.tv_certi_id;
     const data = req.body;
     const TvCertificate = await TvCertificaion.findByIdAndUpdate(
-      { TvCId },
+      { _id:TvCId },
       { $set: { ...data } },
       { new: true }
     );
@@ -146,17 +146,17 @@ class CertificationDomain {
 
   // soft delete Tv certificate
   async softDeleteTvCertificate(req, res) {
-    const TvCId = req.params.tv_certi_id;
-    const data = req.body;
-    const TvCertificate = await TvCertificaion.findByIdAndUpdate(
-      { TvCId},
+    const TvCId = req.params.id;
+    
+    const TvCertificate = await TvCertificaion.findOneAndUpdate(
+      { _id:TvCId,IsActive : true},
       { $set: { IsActive: false } },
       { new: true }
     );
 
     try {
-      if (TvCertificate) res.status(200).send("Soft delete successfully");
-      else res.status(400).send("Not able to delete this certificate");
+      if (TvCertificate) res.status(200).send({msg : "Soft delete successfully"});
+      else res.status(400).send({msg : "can't found certificate"});
     } catch (e) {
       res.status(500).send(`some error ${e}`);
     }
@@ -164,15 +164,15 @@ class CertificationDomain {
 
   // Hard delete Tv certificate
   async hardDeleteTvCertificate(req, res) {
-    const TvCId = req.params.tv_certi_id;
-    const data = req.body;
+    const TvCId = req.params.id;
+    
     const TvCertificate = await TvCertificaion.findByIdAndDelete({
-      TvCId
+      _id:TvCId
     });
 
     try {
-      if (TvCertificate) res.status(200).send("Hard delete successfully");
-      else res.status(400).send("Not able to delete this certificate");
+      if (TvCertificate) res.status(200).send({msg :"Hard delete successfully"});
+      else res.status(400).send({msg : "Not able to delete this certificate"});
     } catch (e) {
       res.status(500).send(`some error ${e}`);
     }

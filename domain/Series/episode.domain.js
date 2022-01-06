@@ -5,7 +5,7 @@ const path = require("path");
 
 class episodeDomain {
   //   create episode
-  async createAnEpisode(req, res) {
+  async   createAnEpisode(req, res) {
 
     const data = req.body;
     const season_id = data.SeasonID;

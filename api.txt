@@ -16,3 +16,14 @@ fetch(
   .then((res) => console.log(res));
 
 mongodb+srv://<username>:<password>@ottcluster.tapyt.mongodb.net/test
+
+Tokens
+user
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjQsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzcwNjM2LCJleHAiOjE2NDE4MDI2MzZ9.M-0nHcWz9FDMPbctnky55idEcSh5Y3oUHMiVQA-ZjXU
+
+
+Admin
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA
+
+hardik
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzgyNDkyLCJleHAiOjE2NDE4MTQ0OTJ9.hf0AZc9F45_eVF7nCJD9r5D4nnq9QL9SMvu1bSwezA8

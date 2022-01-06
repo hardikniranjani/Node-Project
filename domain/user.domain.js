@@ -111,9 +111,11 @@ class UserDomain {
   async getAnUser(req, res) {
     const user = req.body;
 
-    const findUser = await UserModel.findOne({ Email: user.email }).populate(
+    const findUser = await UserModel.findOne({ Email: user.email,IsActive : true }).populate(
       "Subscription_plan_id"
-    );
+    ).populate("watchHistory")
+    .populate("watchLater")
+    .populate("wishList");
 
     if (findUser && findUser.IsActive) {
       if (bcrypt.compareSync(user.password, findUser.Password)) {
@@ -128,10 +130,10 @@ class UserDomain {
         console.log(token, "line 124 user.domain");
         res.header("x-access-token", token).send(findUser);
       } else {
-        res.status(400).send("Invalid Email Or Password!!!");
+        res.status(400).send({msg : "Invalid Email Or Password!!!"});
       }
     } else {
-      res.status(404).send("Can't find User");
+      res.status(404).send({msg : "Can't find User"});
     }
   }
 
@@ -146,7 +148,7 @@ class UserDomain {
     const findUser = await UserModel.findById(user_id);
 
     if (!findUser.IsActive) {
-      res.status(501).send("User not found");
+      res.status(501).send({msg : "User not found"});
     }
 
     const updatedUser = await UserModel.findOneAndUpdate(
@@ -184,11 +186,35 @@ class UserDomain {
       await UserModel.findByIdAndUpdate(id, {
         $set: {
           IsActive: false,
-        },
+        }
       });
-      res.send("Successfully deleted");
+      await watchHistory.findOneAndUpdate({User : id},
+        {
+          $set : {
+            IsActive : false
+          }
+        });
+
+      await watchLater.findOneAndUpdate(
+        { User: id },
+        {
+          $set: {
+            IsActive: false,
+          },
+        }
+      );
+      await wishlist.findOneAndUpdate(
+        { UserId: id },
+        {
+          $set: {
+            IsActive: false,
+          },
+        }
+      );
+
+      res.send({msg : "Successfully deleted"});
     } else {
-      res.status(404).send("Can't find User");
+      res.status(404).send({msg : "Can't find User"});
     }
   }
 
@@ -197,7 +223,6 @@ class UserDomain {
   async deleteAnUserByAdmin(req, res) {
     let id = req.params.id;
 
-    if (!(req.user.role == "admin")) res.status(401).send("Access Denied!!!");
 
     const result = await UserModel.findById(id);
 
@@ -215,7 +240,6 @@ class UserDomain {
 
   // get all users
   async getAllUsers(req, res) {
-    
     const result = await UserModel.find({ IsActive: true });
 
     if (result) res.status(200).send(result);
@@ -225,8 +249,6 @@ class UserDomain {
   // get all deleted users
 
   async getAllDeletedUsers(req, res) {
-    
-
     const result = await UserModel.find({ IsActive: false });
 
     if (result) res.status(200).send(result);
@@ -237,14 +259,15 @@ class UserDomain {
 
   // Hard Delete user by id
   async HardDeleteUser(req, res) {
-
     let id = req.params.id;
 
-    const result = await UserModel.findByIdAndDelete(id);
-    if (result) {
-      res.send("Successfully deleted");
+    const result = await UserModel.findOne({_id : id , IsActive : false});
+    if(!result) return res.status(404).send({msg : "Can't find User"})
+    const deleteUser = await UserModel.deleteOne({_id : id})
+    if (deleteUser) {
+      res.send({ msg: "Successfully deleted" });
     } else {
-      res.status(404).send("Can't find User");
+      res.status(404).send({ msg: "Can't find User" });
     }
   }
 
@@ -253,7 +276,7 @@ class UserDomain {
     let User_id = req.user._id;
 
     const history = await watchHistory
-      .find({ User: User_id })
+      .find({ User: User_id,IsActive : true })
       .populate("Movies")
       .populate({
         path: "Episode",
@@ -298,8 +321,8 @@ class UserDomain {
     let User_id = req.user._id;
     let media_id = req.query.media_id;
     let media_type = req.query.media_type;
-    console.log([media_type]);
-    const history = await watchHistory.find({ User: User_id });
+    
+    const history = await watchHistory.find({ User: User_id,IsActive : true });
 
     if (history.length == 0) {
       const watchedMedia = new watchHistory({
@@ -352,7 +375,7 @@ class UserDomain {
     let User_id = req.user._id;
     let media_id = req.query.media_id;
     let media_type = req.query.media_type;
-    const list = await watchHistory.find({ User: User_id });
+    const list = await watchHistory.find({ User: User_id,IsActive : false });
 
     if (list.length == 0) {
       res.status(200).send({ msg: "No list is there." });
@@ -363,11 +386,9 @@ class UserDomain {
           [media_type]: media_id,
         },
       });
-      res
-        .status(200)
-        .send({
-          list : deletedlist
-        });
+      res.status(200).send({
+        list: deletedlist,
+      });
     }
   }
 
@@ -376,9 +397,9 @@ class UserDomain {
     let User_id = req.user._id;
     let media_id = req.query.media_id;
     let media_type = req.query.media_type;
-    media_type = media_type.charAt(0).toUpperCase() + media_type.slice(1);
+    // media_type = media_type.charAt(0).toUpperCase() + media_type.slice(1);
     console.log([media_type]);
-    const library = await watchLater.find({ User: User_id });
+    const library = await watchLater.find({ User: User_id,IsActive : true });
 
     if (library.length == 0) {
       const newlibrary = new watchLater({
@@ -407,12 +428,37 @@ class UserDomain {
     }
   }
 
+  //remove particular episode or movie from watchlater
+  async remove_watch_later(req, res) {
+    let User_id = req.user._id;
+    let media_id = req.query.media_id;
+    let media_type = req.query.media_type;
+    const list = await watchLater.find({ User: User_id,IsActive:true });
+
+    if (list.length == 0) {
+      res.status(200).send({ msg: "No list is there." });
+    } else {
+      const deletedlist = await watchLater.findOneAndUpdate(
+        { User: User_id },
+        {
+          $pull: {
+            [media_type]: media_id,
+          },
+        },
+        { new: true }
+      );
+      res.status(200).send({
+        list: deletedlist,
+      });
+    }
+  }
+
   // show watch history of user
   async showWatchLater(req, res) {
     let User_id = req.user._id;
 
     const watchLaterList = await watchLater
-      .find({ User: User_id })
+      .find({ User: User_id,IsActive :true })
       .populate("Movies")
       .populate({
         path: "Episode",
@@ -457,7 +503,7 @@ class UserDomain {
     let User_id = req.user._id;
     let media_id = req.query.media_id;
     let media_type = req.query.media_type;
-    const list = await watchLater.find({ User: User_id });
+    const list = await watchLater.find({ User: User_id,IsActive: true });
 
     if (list.length == 0) {
       res.status(200).send({ msg: "No list is there." });
@@ -474,19 +520,16 @@ class UserDomain {
     }
   }
 
-  // remove watch common of user
-  async removeCommon(req, res) {
+  async removeFromWatchLater(req, res) {
     let User_id = req.user._id;
     let media_id = req.query.media_id;
     let media_type = req.query.media_type;
-    let media_model = req.query.media_model;
-    console.log(req.query);
-    const list = await [media_model].find({ User: User_id });
+    const list = await watchLater.find({ User: User_id,IsActive : true });
 
     if (list.length == 0) {
       res.status(200).send({ msg: "No list is there." });
     } else {
-      const updatedlist = await [media_model].findOneAndUpdate({
+      const deletedlist = await watchLater.findOneAndUpdate({
         User: User_id,
         $pull: {
           [media_type]: media_id,
@@ -494,10 +537,11 @@ class UserDomain {
       });
       res
         .status(200)
-        .send({list : updatedlist});
-        // .send({ msg: "Your list has been Successfully updated!!!" });
+        .send({ msg: "Your list has been Successfully updated!!!" });
     }
   }
+  
+  
 
   // add ro wishlist of user
   async addToWishList(req, res) {
@@ -595,13 +639,34 @@ class UserDomain {
     }
   }
 
+  async removeOneWishList(req, res) {
+    let User_id = req.user._id;
+    let media_id = req.query.media_id;
+    let media_type = req.query.media_type;
+    const list = await wishlist.find({ User: User_id });
+
+    if (list.length == 0) {
+      res.status(200).send({ msg: "No list is there." });
+    } else {
+      const deletedlist = await wishlist.findOneAndUpdate({
+        User: User_id,
+        $pull: {
+          [media_type]: media_id,
+        },
+      });
+      res
+        .status(200)
+        .send({ msg: "Your list has been Successfully updated!!!" });
+    }
+  }
+
   // add subscription on user id
   async addSubscription(req, res) {
     const user_id = req.user._id;
     const plan_id = req.query.plan_id;
-
+    
     const getPlan = await SubscriptionModel.findById(plan_id);
-
+    // console.log(getPlan);
     if (!getPlan)
       return res.status(404).send({ msg: `Plan id ${plan_id} not found` });
 
@@ -621,7 +686,7 @@ class UserDomain {
         },
       },
       { new: true }
-    );
+    ).populate("Subscription_plan_id");
     res.status(200).send(addplanToUser);
   }
 }

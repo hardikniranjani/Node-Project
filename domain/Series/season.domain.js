@@ -81,13 +81,13 @@ class seasonDomain {
   // delete season by id
 
   async deleteAnseason(req, res) {
-    var seriesID = req.params.series_id;
+    var SeriesID = req.params.series_id;
     var seasonID = req.params.season_id;
 
-    const series_result = await season.findById({seriesID});
+    const series_result = await season.findById(seasonID);
     if (!series_result) return res.status(404).json({ msg: `Series Not found` });
     
-    const season_result = await season.findOne({seriesID,_id: seasonID});
+    const season_result = await season.findOne({ SeriesID, _id: seasonID });
     if (!season_result) return res.status(404).json({ msg: `Session Not found` });
 
        await season.findOneAndUpdate({_id: seasonID},
@@ -97,7 +97,7 @@ class seasonDomain {
           }
         });
          await Series.findOneAndUpdate(
-          { _id: seriesID },
+          { _id: SeriesID },
           {
             $pull: {
               season: seasonID,
@@ -107,11 +107,8 @@ class seasonDomain {
         );
 
         
-        res.status(200).send("Successfully deleted");
+      res.status(200).send("Successfully deleted");
 
-       
-      
-    
   }
 
   //   Edit season
@@ -119,7 +116,7 @@ class seasonDomain {
     var data = req.body;
     var seriesID = req.params.series_id;
     var SeasonNumber = req.query.SeasonNumber;
-    const series_result = await season.findbyOne({seriesID});
+    const series_result = await season.findOne({seriesID});
     const season_result = await season.find({ SeasonNumber });
 
     if (!series_result)
@@ -146,9 +143,12 @@ class seasonDomain {
 
   // get all episode from season
   async getAllEpisodesOfSeason(req, res) {
+    // console.log("called");
     const SeasonId = Number(req.query.SeasonId);
-
-    const findSeason = await season.findById(SeasonId).populate("Episodes");
+    const SeriesID = Number(req.query.SeriesID);
+    const findSeason = await season
+      .findOne({ SeriesID: SeriesID, _id: SeasonId })
+      .populate("Episodes");
 
     if (!findSeason)
       return res
@@ -178,17 +178,17 @@ class seasonDomain {
     async findSeasionAndSort(req, res) {
       const series_id = req.query.series_id;
       const queryperam = req.query.filter;
-      const Ascending = req.query.ascending;
+      const order = req.query.order;
   
       const seasion = await season
-        .find({ SeriesID: series_id})
-        .populate("series")
-        .populate("episode")
+        .find({ SeriesID: series_id })
+        // .populate("SeriesID")
+        // .populate("Episodes")
         .sort(queryperam);
   
       if (!seasion) return res.status(404).send({ msg: `seasion not found` });
   
-      if (Ascending == "descending")
+      if (order == "descending")
         return res.status(200).send(seasion.reverse());
   
       return res.status(200).send(seasion);
@@ -205,12 +205,10 @@ class seasonDomain {
           SeriesID: series_id,
           [queryperam]: queryName,
         })
-        .populate("series")
-        .populate("seasons")
+        .populate("SeriesID")
         .sort(`${queryperam}`);
   
-      if (seasionData.length <= 0)
-        res.status(500).send({ msg: `seasion not found` });
+      if (seasionData.length <= 0) return res.status(500).send({ msg: `seasion not found` });
   
       return res.status(200).send(seasionData);
     }

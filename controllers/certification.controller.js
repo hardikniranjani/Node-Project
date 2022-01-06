@@ -82,14 +82,13 @@ router.use(checkRole);
 router.post("/movie", CertificationController.createMovieCertificate);
 
 // update movie Certification
-router.put("/movie", CertificationController.updateMovieCertificate);
+router.put("/movie/:id", CertificationController.updateMovieCertificate);
 
 //soft delete movie Certification
-router.put("/:id/movie", CertificationController.softDeleteMovieCertificate);
+router.put("/movie", CertificationController.softDeleteMovieCertificate);
 
 //Hard delete movie Certification
 router.delete("/:id/movie", CertificationController.hardDeleteMovieCertificate);
-
 
   // ++++++ For Tv(Series) +++++++ //
 

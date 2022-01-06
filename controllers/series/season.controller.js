@@ -62,16 +62,16 @@ class SeasonController {
 
 
 // find and filter season data
-router.get("/sort/season", SeasonController.findSeasionAndSort);
+router.get("/sort", SeasonController.findSeasionAndSort);
 
 // search season
-router.get("/search/season", SeasonController.findseasionBySearch);
+router.get("/search", SeasonController.findseasionBySearch);
 
 // get all Season
-router.get("/:series_id/season/", SeasonController.getAllSeason);
+router.get("/:series_id", SeasonController.getAllSeason);
 
 // get specific Season by id
-router.get("/:series_id/season/:season_id", SeasonController.getAnSeason);
+router.get("/:series_id/:season_id", SeasonController.getAnSeason);
 
 //authenticate user
 router.use(verifyToken);
@@ -80,19 +80,19 @@ router.use(verifyToken);
 router.use(checkRole);
 
 // create Season
-router.post("/:series_id/season/", SeasonController.createSeason);
+router.post("/:series_id", SeasonController.createSeason);
 
 // update Season
-router.put("/:series_id/season", SeasonController.updateSeason);
+router.put("/:series_id", SeasonController.updateSeason);
 
 //soft delete Season
-router.put("/:series_id/season/:season_id", SeasonController.deleteSeason);
+router.put("/:series_id/:season_id", SeasonController.deleteSeason);
 
 //get episodes
-router.get("/season/Episodes", SeasonController.getAllEpisodesOfSeason);
+router.get("/Episodes", SeasonController.getAllEpisodesOfSeason);
 
 // get specific episode from season
-router.get("/season/Episode", SeasonController.getAnEpisodeOfSeason);
+router.get("/Episode", SeasonController.getAnEpisodeOfSeason);
 
 
 module.exports = router;

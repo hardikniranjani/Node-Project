@@ -17,22 +17,22 @@ class UserController {
     userDomain.getAnUser(req, res);
   }
 
-  // get all user 
-  static async getAllUsers(req,res){
+  // get all user
+  static async getAllUsers(req, res) {
     const userDomain = new UserDomain();
-    userDomain.getAllUsers(req,res);
+    userDomain.getAllUsers(req, res);
   }
 
   //get all soft deleted user
-  static async softDeletedUsers(req,res){
+  static async softDeletedUsers(req, res) {
     const userDomain = new UserDomain();
-    userDomain.getAllDeletedUsers(req,res);
+    userDomain.getAllDeletedUsers(req, res);
   }
 
   //hard delete a user
-  static async hardDeleteUser(req,res){
+  static async hardDeleteUser(req, res) {
     const userDomain = new UserDomain();
-    userDomain.HardDeleteUser(req,res);
+    userDomain.HardDeleteUser(req, res);
   }
   // create User
   static async createAnUser(req, res) {
@@ -106,6 +106,12 @@ class UserController {
     userDomain.removeFromWishlist(req, res);
   }
 
+  //remove from wishlist
+  static async removeonewishlist(req,res){
+    const userDomain = new UserDomain();
+    userDomain.removeOneWishList(req,res)
+  }
+
   // add subscription of user
   static async addSubscription(req, res) {
     const userDomain = new UserDomain();
@@ -117,6 +123,12 @@ class UserController {
     const userDomain = new UserDomain();
     userDomain.removeFromHisoty(req, res);
   }
+
+  static async remove_watch_later(req, res) {
+    const userDomain = new UserDomain();
+    userDomain.remove_watch_later(req, res);
+  }
+
   static async removeCommon(req, res) {
     const userDomain = new UserDomain();
     userDomain.removeCommon(req, res);
@@ -157,11 +169,12 @@ router.delete("/delete_history", UserController.deleteHistory);
 //add to watch later library
 router.post("/watch_later", UserController.addToWatchLater);
 
+router.put("/remove_watch_later", UserController.remove_watch_later);
 //get user watch later list
 router.get("/watch_later", UserController.getWatchLaterList);
 
 //remove from watchlater
-router.put("/remove", UserController.removeFromWatchLater);
+router.delete("/remove", UserController.removeFromWatchLater);
 
 
 
@@ -174,12 +187,13 @@ router.get("/wishlist", UserController.getWishList);
 //delete wishlist
 router.delete("/wishlist", UserController.deleteWishlist);
 
+//remove from wishlist
+router.put("/removefromwishlist" , UserController.removeonewishlist)
+
 // add subscription plan of user
 router.post("/addsubscription", UserController.addSubscription);
 
 
-
-router.put("/removecommon", UserController.removeCommon);
 
 // verify role
 router.use(checkRole);
