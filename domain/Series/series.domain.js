@@ -1,5 +1,6 @@
 const Series = require("../../models/Series/series.model");
-
+const episode_Model = require("../../models/Series/episode.model");
+const season_Model = require("../../models/Series/season.model");
 class SeriesDomain {
   // create new Series
   async createAnSeries(req, res) {
@@ -72,10 +73,25 @@ class SeriesDomain {
       },
       { new: true }
     );
-
+    await season_Model.updateMany(
+      {
+        SeriesID: id,
+      },
+      {
+        IsActive: false,
+      }
+    );
+    await episode_Model.updateMany(
+      {
+        SeriesID: id,
+      },
+      {
+        IsActive: false,
+      }
+    );
     if (!result) return res.status(404).send({ msg: `Series not found` });
 
-    res.send(200).send("Soft Deleted Successfully");
+    res.status(200).send({msg : "Soft Deleted Successfully"});
   }
 
   // Hard Delete series by id
