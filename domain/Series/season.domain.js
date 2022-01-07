@@ -1,6 +1,6 @@
 const Series = require("../../models/Series/series.model");
 const season = require("../../models/Series/season.model");
-
+const Episode = require("../../models/Series/episode.model");
 class seasonDomain {
   // create new season
   async createAnseason(req, res) {
@@ -83,12 +83,9 @@ class seasonDomain {
   async deleteAnseason(req, res) {
     var SeriesID = req.params.series_id;
     var seasonID = req.params.season_id;
-
-    const series_result = await season.findById(seasonID);
-    if (!series_result) return res.status(404).json({ msg: `Series Not found` });
     
     const season_result = await season.findOne({ SeriesID, _id: seasonID });
-    if (!season_result) return res.status(404).json({ msg: `Session Not found` });
+    if (!season_result) return res.status(404).json({ msg: `Season Not found` });
 
        await season.findOneAndUpdate({_id: seasonID},
         {
@@ -96,16 +93,21 @@ class seasonDomain {
             IsActive: false,
           }
         });
-         await Series.findOneAndUpdate(
-          { _id: SeriesID },
-          {
-            $pull: {
-              season: seasonID,
-            },
+        await Series.findOneAndUpdate(
+        { _id: SeriesID },
+        {
+          $pull: {
+            Seasons: seasonID,
           },
-          { new: true }
-        );
-
+        },
+        { new: true }
+      );
+      await Episode.updateMany({
+        SeasonID: seasonID
+      },
+      {
+        IsActive : false
+      });
         
       res.status(200).send("Successfully deleted");
 
