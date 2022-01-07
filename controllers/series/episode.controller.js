@@ -77,7 +77,7 @@ class EpisodeController {
     episodeDomain.uploadEpisodeVideo(req, res);
   }
 }
-router.use(verifyToken);
+
 // get specific Series by id
 router.get("/", EpisodeController.getEpisode);
 
@@ -86,6 +86,9 @@ router.get("/sort", EpisodeController.findEpisodeAndSort);
 
 // search episode
 router.get("/search", EpisodeController.findEpisodeBySearch);
+
+
+router.use(verifyToken);
 
 //verify role
 router.use(checkRole);
@@ -111,6 +114,7 @@ router.put("/bulk_soft_delete", EpisodeController.softDeleteBulkEpisode);
 
 //hard bulk delete episode
 router.delete("/bulk_hard_delete", EpisodeController.hardDeleteBulkEpisode);
+
 // update episode
 router.put("/update", EpisodeController.updateEpisode);
 

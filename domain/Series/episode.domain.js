@@ -358,7 +358,8 @@ class episodeDomain {
 
   // Hard delete episode
   async hardDeleteBulkEpisode(req, res) {
-    const season_id = req.params.season_id;
+
+    const season_id = req.query.season_id;
     const arrayOfEpisode = req.body;
 
     const season = await season_Model.find({ _id: season_id });
@@ -389,6 +390,7 @@ class episodeDomain {
     const episode_data = req.body;
     const season_id = req.query.season_id;
     const series_id = req.query.series_id;
+    const episode_id = req.query.episode_id;
 
     const series = await episode_Model.find({ SeriesID: series_id });
     if (!series)
@@ -400,6 +402,7 @@ class episodeDomain {
 
     const UpdatedEpisode = await episode_Model.findByIdAndUpdate(
       {
+        _id:episode_id,
         SeriesID: series_id,
         SeasonID: season_id,
       },
@@ -431,6 +434,7 @@ class episodeDomain {
     for (let i = 0; i < arrayOfEpisode.length; i++) {
       await episode_Model.findByIdAndUpdate(
         {
+          _id:arrayOfEpisode[i]._id,
           SeriesID: series_id,
           SeasonID: season_id,
         },
@@ -480,8 +484,8 @@ class episodeDomain {
         SeasonID: season_id,
         [queryperam]: queryName,
       })
-      .populate("series")
-      .populate("seasons")
+      .populate("SeriesID")
+      .populate("SeasonID")
       .sort(`${queryperam}`);
 
     if (EpisodeData.length <= 0)

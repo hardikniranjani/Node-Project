@@ -1,0 +1,2917 @@
+{
+	"info": {
+		"_postman_id": "74798e70-a194-45b8-9e41-bd9cad9fcc06",
+		"name": "OttPlatform Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"user@gmail.com\",\r\n    \"password\": \"pass123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"adminOne\",\r\n    \"email\" : \"adminOne@gmail.com\",\r\n    \"password\": \"adminOnePass12345\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/user/create_admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"user",
+								"create_admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Hardik Niranjani\",\r\n    \"email\" : \"hardik@gmail.com\",\r\n    \"password\" : \"hardik12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_path}}/user/signup",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"user",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Hard Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjQsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzcwNjM2LCJleHAiOjE2NDE4MDI2MzZ9.M-0nHcWz9FDMPbctnky55idEcSh5Y3oUHMiVQA-ZjXU",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/user/deleteuser/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"user",
+								"deleteuser",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzgyNDkyLCJleHAiOjE2NDE4MTQ0OTJ9.hf0AZc9F45_eVF7nCJD9r5D4nnq9QL9SMvu1bSwezA8",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Hardik Patel\",\r\n    \"email\" : \"hardikpatel@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_path}}/user/update",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addsubscription to user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjQsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzcwNjM2LCJleHAiOjE2NDE4MDI2MzZ9.M-0nHcWz9FDMPbctnky55idEcSh5Y3oUHMiVQA-ZjXU",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_path}}/delete",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Watch History",
+			"item": [
+				{
+					"name": "get user watch history",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjQsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzcwNjM2LCJleHAiOjE2NDE4MDI2MzZ9.M-0nHcWz9FDMPbctnky55idEcSh5Y3oUHMiVQA-ZjXU",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_path}}/watch_history",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"watch_history"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add to watch history",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjQsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzcwNjM2LCJleHAiOjE2NDE4MDI2MzZ9.M-0nHcWz9FDMPbctnky55idEcSh5Y3oUHMiVQA-ZjXU",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_path}}/watch_history?media_id=2&media_type=Movies",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"watch_history"
+							],
+							"query": [
+								{
+									"key": "media_id",
+									"value": "2"
+								},
+								{
+									"key": "media_type",
+									"value": "Movies"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove paticular episode or movie",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjQsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzcwNjM2LCJleHAiOjE2NDE4MDI2MzZ9.M-0nHcWz9FDMPbctnky55idEcSh5Y3oUHMiVQA-ZjXU",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_path}}/removeonehistory?media_id=2&media_type=Episode",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"removeonehistory"
+							],
+							"query": [
+								{
+									"key": "media_id",
+									"value": "2"
+								},
+								{
+									"key": "x-access-token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjQsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzcwNjM2LCJleHAiOjE2NDE4MDI2MzZ9.M-0nHcWz9FDMPbctnky55idEcSh5Y3oUHMiVQA-ZjXU",
+									"disabled": true
+								},
+								{
+									"key": "media_type",
+									"value": "Episode"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete all history",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzgyNDkyLCJleHAiOjE2NDE4MTQ0OTJ9.hf0AZc9F45_eVF7nCJD9r5D4nnq9QL9SMvu1bSwezA8",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_path}}/delete_history",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"delete_history"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Watch Later",
+			"item": [
+				{
+					"name": "add to watch later",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzgyNDkyLCJleHAiOjE2NDE4MTQ0OTJ9.hf0AZc9F45_eVF7nCJD9r5D4nnq9QL9SMvu1bSwezA8",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_path}}/watch_later?media_id=2&media_type=Episode",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"watch_later"
+							],
+							"query": [
+								{
+									"key": "media_id",
+									"value": "2"
+								},
+								{
+									"key": "media_type",
+									"value": "Episode"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove one from watch later",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzgyNDkyLCJleHAiOjE2NDE4MTQ0OTJ9.hf0AZc9F45_eVF7nCJD9r5D4nnq9QL9SMvu1bSwezA8",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_path}}/remove_watch_later?media_id=1&media_type=Episode",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"remove_watch_later"
+							],
+							"query": [
+								{
+									"key": "media_id",
+									"value": "1"
+								},
+								{
+									"key": "media_type",
+									"value": "Episode"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get watch later",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzgyNDkyLCJleHAiOjE2NDE4MTQ0OTJ9.hf0AZc9F45_eVF7nCJD9r5D4nnq9QL9SMvu1bSwezA8",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_path}}/watch_later",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"watch_later"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clear history",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzgyNDkyLCJleHAiOjE2NDE4MTQ0OTJ9.hf0AZc9F45_eVF7nCJD9r5D4nnq9QL9SMvu1bSwezA8",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_path}}/remove",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"remove"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Wishlist",
+			"item": [
+				{
+					"name": "get wishlist",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzgyNDkyLCJleHAiOjE2NDE4MTQ0OTJ9.hf0AZc9F45_eVF7nCJD9r5D4nnq9QL9SMvu1bSwezA8",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_path}}/wishlist",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"wishlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add to wishlist",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzgyNDkyLCJleHAiOjE2NDE4MTQ0OTJ9.hf0AZc9F45_eVF7nCJD9r5D4nnq9QL9SMvu1bSwezA8",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_path}}/wishlist?media_id=2&media_type=Series",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"wishlist"
+							],
+							"query": [
+								{
+									"key": "media_id",
+									"value": "2"
+								},
+								{
+									"key": "media_type",
+									"value": "Series"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove movie or series from wishlist",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzgyNDkyLCJleHAiOjE2NDE4MTQ0OTJ9.hf0AZc9F45_eVF7nCJD9r5D4nnq9QL9SMvu1bSwezA8",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_path}}/removefromwishlist?media_id=2&media_type=Series",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"removefromwishlist"
+							],
+							"query": [
+								{
+									"key": "media_id",
+									"value": "2"
+								},
+								{
+									"key": "media_type",
+									"value": "Series"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete wish list",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzgyNDkyLCJleHAiOjE2NDE4MTQ0OTJ9.hf0AZc9F45_eVF7nCJD9r5D4nnq9QL9SMvu1bSwezA8",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_path}}/wishlist",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"wishlist"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "get all user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_path}}/getallusers",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"getallusers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "soft deleted users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_path}}/softdeleteduser",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"softdeleteduser"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movie",
+			"item": [
+				{
+					"name": "Get all movies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/movies/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"movies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get movie by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/movies/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"movies",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sorting Movie",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/movies/sorting/movie?filter=Popularity&ascending=ascending",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"movies",
+								"sorting",
+								"movie"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "Popularity"
+								},
+								{
+									"key": "ascending",
+									"value": "ascending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Movie",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/movies/search/movie?item1=Vote_average&item=7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"movies",
+								"search",
+								"movie"
+							],
+							"query": [
+								{
+									"key": "item1",
+									"value": "Vote_average"
+								},
+								{
+									"key": "item",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Movie",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"_id\":4 ,\r\n        \"MovieName\":\"FF6_2\" ,\r\n        \"Original_language\": \"US_English\",\r\n        \"Spoken_languages\": [1,2,3,6,7,14,9],\r\n        \"DirectorName\": [\"Justin Lin\"],\r\n        \"Budget\":\"$160 million\" ,\r\n        \"ShortDescription\":\"Hobbs is tasked with catching a team of mercenary drivers who manage to evade him every time. However, he enlists the help of Dominic and his team in exchange for full pardons for their past crimes.\" ,\r\n        \"Genres\":[1, 9, 4,7,2],\r\n        \"ReleaseDate\": \"2013-5-24\",\r\n        \"Popularity\":87,\r\n        \"Production_companies\": [4,5,11],\r\n        \"Revenue\": \"$788.7 million\",\r\n        \"Status\":\"\" ,\r\n        \"Vote_average\":7,\r\n        \"Vote_count\": 85000000,\r\n        \"LongDescription\": \"\",\r\n        \"Banner\": \"https://wallpapercave.com/wp/wp1961155.jpg\",\r\n        \"IsActive\":true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/movies/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"movies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Movie",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"_id\": 2,\r\n        \"MovieName\":\"FF6\" ,\r\n        \"Original_language\": \"US_English\",\r\n        \"Spoken_languages\": [1,2,3,6,7,14,9],\r\n        \"DirectorName\": [\"Justin Lin\"],\r\n        \"Budget\":\"$160 million\" ,\r\n        \"ShortDescription\":\"Hobbs is tasked with catching a team of mercenary drivers who manage to evade him every time. However, he enlists the help of Dominic and his team in exchange for full pardons for their past crimes.\" ,\r\n        \"Genres\":[1, 9, 4,7,2],\r\n        \"ReleaseDate\": \"2013-5-24\",\r\n        \"Popularity\":87,\r\n        \"Production_companies\": [4,5,11],\r\n        \"Revenue\": \"$788.7 million\",\r\n        \"Status\":\"\" ,\r\n        \"Vote_average\":7,\r\n        \"Vote_count\": 85000000,\r\n        \"LongDescription\": \"\",\r\n        \"Banner\": \"https://wallpapercave.com/wp/wp1961155.jpg\",\r\n        \"IsActive\":true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/movies/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"movies",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Soft delete Movie",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/movies/delete/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"movies",
+								"delete",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hard Delete Movie",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/movies/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"movies",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Movie",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/movies/upload?movie_id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"movies",
+								"upload"
+							],
+							"query": [
+								{
+									"key": "movie_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "get all Company",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/company/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"company",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get specific Company by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/company/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"company",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Company",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"_id\": 15,\r\n        \"Name\": \"HBO\",\r\n        \"Origin_country\":\"United States\",\r\n        \"Founded\": \"8 November 1972, New York, New York, United States\",\r\n        \"Founders\": [\"Charles Dolan\"],\r\n        \"CEO\": \"Richard Plepler\",\r\n        \"Address\":\"1100 Avenue of the Americas New York, NY 10036 USA\",\r\n        \"Headquaters\": [\"New York, New York\"],\r\n        \"Description\": \"Home Box Office is an American pay television network owned by WarnerMedia Studios & Networks and the flagship property of namesake parent subsidiary Home Box Office, Inc.\",\r\n        \"Value\": \"$6.8 billion\",\r\n        \"IsActive\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/company/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"company",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Company",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"_id\": 15,\r\n        \"Name\": \"HBO1\",\r\n        \"Origin_country\":\"United States\",\r\n        \"Founded\": \"8 November 1972, New York, New York, United States\",\r\n        \"Founders\": [\"Charles Dolan\"],\r\n        \"CEO\": \"Richard Plepler\",\r\n        \"Address\":\"1100 Avenue of the Americas New York, NY 10036 USA\",\r\n        \"Headquaters\": [\"New York, New York\"],\r\n        \"Description\": \"Home Box Office is an American pay television network owned by WarnerMedia Studios & Networks and the flagship property of namesake parent subsidiary Home Box Office, Inc.\",\r\n        \"Value\": \"$6.8 billion\",\r\n        \"IsActive\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/company/15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"company",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/company/delete/15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"company",
+								"delete",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hard delete Company",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/company/15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"company",
+								"15"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subscription",
+			"item": [
+				{
+					"name": "get all Subscription",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/subscription/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"subscription",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get specific Subscription by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/subscription/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"subscription",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Subscription",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"_id\":8,\r\n        \"Monthly_price\":2799,\r\n        \"Plan_name\":\"Diamond+\",\r\n        \"Number_of_screen_available\":18,\r\n        \"Max_video_quality\":\"4K\",\r\n        \"Devices\":[\"Mobile\",\"Tablet\",\"Laptop\",\"TV\"],\r\n        \"IsActive\":true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/subscription/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"subscription",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Subscription",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"_id\":6,\r\n        \"Monthly_price\":2799,\r\n        \"Plan_name\":\"Diamond+\",\r\n        \"Number_of_screen_available\":18,\r\n        \"Max_video_quality\":\"4K\",\r\n        \"Devices\":[\"Mobile\",\"Tablet\",\"Laptop\",\"TV\"],\r\n        \"IsActive\":true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/subscription/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"subscription",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "soft delete Subscription",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/subscription/delete/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"subscription",
+								"delete",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hard delete Subscription",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/movies/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"movies",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Spoken Language",
+			"item": [
+				{
+					"name": "get all SpokenLanguage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/languages/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"languages",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get specific SpokenLanguage by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/languages/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"languages",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create SpokenLanguage",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": 15,\r\n    \"Spoken_Language\": \"Au_English\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/languages/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"languages",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update SpokenLanguage",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"_id\": 2,\r\n            \"Spoken_Language\": \"British_English1\",\r\n            \"IsActive\": true,\r\n            \"__v\": 0\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/languages/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"languages",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "soft delete SpokenLanguage",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/languages/delete/15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"languages",
+								"delete",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hard delete SpokenLanguage by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "country",
+			"item": [
+				{
+					"name": "get all Country",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/country/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"country",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get specific Country by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/country/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"country",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Country",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": 12,\r\n    \"CountryName\": \"Australia\",\r\n    \"CountryShortForm\": \"AU\",\r\n    \"CountryCode\": 61\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/country/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"country",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create bulk Country",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"_id\": 1,\r\n    \"CountryName\": \"United States of America\",\r\n    \"CountryShortForm\": \"US\",\r\n    \"CountryCode\": 1\r\n  },\r\n  {\r\n    \"_id\": 2,\r\n    \"CountryName\": \"Canada\",\r\n    \"CountryShortForm\": \"CA\",\r\n    \"CountryCode\": 1\r\n  },\r\n  {\r\n    \"_id\": 3,\r\n    \"CountryName\": \"Denmark\",\r\n    \"CountryShortForm\": \"DK\",\r\n    \"CountryCode\": 45\r\n  },\r\n  {\r\n    \"_id\": 4,\r\n    \"CountryName\": \"France\",\r\n    \"CountryShortForm\": \"FR\",\r\n    \"CountryCode\": 33\r\n  },\r\n  {\r\n    \"_id\": 5,\r\n    \"CountryName\": \"New zealand\",\r\n    \"CountryShortForm\": \"NZ\",\r\n    \"CountryCode\": 64\r\n  },\r\n  {\r\n    \"_id\": 6,\r\n    \"CountryName\": \"India\",\r\n    \"CountryShortForm\": \"IN\",\r\n    \"CountryCode\": 91\r\n  },\r\n  {\r\n    \"_id\": 7,\r\n    \"CountryName\": \"Brazil\",\r\n    \"CountryShortForm\": \"BR\",\r\n    \"CountryCode\": 55\r\n  },\r\n  {\r\n    \"_id\": 8,\r\n    \"CountryName\": \"Finland\",\r\n    \"CountryShortForm\": \"FI\",\r\n    \"CountryCode\": 358\r\n  },\r\n  {\r\n    \"_id\": 9,\r\n    \"CountryName\": \"Philippines\",\r\n    \"CountryShortForm\": \"PH\",\r\n    \"CountryCode\": 63\r\n  },\r\n  {\r\n    \"_id\": 10,\r\n    \"CountryName\": \"Portugal\",\r\n    \"CountryShortForm\": \"PT\",\r\n    \"CountryCode\": 351\r\n  },\r\n  {\r\n    \"_id\": 11,\r\n    \"CountryName\": \"Australia\",\r\n    \"CountryShortForm\": \"AU\",\r\n    \"CountryCode\": 61\r\n  }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/country/addCountry",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"country",
+								"addCountry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Country",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": 11,\r\n    \"CountryName\": \"Australia\",\r\n    \"CountryShortForm\": \"AU\",\r\n    \"CountryCode\": 61\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/country/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"country",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "soft delete Country",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/country/delete/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"country",
+								"delete",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hard delete Country",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/country/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"country",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Certification",
+			"item": [
+				{
+					"name": "get all movie Certification by country id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/certification/movie?country_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"certification",
+								"movie"
+							],
+							"query": [
+								{
+									"key": "country_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all tv certificate by country id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/certification/tv?country_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"certification",
+								"tv"
+							],
+							"query": [
+								{
+									"key": "country_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add movie certificate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": 21,\r\n\"Country_id\": 3,\r\n\"Certification\": \"0\",\r\n\"Meaning\": \"No age restriction.\",\r\n\"Order\": 1,\r\n\"IsActive\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/certification/movie",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"certification",
+								"movie"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add tv certificate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": 22,\r\n    \"Country_id\": 11,\r\n    \"Certification\": \"R18+\",\r\n    \"Meaning\": \"Not for children under 18; this is limited to Adult \\\"Pay Per View\\\" VC 196 and 197. Content may include graphic violence, sexual situations, coarse language and explicit drug use.\",\r\n    \"Order\": 8,\r\n    \"IsActive\":true\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/certification/tv",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"certification",
+								"tv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update movie certificate",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Country_id\": 3,\r\n    \"Certification\": \"1\",\r\n    \"Meaning\": \"No age restriction.\",\r\n    \"Order\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/certification/movie/21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"certification",
+								"movie",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update tv certificate",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"Country_id\": 8,\r\n    \"Certification\": \"R18+\",\r\n    \"Meaning\": \"Not for children under 18; this is limited to Adult \\\"Pay Per View\\\" VC 196 and 197. Content may include graphic violence, sexual situations, coarse language and explicit drug use.\",\r\n    \"Order\": 8,\r\n    \"IsActive\":true\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/certification/tv?tv_certi_id=22",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"certification",
+								"tv"
+							],
+							"query": [
+								{
+									"key": "tv_certi_id",
+									"value": "22"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "soft delete a movie certificate",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/certification/movie?movie_certi_id=21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"certification",
+								"movie"
+							],
+							"query": [
+								{
+									"key": "movie_certi_id",
+									"value": "21"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "soft delete a tv certificate",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/certification/movie?movie_certi_id=21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"certification",
+								"movie"
+							],
+							"query": [
+								{
+									"key": "movie_certi_id",
+									"value": "21"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hard delete a movie certificate",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/certification/21/movie",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"certification",
+								"21",
+								"movie"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hard delete a tv certificate",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/certification/21/movie",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"certification",
+								"21",
+								"movie"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Genres",
+			"item": [
+				{
+					"name": "get all Genre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/genre/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"genre",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get specific Genre by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/genre/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"genre",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Genre",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"_id\": 13,\r\n      \"GenresName\": \"Fantasy\",\r\n      \"IsActive\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/genre/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"genre",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Genre",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n      \"_id\": 13,\r\n      \"GenresName\": \"Fantasy1\",\r\n      \"IsActive\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/genre/13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"genre",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "soft delete Genre",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/genre/delete/13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"genre",
+								"delete",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hard delete Genre",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/genre/13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"genre",
+								"13"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Series",
+			"item": [
+				{
+					"name": "get all Series",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/series/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"series",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get specific Series by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/series/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"series",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create series",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"_id\":3,\r\n        \"SeriesName\":\"Game of Thrones\",\r\n        \"Original_language\":\"US_English\",\r\n        \"Spoken_languages\":[1,2,3,4,5,7,8,9,14],\r\n        \"Budget\":\"$990 million\",\r\n        \"ShortDescription\":\"Nine noble families wage war against each other in order to gain control over the mythical land of Westeros. Meanwhile, a force is rising after millenniums and threatens the existence of living men.\",\r\n        \"Genres\":[1, 9, 11,12],\r\n        \"Number_of_seasons\":8,\r\n        \"Number_of_episodes\":71,\r\n        \"ReleaseDate\":\"2011-09-17\",\r\n        \"Popularity\":89,\r\n        \"Production_companies\":[14],\r\n        \"Revenue\":\"$3.1 billion\",\r\n        \"Status\":\"\",\r\n        \"DirectorName\":[\"D. B. Weiss\",\"David Benioff\"],\r\n        \"Vote_average\":9.2,\r\n        \"Vote_count\":980780410,\r\n        \"LongDescription\":\"Game of Thrones is an American fantasy drama television series created by David Benioff and D. B. Weiss for HBO. It is an adaptation of A Song of Ice and Fire, a series of fantasy novels by George R. R. Martin, the first of which is A Game of Thrones. The show was shot in the United Kingdom, Canada, Croatia, Iceland, Malta, Morocco, and Spain. It premiered on HBO in the United States on April 17, 2011, and concluded on May 19, 2019, with 73 episodes broadcast over eight seasons.\",\r\n        \"Seasons\":[2,3,4],\r\n        \"Poster_path\":[\"https://c4.wallpaperflare.com/wallpaper/956/258/378/sean-bean-iron-throne-sword-game-of-thrones-wallpaper-preview.jpg\",\"https://c4.wallpaperflare.com/wallpaper/135/443/590/game-of-thrones-sigils-house-stark-wallpaper-preview.jpg\"],\r\n        \"IsActive\":true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/series/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"series",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hard delete series",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/series/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"series",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Soft Delete series by Id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/series/delete/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"series",
+								"delete",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update series",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM4MTcxMywiZXhwIjoxNjQxODEzNzEzfQ.hBrL-f_7MXyfJx1luWIoJUQU6Z_Oqk_1nO953DJHHiY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"_id\":3,\r\n        \"SeriesName\":\"Game of Thrones\",\r\n        \"Original_language\":\"US_English\",\r\n        \"Spoken_languages\":[1,2,3,4,5,7,8,9,14],\r\n        \"Budget\":\"$990 million\",\r\n        \"ShortDescription\":\"Nine noble families wage war against each other in order to gain control over the mythical land of Westeros. Meanwhile, a force is rising after millenniums and threatens the existence of living men.\",\r\n        \"Genres\":[1, 9, 11,12],\r\n        \"Number_of_seasons\":8,\r\n        \"Number_of_episodes\":71,\r\n        \"ReleaseDate\":\"2011-09-17\",\r\n        \"Popularity\":89,\r\n        \"Production_companies\":[14],\r\n        \"Revenue\":\"$3.1 billion\",\r\n        \"Status\":\"\",\r\n        \"DirectorName\":[\"D. B. Weiss\",\"David Benioff\"],\r\n        \"Vote_average\":9.2,\r\n        \"Vote_count\":980780410,\r\n        \"LongDescription\":\"Game of Thrones is an American fantasy drama television series created by David Benioff and D. B. Weiss for HBO. It is an adaptation of A Song of Ice and Fire, a series of fantasy novels by George R. R. Martin, the first of which is A Game of Thrones. The show was shot in the United Kingdom, Canada, Croatia, Iceland, Malta, Morocco, and Spain. It premiered on HBO in the United States on April 17, 2011, and concluded on May 19, 2019, with 73 episodes broadcast over eight seasons.\",\r\n        \"Seasons\":[2,3,4],\r\n        \"Poster_path\":[\"https://c4.wallpaperflare.com/wallpaper/956/258/378/sean-bean-iron-throne-sword-game-of-thrones-wallpaper-preview.jpg\",\"https://c4.wallpaperflare.com/wallpaper/135/443/590/game-of-thrones-sigils-house-stark-wallpaper-preview.jpg\"],\r\n        \"IsActive\":true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/series/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"series",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find and filter series data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/series/sort/series?filter=Number_of_seasons&ascending=descending",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"series",
+								"sort",
+								"series"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "Number_of_seasons"
+								},
+								{
+									"key": "ascending",
+									"value": "descending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search series",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/series/search/series?item1=Number_of_seasons&item=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"series",
+								"search",
+								"series"
+							],
+							"query": [
+								{
+									"key": "item1",
+									"value": "Number_of_seasons"
+								},
+								{
+									"key": "item",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Episode",
+			"item": [
+				{
+					"name": "get an episode",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzgyNDkyLCJleHAiOjE2NDE4MTQ0OTJ9.hf0AZc9F45_eVF7nCJD9r5D4nnq9QL9SMvu1bSwezA8",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/episode?episode_id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"episode"
+							],
+							"query": [
+								{
+									"key": "episode_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filter episode vote count",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQxMzgyNDkyLCJleHAiOjE2NDE4MTQ0OTJ9.hf0AZc9F45_eVF7nCJD9r5D4nnq9QL9SMvu1bSwezA8",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/episode/sort?series_id=1&season_id=1&filter=Vote_count",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"episode",
+								"sort"
+							],
+							"query": [
+								{
+									"key": "series_id",
+									"value": "1"
+								},
+								{
+									"key": "season_id",
+									"value": "1"
+								},
+								{
+									"key": "filter",
+									"value": "Vote_count"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create episode",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"_id\": 6,\r\n        \"EpisodeName\": \"Valar Dohaeris\",\r\n        \"EpisodeNumber\": 1,\r\n        \"ShortDescription\": \"Jon is brought before the King Beyond the Wall; Tyrion asks for his reward; Littlefinger offers Sansa a way out; Cersei hosts a dinner for the royal family; Daenerys sails into Slaver's Bay.\",\r\n        \"SeriesID\": 2,\r\n        \"SeasonID\": 4,\r\n        \"ReleaseDate\":\"31-03-2013\",\r\n        \"Poster_path\": \"https://miro.medium.com/max/1400/1*xwQJ4gb7pIkPBm2INLlUTQ.jpeg\",\r\n        \"Video_path\": \"\",\r\n        \"Vote_average\": 9.7,\r\n        \"Vote_count\": 83419,\r\n        \"IsActive\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/episode",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"episode"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload episode",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "banner",
+									"type": "file",
+									"src": "/C:/Users/HP/Pictures/1.png"
+								},
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/D:/ReactVideo/Mocks/Node mock interview 1.mp4"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/episode/upload?episode_id=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"episode",
+								"upload"
+							],
+							"query": [
+								{
+									"key": "episode_id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search episode",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/episode/sort?series_id=1&season_id=1&Vote_average=9.7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"episode",
+								"sort"
+							],
+							"query": [
+								{
+									"key": "series_id",
+									"value": "1"
+								},
+								{
+									"key": "season_id",
+									"value": "1"
+								},
+								{
+									"key": "Vote_average",
+									"value": "9.7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Multiple episode",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n        {\r\n        \"_id\": 18,\r\n        \"EpisodeName\": \"The North Remembers\",\r\n        \"EpisodeNumber\": 1,\r\n        \"ShortDescription\": \"Tyrion arrives in King's Landing to counsel Joffrey; Stannis Baratheon plots an invasion to claim his late brother's throne; Daenerys and her three dragons search for allies and water; Bran presides over a threadbare Winterfell.\",\r\n        \"SeriesID\": 2,\r\n        \"SeasonID\": 3,\r\n        \"ReleaseDate\":\"1-04-2012\",\r\n        \"Poster_path\": \"https://static01.nyt.com/images/2017/07/04/arts/television/GOTs2-joffrey/GOTs2-joffrey-jumbo.jpg?quality=75&auto=webp\",\r\n        \"Video_path\": \"\",\r\n        \"Vote_average\": 9.6,\r\n        \"Vote_count\": 82554,\r\n        \"IsActive\": true\r\n    },\r\n    {\r\n        \"_id\": 19,\r\n        \"EpisodeName\": \"Valar Dohaeris\",\r\n        \"EpisodeNumber\": 1,\r\n        \"ShortDescription\": \"Jon is brought before the King Beyond the Wall; Tyrion asks for his reward; Littlefinger offers Sansa a way out; Cersei hosts a dinner for the royal family; Daenerys sails into Slaver's Bay.\",\r\n        \"SeriesID\": 2,\r\n        \"SeasonID\": 4,\r\n        \"ReleaseDate\":\"31-03-2013\",\r\n        \"Poster_path\": \"https://miro.medium.com/max/1400/1*xwQJ4gb7pIkPBm2INLlUTQ.jpeg\",\r\n        \"Video_path\": \"\",\r\n        \"Vote_average\": 9.7,\r\n        \"Vote_count\": 83419,\r\n        \"IsActive\": true\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/episode/multiepisode?season_id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"episode",
+								"multiepisode"
+							],
+							"query": [
+								{
+									"key": "season_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "soft bulk delete episode",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[18,19]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/episode/bulk_soft_delete?season_id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"episode",
+								"bulk_soft_delete"
+							],
+							"query": [
+								{
+									"key": "season_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hard bulk delete episode",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[18,19]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/episode/bulk_hard_delete?season_id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"episode",
+								"bulk_hard_delete"
+							],
+							"query": [
+								{
+									"key": "season_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update episode",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"_id\": 3,\r\n        \"EpisodeName\": \"Winter Is Coming+\",\r\n        \"EpisodeNumber\": 1,\r\n        \"ShortDescription\": \"A Night's Watch deserter is tracked down; Lord Eddard 'Ned' Stark learns that his mentor has died; Viserys Targaryen plots to win back the throne; Robert arrives at Winterfell with his family; Ned prepares to leave for King's Landing.\",\r\n        \"SeriesID\": 2,\r\n        \"SeasonID\": 2,\r\n        \"Poster_path\": \"http://www.ceogc.org/wp-content/uploads/2020/08/game-of-thrones-season-1.jpg\",\r\n        \"Video_path\": \"\",\r\n        \"Vote_average\": 9.8,\r\n        \"Vote_count\": 77896,\r\n        \"IsActive\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/episode/update?season_id=2&series_id=2&episode_id=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"episode",
+								"update"
+							],
+							"query": [
+								{
+									"key": "season_id",
+									"value": "2"
+								},
+								{
+									"key": "series_id",
+									"value": "2"
+								},
+								{
+									"key": "episode_id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Season",
+			"item": [
+				{
+					"name": "sort season by votecount",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/season/sort?series_id=2&filter=Vote_count&order=descending",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"season",
+								"sort"
+							],
+							"query": [
+								{
+									"key": "series_id",
+									"value": "2"
+								},
+								{
+									"key": "filter",
+									"value": "Vote_count"
+								},
+								{
+									"key": "order",
+									"value": "descending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sort season by voteaverage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/season/sort?series_id=2&filter=Vote_count&order=descending",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"season",
+								"sort"
+							],
+							"query": [
+								{
+									"key": "series_id",
+									"value": "2"
+								},
+								{
+									"key": "filter",
+									"value": "Vote_count"
+								},
+								{
+									"key": "order",
+									"value": "descending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add season",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": 1,\r\n    \"SeasonName\": \"Squid Games Season_1\",\r\n    \"SeasonNumber\": 1,\r\n    \"ShortDescription\": \"Hundreds of cash-strapped contestants accept an invitation to compete in children's games for a tempting prize, but the stakes are deadly.\",\r\n    \"Number_of_episodes\": 9,\r\n    \"SeriesID\":1,\r\n    \"Vote_average\": 8.1,\r\n    \"Vote_count\": 7805004,\r\n    \"Poster_path\": \"https://cdn.amazfeed.com/wp-content/uploads/2021/09/Squid-Games-Wallpaper-Poster-48-1024x540.jpg\",\r\n    \"Episodes\": [1, 2],\r\n    \"IsActive\": true\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/season/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"season",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all season",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/season/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"season",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get particular season",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/season/1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"season",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete a season",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"ShortDescription\": \"The first season of the fantasy drama television series Game of Thrones premiered on HBO on April 25, 2011, in the U.S. and concluded on June 19, 2011. It consists of ten episodes, each of approximately 55 minutes. The series is based on A Game of Thrones, the first novel in the A Song of Ice and Fire series by George R. R. Martin, adapted for television by David Benioff and D. B. Weiss.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/season/2?SeasonNumber=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"season",
+								"2"
+							],
+							"query": [
+								{
+									"key": "SeasonNumber",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a season Copy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"ShortDescription\": \"The first season of the fantasy drama television series Game of Thrones premiered on HBO on April 25, 2011, in the U.S. and concluded on June 19, 2011. It consists of ten episodes, each of approximately 55 minutes. The series is based on A Game of Thrones, the first novel in the A Song of Ice and Fire series by George R. R. Martin, adapted for television by David Benioff and D. B. Weiss.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/season/2?SeasonNumber=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"season",
+								"2"
+							],
+							"query": [
+								{
+									"key": "SeasonNumber",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
