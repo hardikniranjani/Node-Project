@@ -39,7 +39,7 @@ class SeriesDomain {
 
   // get all series
   async getAllSeries(req, res) {
-    var series_data = await Series.find({IsActive: true});
+    var series_data = await Series.find({ IsActive: true });
     if (series_data.length > 0) {
       res.send(series_data);
     } else {
@@ -60,16 +60,20 @@ class SeriesDomain {
   }
 
   // Delete series by Id
-  
+
   async deleteAnSeries(req, res) {
     var id = req.params.id;
-    const result = await Series.findByIdAndUpdate(id,{
-      $set:{
-        IsActive: false,
-    }
-    },{ new: true});
+    const result = await Series.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          IsActive: false,
+        },
+      },
+      { new: true }
+    );
 
-    if (!result) return res.status(404).send({ msg: `Series not found` });  
+    if (!result) return res.status(404).send({ msg: `Series not found` });
 
     res.send(200).send("Soft Deleted Successfully");
   }
@@ -96,7 +100,7 @@ class SeriesDomain {
     const UpdateSeries = await Series.findByIdAndUpdate(
       id,
       {
-        $set: {  ...data },
+        $set: { ...data },
       },
       { new: true }
     );
@@ -135,6 +139,10 @@ class SeriesDomain {
     const Ascending = req.query.ascending;
 
     const series = await Series.find()
+      .populate("Spoken_languages")
+      .populate("Genres")
+      .populate("Production_companies")
+      .populate("Seasons")
       .sort(queryperam);
 
     if (!series) return res.status(404).send({ msg: `Series not found` });
@@ -151,6 +159,10 @@ class SeriesDomain {
     const queryName = req.query.item;
 
     const seriesData = await Series.find({ [queryperam]: queryName })
+      .populate("Spoken_languages")
+      .populate("Genres")
+      .populate("Production_companies")
+      .populate("Seasons")
       .sort(`${queryperam}`);
 
     if (seriesData.length <= 0)
@@ -162,7 +174,4 @@ class SeriesDomain {
 
 module.exports = SeriesDomain;
 
-// .populate("spoken_languages")
-// .populate("genres")
-// .populate("compaines")
-// .populate("seasons")
+

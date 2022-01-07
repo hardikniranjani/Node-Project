@@ -182,8 +182,8 @@ class seasonDomain {
   
       const seasion = await season
         .find({ SeriesID: series_id })
-        // .populate("SeriesID")
-        // .populate("Episodes")
+        .populate("SeriesID")
+        .populate("Episodes")
         .sort(queryperam);
   
       if (!seasion) return res.status(404).send({ msg: `seasion not found` });
@@ -206,6 +206,7 @@ class seasonDomain {
           [queryperam]: queryName,
         })
         .populate("SeriesID")
+        .populate("Episodes")
         .sort(`${queryperam}`);
   
       if (seasionData.length <= 0) return res.status(500).send({ msg: `seasion not found` });
