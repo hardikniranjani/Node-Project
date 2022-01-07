@@ -64,6 +64,16 @@ class MovieController {
     const movieDomain = new MovieDomain();
     movieDomain.uploadMovie(req, res);
   }
+
+  static async uploadMovieImage(req, res) {
+    const movieDomain = new MovieDomain();
+    movieDomain.uploadMovieImage(req, res);
+  }
+
+  static async uploadMovieVideo(req, res) {
+    const movieDomain = new MovieDomain();
+    movieDomain.uploadMovieVideo(req, res);
+  }
 }
 
 // sort movie
@@ -86,6 +96,13 @@ router.use(verifyToken);
 
 //verify role
 router.use(checkRole);
+
+//upload movie image 
+router.post("/upload/image",MovieController.uploadMovieImage);
+
+//upload movie video 
+router.post("/upload/video",MovieController.uploadMovieVideo);
+
 
 // create Movie
 router.post("/", MovieController.createMovie);

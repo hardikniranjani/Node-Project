@@ -1,12 +1,18 @@
+require('dotenv').config();
 const season_Model = require("../../models/Series/season.model");
 const series_Model = require("../../models/Series/season.model");
 const episode_Model = require("../../models/Series/episode.model");
 const path = require("path");
-
+const cloudinary = require('cloudinary').v2;
+const fs = require('fs');
+cloudinary.config({
+  cloud_name : process.env.cloud_name,
+  api_key:process.env.api_key,
+  api_secret:process.env.api_secret
+})
 class episodeDomain {
   //   create episode
-  async   createAnEpisode(req, res) {
-
+  async createAnEpisode(req, res) {
     const data = req.body;
     const season_id = data.SeasonID;
     const series_id = data.SeriesID;
@@ -84,13 +90,11 @@ class episodeDomain {
     }
   }
 
-
-
-  // uplode episode video 
+  // uplode episode video
   async uploadEpisode(req, res) {
     const episode_id = req.query.episode_id;
     const pathToUpload = path.normalize(`${__dirname}/../..`);
-   
+
     const findEpisode = await episode_Model.findById(episode_id);
 
     if (!findEpisode)
@@ -127,7 +131,6 @@ class episodeDomain {
 
     await banner.mv(bpath, (err) => {
       if (err) return res.status(500).send({ msg: `error : ${err.message}` });
-    
     });
 
     const updatedEpisode = await episode_Model.findOneAndUpdate(
@@ -147,12 +150,124 @@ class episodeDomain {
     res.status(200).send({ Episode: updatedEpisode });
   }
 
+  //upload episode Image
+  async uploadEpisodeImage(req, res) {
+    const episode_id = req.query.episode_id;
+    const findEpisode = await episode_Model
+      .findById(episode_id)
+      .populate("SeasonID")
+      .populate("SeriesID");
 
+    if (!findEpisode)
+      return res
+        .status(400)
+        .send({ msg: `Can't found movie with id ${episode_id}` });
 
+    if (!req.files.banner)
+      return res.status(404).send({ msg: "Kindly upload all necessary data." });
+
+    const banner = req.files.banner;
+
+    const bannerType = banner.mimetype.split("/");
+
+    if (bannerType[0] !== "image")
+      return res
+        .status(400)
+        .send({ msg: "Make sure your banner must be an image." });
+
+    let pathForCloudinary = `OttPlatForm/Series/${
+      findEpisode.SeriesID.SeriesName
+    }/Season-${findEpisode.SeasonID.SeasonNumber}/Episode-${
+      findEpisode.EpisodeNumber
+    }/${bannerType[0] + "s"}/${new Date().valueOf()}`;
+
+    cloudinary.uploader
+      .upload(banner.tempFilePath, { public_id: pathForCloudinary })
+      .then(async (result) => {
+        console.log("uploaded", "line 186 episode.domain");
+        const updateEpisode = await episode_Model.findOneAndUpdate(
+          { _id: episode_id },
+          {
+            $set: {
+              Poster_path: result.url,
+            },
+          },
+          { new: true }
+        );
+
+        fs.unlinkSync(`${banner.tempFilePath}`);
+
+        if (!updateEpisode)
+          return res.status(400).send({ msg: "not able to upload movie" });
+
+        res.status(200).send({ Episode: updateEpisode });
+      })
+      .catch((err) => {
+        //fs.unlinkSync(`${banner.tempFilePath}`);
+        res.status(500).send({ err: `${err}` });
+      });
+  }
+
+  //upload episode Video
+  async uploadEpisodeVideo(req, res) {
+    const episode_id = req.query.episode_id;
+    const findEpisode = await episode_Model
+      .findById(episode_id)
+      .populate("SeasonID")
+      .populate("SeriesID");
+
+    if (!findEpisode)
+      return res
+        .status(400)
+        .send({ msg: `Can't found movie with id ${episode_id}` });
+
+    if (!req.files.video)
+      return res.status(404).send({ msg: "Kindly upload all necessary data." });
+
+    const video = req.files.video;
+
+    const videoType = video.mimetype.split("/");
+
+    if (videoType[0] !== "video")
+      return res
+        .status(400)
+        .send({ msg: "Make sure your banner must be an image." });
+
+    let pathForCloudinary = `OttPlatForm/Series/${
+      findEpisode.SeriesID.SeriesName
+    }/Season-${findEpisode.SeasonID.SeasonNumber}/Episode-${
+      findEpisode.EpisodeNumber
+    }/${videoType[0] + "s"}/${new Date().valueOf()}`;
+
+    cloudinary.uploader
+      .upload(video.tempFilePath, { resource_type : "video",public_id: pathForCloudinary })
+      .then(async (result) => {
+         
+        const updateEpisode = await episode_Model.findOneAndUpdate(
+          { _id: episode_id },
+          {
+            $set: {
+              Video_path: result.url,
+            },
+          },
+          { new: true }
+        );
+
+        fs.unlinkSync(`${video.tempFilePath}`);
+
+        if (!updateEpisode)
+          return res.status(400).send({ msg: "not able to upload Episode" });
+
+        res.status(200).send({ Episode: updateEpisode });
+      })
+      .catch((err) => {
+        fs.unlinkSync(`${video.tempFilePath}`);
+        res.status(500).send({ err: `${err}` });
+      });
+  }
 
   //   write bulk episodes
   async createBulkEpisode(req, res) {
-    
     const season_id = req.query.season_id;
     const arrayOfEpisode = req.body;
     const dateUpdatedEpisode = arrayOfEpisode.map((obj) => {
@@ -190,28 +305,24 @@ class episodeDomain {
     res.status(200).send({ seasonEpisodes: updateSeason.Episodes });
   }
 
-
-
-
   //   get an episodes
   async getAnEpisode(req, res) {
     const episode_id = req.query.episode_id;
 
-    const findEpisode = await episode_Model.find({
-      _id: episode_id,
-    });
+    const findEpisode = await episode_Model
+      .find({
+        _id: episode_id,
+      })
+      .populate("SeasonID")
+      .populate("SeriesID");
 
     if (!findEpisode) res.status(404).send({ msg: "data not found" });
 
     res.status(200).send(findEpisode);
   }
 
-
-
-
   // soft delete episode
   async deleteBulkEpisode(req, res) {
-
     const season_id = req.query.season_id;
     const arrayOfEpisode = req.body;
 
@@ -245,11 +356,8 @@ class episodeDomain {
     res.status(200).send("delete successfully");
   }
 
-
-
   // Hard delete episode
   async hardDeleteBulkEpisode(req, res) {
-
     const season_id = req.params.season_id;
     const arrayOfEpisode = req.body;
 
@@ -274,9 +382,6 @@ class episodeDomain {
 
     res.status(200).send("Hard delete successfully");
   }
-
-
-
 
   //update episode
 
@@ -309,8 +414,6 @@ class episodeDomain {
     res.status(200).send(UpdatedEpisode);
   }
 
-
-
   //bulk update episode
   async updateBulkEpisode(req, res) {
     const arrayOfEpisode = req.body;
@@ -342,8 +445,6 @@ class episodeDomain {
 
     res.status(200).send("update successfully");
   }
-
-
 
   // find and sorting episode data
   async findEpisodeAndSort(req, res) {

@@ -26,7 +26,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 //middleware for uploading video and images
-app.use(fileupload());
+app.use(fileupload({
+  useTempFiles:true
+}));
 
 app.use("/user", userController);
 app.use("/movies", moviesController);

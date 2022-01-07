@@ -64,6 +64,18 @@ class EpisodeController {
     const episodeDomain = new EpisodeDomain();
     episodeDomain.uploadEpisode(req, res);
   }
+
+  //upload episode image
+  static async uploadEpisodeImage(req, res) {
+    const episodeDomain = new EpisodeDomain();
+    episodeDomain.uploadEpisodeImage(req, res);
+  }
+
+  //upload episode video
+  static async uploadEpisodeVideo(req, res) {
+    const episodeDomain = new EpisodeDomain();
+    episodeDomain.uploadEpisodeVideo(req, res);
+  }
 }
 router.use(verifyToken);
 // get specific Series by id
@@ -75,10 +87,15 @@ router.get("/sort", EpisodeController.findEpisodeAndSort);
 // search episode
 router.get("/search", EpisodeController.findEpisodeBySearch);
 
-
-
 //verify role
 router.use(checkRole);
+
+//upload episode image
+router.post('/upload/image' , EpisodeController.uploadEpisodeImage);
+
+//upload episode image
+router.post('/upload/video' , EpisodeController.uploadEpisodeVideo  );
+
 
 // create episode
 router.post("/", EpisodeController.createEpisode);

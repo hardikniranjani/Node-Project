@@ -849,6 +849,92 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "upload movie image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/C:/Users/HP/Desktop/titanic_movie-hd-1.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3005/movies/upload/image?movie_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"movies",
+								"upload",
+								"image"
+							],
+							"query": [
+								{
+									"key": "movie_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload movie video",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/C:/Users/HP/Desktop/titanic_movie-hd-1.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3005/movies/upload/image?movie_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"movies",
+								"upload",
+								"image"
+							],
+							"query": [
+								{
+									"key": "movie_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -2446,6 +2532,15 @@
 								}
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
 					},
 					"response": []
 				}
