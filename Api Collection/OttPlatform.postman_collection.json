@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "74798e70-a194-45b8-9e41-bd9cad9fcc06",
+		"_postman_id": "1b0f01a8-ee73-4cf4-be3b-e3fe08b88116",
 		"name": "OttPlatform",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -163,9 +163,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": ""
-						}
+						"url": null
 					},
 					"response": []
 				},
@@ -846,6 +844,92 @@
 								{
 									"key": "movie_id",
 									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload movie image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/C:/Users/HP/Desktop/titanic_movie-hd-1.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3005/movies/upload/image?movie_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"movies",
+								"upload",
+								"image"
+							],
+							"query": [
+								{
+									"key": "movie_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload movie video",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/C:/Users/HP/Desktop/titanic_movie-hd-1.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3005/movies/upload/image?movie_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"movies",
+								"upload",
+								"image"
+							],
+							"query": [
+								{
+									"key": "movie_id",
+									"value": "1"
 								}
 							]
 						}
@@ -2292,8 +2376,355 @@
 			]
 		},
 		{
+			"name": "Season",
+			"item": [
+				{
+					"name": "sort season by votecount",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/season/sort?series_id=2&filter=Vote_count&order=descending",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"season",
+								"sort"
+							],
+							"query": [
+								{
+									"key": "series_id",
+									"value": "2"
+								},
+								{
+									"key": "filter",
+									"value": "Vote_count"
+								},
+								{
+									"key": "order",
+									"value": "descending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sort season by voteaverage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3005/season/sort?series_id=2&filter=Vote_count&order=descending",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"season",
+								"sort"
+							],
+							"query": [
+								{
+									"key": "series_id",
+									"value": "2"
+								},
+								{
+									"key": "filter",
+									"value": "Vote_count"
+								},
+								{
+									"key": "order",
+									"value": "descending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add season",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": 1,\r\n    \"SeasonName\": \"Squid Games Season_1\",\r\n    \"SeasonNumber\": 1,\r\n    \"ShortDescription\": \"Hundreds of cash-strapped contestants accept an invitation to compete in children's games for a tempting prize, but the stakes are deadly.\",\r\n    \"Number_of_episodes\": 9,\r\n    \"SeriesID\":1,\r\n    \"Vote_average\": 8.1,\r\n    \"Vote_count\": 7805004,\r\n    \"Poster_path\": \"https://cdn.amazfeed.com/wp-content/uploads/2021/09/Squid-Games-Wallpaper-Poster-48-1024x540.jpg\",\r\n    \"Episodes\": [1, 2],\r\n    \"IsActive\": true\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/season/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"season",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all season",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/season/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"season",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get particular season",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3005/season/1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"season",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete a season",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"ShortDescription\": \"The first season of the fantasy drama television series Game of Thrones premiered on HBO on April 25, 2011, in the U.S. and concluded on June 19, 2011. It consists of ten episodes, each of approximately 55 minutes. The series is based on A Game of Thrones, the first novel in the A Song of Ice and Fire series by George R. R. Martin, adapted for television by David Benioff and D. B. Weiss.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/season/2?SeasonNumber=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"season",
+								"2"
+							],
+							"query": [
+								{
+									"key": "SeasonNumber",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a season",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"ShortDescription\": \"The first season of the fantasy drama television series Game of Thrones premiered on HBO on April 25, 2011, in the U.S. and concluded on June 19, 2011. It consists of ten episodes, each of approximately 55 minutes. The series is based on A Game of Thrones, the first novel in the A Song of Ice and Fire series by George R. R. Martin, adapted for television by David Benioff and D. B. Weiss.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/season/2?SeasonNumber=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"season",
+								"2"
+							],
+							"query": [
+								{
+									"key": "SeasonNumber",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all episode of season",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "get specific episode of season",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Episode",
 			"item": [
+				{
+					"name": "upload video",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/C:/Users/HP/Desktop/TITANIC___Dolby_Vision_Trailer___Paramount_Movies(240p).mp4"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3005/episode/upload/video?episode_id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"episode",
+								"upload",
+								"video"
+							],
+							"query": [
+								{
+									"key": "episode_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "banner",
+									"type": "file",
+									"src": "/C:/Users/HP/Desktop/titanic_movie-hd-1.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3005/episode/upload/image?episode_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"episode",
+								"upload",
+								"image"
+							],
+							"query": [
+								{
+									"key": "episode_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "get an episode",
 					"request": {
@@ -2646,249 +3077,6 @@
 								{
 									"key": "episode_id",
 									"value": "3"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Season",
-			"item": [
-				{
-					"name": "sort season by votecount",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3005/season/sort?series_id=2&filter=Vote_count&order=descending",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3005",
-							"path": [
-								"season",
-								"sort"
-							],
-							"query": [
-								{
-									"key": "series_id",
-									"value": "2"
-								},
-								{
-									"key": "filter",
-									"value": "Vote_count"
-								},
-								{
-									"key": "order",
-									"value": "descending"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "sort season by voteaverage",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3005/season/sort?series_id=2&filter=Vote_count&order=descending",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3005",
-							"path": [
-								"season",
-								"sort"
-							],
-							"query": [
-								{
-									"key": "series_id",
-									"value": "2"
-								},
-								{
-									"key": "filter",
-									"value": "Vote_count"
-								},
-								{
-									"key": "order",
-									"value": "descending"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "add season",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"_id\": 1,\r\n    \"SeasonName\": \"Squid Games Season_1\",\r\n    \"SeasonNumber\": 1,\r\n    \"ShortDescription\": \"Hundreds of cash-strapped contestants accept an invitation to compete in children's games for a tempting prize, but the stakes are deadly.\",\r\n    \"Number_of_episodes\": 9,\r\n    \"SeriesID\":1,\r\n    \"Vote_average\": 8.1,\r\n    \"Vote_count\": 7805004,\r\n    \"Poster_path\": \"https://cdn.amazfeed.com/wp-content/uploads/2021/09/Squid-Games-Wallpaper-Poster-48-1024x540.jpg\",\r\n    \"Episodes\": [1, 2],\r\n    \"IsActive\": true\r\n  }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3005/season/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3005",
-							"path": [
-								"season",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all season",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
-								"type": "default"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:3005/season/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3005",
-							"path": [
-								"season",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get particular season",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
-								"type": "default"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:3005/season/1/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3005",
-							"path": [
-								"season",
-								"1",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete a season",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n     \"ShortDescription\": \"The first season of the fantasy drama television series Game of Thrones premiered on HBO on April 25, 2011, in the U.S. and concluded on June 19, 2011. It consists of ten episodes, each of approximately 55 minutes. The series is based on A Game of Thrones, the first novel in the A Song of Ice and Fire series by George R. R. Martin, adapted for television by David Benioff and D. B. Weiss.\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3005/season/2?SeasonNumber=2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3005",
-							"path": [
-								"season",
-								"2"
-							],
-							"query": [
-								{
-									"key": "SeasonNumber",
-									"value": "2"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update a season Copy",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0MTM3ODgxOCwiZXhwIjoxNjQxODEwODE4fQ.IFebDwAuyR9fjsHLQ-LdLIY5EYPSOBdgtposWkAn_SA",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n     \"ShortDescription\": \"The first season of the fantasy drama television series Game of Thrones premiered on HBO on April 25, 2011, in the U.S. and concluded on June 19, 2011. It consists of ten episodes, each of approximately 55 minutes. The series is based on A Game of Thrones, the first novel in the A Song of Ice and Fire series by George R. R. Martin, adapted for television by David Benioff and D. B. Weiss.\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3005/season/2?SeasonNumber=2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3005",
-							"path": [
-								"season",
-								"2"
-							],
-							"query": [
-								{
-									"key": "SeasonNumber",
-									"value": "2"
 								}
 							]
 						}

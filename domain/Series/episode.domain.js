@@ -1,15 +1,15 @@
-require('dotenv').config();
+require("dotenv").config();
 const season_Model = require("../../models/Series/season.model");
 const series_Model = require("../../models/Series/season.model");
 const episode_Model = require("../../models/Series/episode.model");
 const path = require("path");
-const cloudinary = require('cloudinary').v2;
-const fs = require('fs');
+const cloudinary = require("cloudinary").v2;
+const fs = require("fs");
 cloudinary.config({
-  cloud_name : process.env.cloud_name,
-  api_key:process.env.api_key,
-  api_secret:process.env.api_secret
-})
+  cloud_name: process.env.cloud_name,
+  api_key: process.env.api_key,
+  api_secret: process.env.api_secret,
+});
 class episodeDomain {
   //   create episode
   async createAnEpisode(req, res) {
@@ -240,9 +240,11 @@ class episodeDomain {
     }/${videoType[0] + "s"}/${new Date().valueOf()}`;
 
     cloudinary.uploader
-      .upload(video.tempFilePath, { resource_type : "video",public_id: pathForCloudinary })
+      .upload(video.tempFilePath, {
+        resource_type: "video",
+        public_id: pathForCloudinary,
+      })
       .then(async (result) => {
-         
         const updateEpisode = await episode_Model.findOneAndUpdate(
           { _id: episode_id },
           {
@@ -358,7 +360,6 @@ class episodeDomain {
 
   // Hard delete episode
   async hardDeleteBulkEpisode(req, res) {
-
     const season_id = req.query.season_id;
     const arrayOfEpisode = req.body;
 
@@ -402,7 +403,7 @@ class episodeDomain {
 
     const UpdatedEpisode = await episode_Model.findByIdAndUpdate(
       {
-        _id:episode_id,
+        _id: episode_id,
         SeriesID: series_id,
         SeasonID: season_id,
       },
@@ -434,7 +435,7 @@ class episodeDomain {
     for (let i = 0; i < arrayOfEpisode.length; i++) {
       await episode_Model.findByIdAndUpdate(
         {
-          _id:arrayOfEpisode[i]._id,
+          _id: arrayOfEpisode[i]._id,
           SeriesID: series_id,
           SeasonID: season_id,
         },

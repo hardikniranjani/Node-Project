@@ -37,6 +37,7 @@ class SeasonController {
 
   // get all episodes of season
   static getAllEpisodesOfSeason(req, res) {
+    console.log("all episode")
     const seasonDomain = new SeasonDomain();
     seasonDomain.getAllEpisodesOfSeason(req, res);
   }
@@ -89,10 +90,16 @@ router.put("/:series_id", SeasonController.updateSeason);
 router.put("/:series_id/:season_id", SeasonController.deleteSeason);
 
 //get episodes
-router.get("/Episodes", SeasonController.getAllEpisodesOfSeason);
+router.get(
+  "/Episodes/:series_id/:season_id",
+  SeasonController.getAllEpisodesOfSeason
+);
 
 // get specific episode from season
-router.get("/Episode", SeasonController.getAnEpisodeOfSeason);
+router.get(
+  "/Episode/:SeasonId/:EpisodeId",
+  SeasonController.getAnEpisodeOfSeason
+);
 
 
 module.exports = router;

@@ -91,7 +91,7 @@ router.get("/search", EpisodeController.findEpisodeBySearch);
 router.use(verifyToken);
 
 //verify role
-router.use(checkRole);
+router.use(checkRole);  
 
 //upload episode image
 router.post('/upload/image' , EpisodeController.uploadEpisodeImage);

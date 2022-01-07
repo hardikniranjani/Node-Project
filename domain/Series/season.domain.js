@@ -143,31 +143,32 @@ class seasonDomain {
 
   // get all episode from season
   async getAllEpisodesOfSeason(req, res) {
-    // console.log("called");
-    const SeasonId = Number(req.query.SeasonId);
-    const SeriesID = Number(req.query.SeriesID);
-    const findSeason = await season
-      .findOne({ SeriesID: SeriesID, _id: SeasonId })
-      .populate("Episodes");
+    
+     var SeriesID = req.params.series_id;
+     var seasonID = req.params.season_id;
+
+     const findSeason = await season
+       .findOne({ SeriesID, _id: seasonID })
+       .populate("Episodes");
 
     if (!findSeason)
       return res
         .status(404)
-        .json({ msg: `Season Number ${SeasonId} not found` });
+        .json({ msg: `Season Number ${seasonID} not found` });
 
     res.status(200).send(findSeason);
   }
 
   // get specific episode from season
   async getAnEpisodeOfSeason(req, res){
-    const SeasonId = Number(req.query.SeasonId);
-    const EpisodeId = Number(req.query.EpisodeId);
+    const SeasonId = Number(req.params.SeasonId);
+    const EpisodeId = Number(req.params.EpisodeId);
 
     const findSeason = await season.findById(SeasonId).populate("Episodes");
 
     if (!findSeason) return res.status(404).json({ msg: `Season Number ${SeasonId} not found` });
 
-    const findEpisode = findSeason.find({Episodes:{_id :EpisodeId}});
+    const findEpisode = await season.find({ Episodes: { _id: EpisodeId } });
 
     if (!findEpisode) return res.status(404).json({ msg: `Episode Number ${EpisodeId} not found` });
 
