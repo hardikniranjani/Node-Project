@@ -24,7 +24,12 @@ mongoose
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    credentials : true,
+    exposedHeaders: "x-access-token",
+  })
+);
 //middleware for uploading video and images
 app.use(fileupload({
   useTempFiles:true

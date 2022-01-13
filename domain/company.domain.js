@@ -72,7 +72,6 @@ class CompanyDomain {
   }
 
   //  Edit Company
-
   async editAnCompany(req, res) {
     var data = req.body;
     var id = req.params.id;

@@ -82,12 +82,10 @@ class UserController {
     userDomain.showWatchLater(req, res);
   }
 
-  // remove watch later list
-  static async removeFromWatchLater(req, res) {
+  static async deleteWatchLater(req,res){
     const userDomain = new UserDomain();
-    userDomain.removeFromWatchLater(req, res);
+    userDomain.deleteWatchLater(req,res);
   }
-
   // add wishlist of user
   static async addToWishList(req, res) {
     const userDomain = new UserDomain();
@@ -121,7 +119,7 @@ class UserController {
   // add subscription of user
   static async removeFromHistory(req, res) {
     const userDomain = new UserDomain();
-    userDomain.removeFromHisoty(req, res);
+    userDomain.removeFromHistory(req, res);
   }
 
   static async remove_watch_later(req, res) {
@@ -170,13 +168,12 @@ router.delete("/delete_history", UserController.deleteHistory);
 router.post("/watch_later", UserController.addToWatchLater);
 
 router.put("/remove_watch_later", UserController.remove_watch_later);
+
 //get user watch later list
 router.get("/watch_later", UserController.getWatchLaterList);
 
 //remove from watchlater
-router.delete("/remove", UserController.removeFromWatchLater);
-
-
+router.delete("/remove", UserController.deleteWatchLater);
 
 //add to wishlist
 router.post("/wishlist", UserController.addToWishList);

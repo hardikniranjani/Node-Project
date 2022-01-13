@@ -76,8 +76,8 @@ class MovieController {
   }
 }
 
-// sort movie
-router.get("/", MovieController.sortMovie);
+// // sort movie
+// router.get("/", MovieController.sortMovie);
 
 // get all Movie
 router.get("/", MovieController.getAllMovie);
