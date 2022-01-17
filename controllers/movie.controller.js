@@ -6,7 +6,7 @@ const verifyToken = require('../authentication/auth.middleware');
 class MovieController {
   // get all Movie
   static async getAllMovie(req, res) {
-    console.log("getAllMovie");
+    
     const movieDomain = new MovieDomain();
     movieDomain.getAllMovie(req, res);
   }

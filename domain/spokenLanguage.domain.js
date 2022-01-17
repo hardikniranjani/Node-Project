@@ -31,7 +31,7 @@ class SpokenLanguageDomain {
 
     if (data.length <= 0)
       return res.status(500).send({ msg: `SpokenLanguage not found` });
-    res.status(200).send({ SpokenLanguagePlan: data });
+    res.status(200).send({ languages : data });
   }
 
   // get specific SpokenLanguage by id

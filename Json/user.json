@@ -3,5 +3,10 @@
             "_id" : 1,
             "email":"user@gmail.com",
             "password": "pass123"            
+      },
+      {
+        "name": "adminOne",
+        "email": "adminOne@gmail.com",
+        "password": "adminOnePass12345"
       }
 ]
