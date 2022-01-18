@@ -123,7 +123,7 @@ class UserDomain {
           process.env.ACCESS_TOKEN_SECRET,
           {
             algorithm: "HS256",
-            expiresIn: "7200m",
+            
           }
         );
 
