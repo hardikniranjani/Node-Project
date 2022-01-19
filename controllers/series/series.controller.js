@@ -50,6 +50,12 @@ class seriesController {
     const seriesDomain = new SeriesDomain();
     seriesDomain.findSeriesBySearch(req, res);
   }
+
+  // upload series poster
+  static async uploadSeriesPoster(req,res) {
+    const seriesDomain = new SeriesDomain();
+    seriesDomain.uploadSeriesPoster(req,res);
+  }
 }
 
 
@@ -73,6 +79,9 @@ router.use(verifyToken);
 router.use(checkRole);
 // create series
 router.post("/", seriesController.createSeries);
+
+//upload poster
+router.post('/poster',seriesController.uploadSeriesPoster);
 
 // update series
 router.put("/:id", seriesController.updateSeries);

@@ -63,7 +63,7 @@ class MovieDomain {
 
     const bannerType = banner.mimetype.split("/");
 
-    if (bannerType[0] == "image")
+    if (bannerType[0] !== "image")
       return res
         .status(400)
         .send({ msg: "Make sure your banner must be an image." });
@@ -75,7 +75,7 @@ class MovieDomain {
     await cloudinary.uploader
       .upload(banner.tempFilePath, { public_id: pathForCloudinary })
       .then(async (result) => {
-        console.log(result);
+        // console.log(result.url);
         const updateMovie = await MovieModel.findOneAndUpdate(
           { _id: movie_id },
           {
@@ -93,7 +93,7 @@ class MovieDomain {
       })
       .catch((err) => {
         fs.unlinkSync(`${banner.tempFilePath}`);
-        res.status(500).send({ err: `${err}` });
+        res.status(500).send({ err: `${err.msg}` });
       });
   }
 
@@ -208,8 +208,12 @@ class MovieDomain {
   // }
 
   // get all Movie
+ 
   async getAllMovie(req, res) {
-    var Movie_data = await MovieModel.find({ IsActive: true });
+    var Movie_data = await MovieModel.find({ IsActive: true })
+      .populate("Genres")
+      .populate("Spoken_languages")
+      .populate("Production_companies");
     if (Movie_data.length > 0) {
       res.send(Movie_data);
     } else {

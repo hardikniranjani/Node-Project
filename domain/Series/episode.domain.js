@@ -161,7 +161,7 @@ class episodeDomain {
     if (!findEpisode)
       return res
         .status(400)
-        .send({ msg: `Can't found movie with id ${episode_id}` });
+        .send({ msg: `Can't found episode with id ${episode_id}` });
 
     if (!req.files.banner)
       return res.status(404).send({ msg: "Kindly upload all necessary data." });
@@ -198,13 +198,13 @@ class episodeDomain {
         fs.unlinkSync(`${banner.tempFilePath}`);
 
         if (!updateEpisode)
-          return res.status(400).send({ msg: "not able to upload movie" });
+          return res.status(400).send({ msg: "not able to upload episode" });
 
         res.status(200).send({ Episode: updateEpisode });
       })
       .catch((err) => {
-        //fs.unlinkSync(`${banner.tempFilePath}`);
-        res.status(500).send({ err: `${err}` });
+        fs.unlinkSync(`${banner.tempFilePath}`);
+        res.status(500).send({ err: `${err.message}` });
       });
   }
 

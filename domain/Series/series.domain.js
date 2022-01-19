@@ -1,6 +1,13 @@
 const Series = require("../../models/Series/series.model");
 const episode_Model = require("../../models/Series/episode.model");
 const season_Model = require("../../models/Series/season.model");
+const cloudinary = require("cloudinary").v2;
+const fs = require("fs");
+cloudinary.config({
+  cloud_name: process.env.cloud_name,
+  api_key: process.env.api_key,
+  api_secret: process.env.api_secret,
+});
 class SeriesDomain {
   // create new Series
   async createAnSeries(req, res) {
@@ -91,7 +98,7 @@ class SeriesDomain {
     );
     if (!result) return res.status(404).send({ msg: `Series not found` });
 
-    res.status(200).send({msg : "Soft Deleted Successfully"});
+    res.status(200).send({ msg: "Soft Deleted Successfully" });
   }
 
   // Hard Delete series by id
@@ -126,6 +133,58 @@ class SeriesDomain {
     } else {
       res.send("Can't update series");
     }
+  }
+
+  async uploadSeriesPoster(req, res) {
+    const series_id = req.query.series_id;
+    const findSeries = await Series.findById(series_id);
+    const series_poster = req.files.banner;
+
+    if (!findSeries)
+      return res
+        .status(404)
+        .send({ msg: `can't found series with id ${series_id}` });
+
+    if (!series_poster)
+      return res.status(404).send({ msg: "Kindly Upload Poster of Image." });
+
+    const posterType = series_poster.mimetype.split("/");
+
+    if (posterType[0] !== "image") {
+      return res
+        .status(400)
+        .send({ msg: `Make sure your poster must be an Image.` });
+    }
+
+    let pathForCloudinary = `OttPlatForm/Series/${
+      findSeries.SeriesName
+    }/posters/${new Date().valueOf()}`;
+
+    cloudinary.uploader
+      .upload(series_poster.tempFilePath, { public_id: pathForCloudinary })
+      .then(async (result) => {
+        const updatedSeries = await Series.findOneAndUpdate({
+          _id: series_id,
+        },
+        {
+          $set : {
+            Poster_path : result.url
+          }
+        },
+        {
+          new : true
+        });
+
+        fs.unlinkSync(`${series_poster.tempFilePath}`);
+
+        if(!updatedSeries) return res.status(400).send({msg : 'not able to upload episode'});
+
+        res.status(200).send({ Series: updatedSeries });
+      })
+      .catch((err) => {
+        fs.unlinkSync(`${series_poster.tempFilePath}`);
+        res.status(500).send({ err : err.message});
+      });
   }
 
   // // get all the series according to the budget
@@ -189,5 +248,3 @@ class SeriesDomain {
 }
 
 module.exports = SeriesDomain;
-
-
