@@ -47,7 +47,11 @@ class SeriesDomain {
 
   // get all series
   async getAllSeries(req, res) {
-    var series_data = await Series.find({ IsActive: true });
+    var series_data = await Series.find({ IsActive: true })
+      .populate("Spoken_languages")
+      .populate("Genres")
+      .populate("Production_companies")
+      .populate("Seasons");
     if (series_data.length > 0) {
       res.send(series_data);
     } else {
@@ -232,12 +236,16 @@ class SeriesDomain {
   async findSeriesBySearch(req, res) {
     const queryperam = req.query.item1;
     const queryName = req.query.item;
-
+    // console.log("line 239 series.domain",`{${[queryperam]} : ${queryName}}`)
     const seriesData = await Series.find({ [queryperam]: queryName })
       .populate("Spoken_languages")
       .populate("Genres")
       .populate("Production_companies")
       .populate("Seasons")
+      .populate({
+        path : "Seasons",
+        populate : { path : 'Episodes'}
+      })
       .sort(`${queryperam}`);
 
     if (seriesData.length <= 0)
