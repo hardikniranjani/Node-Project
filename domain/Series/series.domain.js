@@ -248,8 +248,7 @@ class SeriesDomain {
       })
       .sort(`${queryperam}`);
 
-    if (seriesData.length <= 0)
-      res.status(500).send({ msg: `Series not found` });
+    if (seriesData.length <= 0) return res.status(404).send({ msg: `Series not found` });
 
     return res.status(200).send(seriesData);
   }

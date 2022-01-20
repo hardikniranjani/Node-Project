@@ -18,19 +18,16 @@ class MovieDomain {
       _id: data._id,
       MovieName: data.MovieName,
       Original_language: data.Original_language,
+      Media_type : data.Media_type,
       Spoken_languages: data.Spoken_languages,
-      DirectorName: data.DirectorName,
-      Budget: data.Budget,
-      ShortDescription: data.ShortDescription,
+      Overview: data.Overview,
       Genres: data.Genres,
       ReleaseDate: data.ReleaseDate,
       Popularity: data.Popularity,
       Production_companies: data.Production_companies,
-      Revenue: data.Revenue,
-      Status: data.Status,
       Vote_average: data.Vote_average,
       Vote_count: data.Vote_count,
-      LongDescription: data.LongDescription,
+      Video_path : "",
       Banner: data.Banner,
     });
 
@@ -330,9 +327,9 @@ class MovieDomain {
       .sort(`${queryperam}`);
 
     if (movieData.length <= 0)
-      res.status(500).send({ msg: `Movies not found` });
+        return res.status(404).send({ msg: `Movies not found` });
 
-    res.status(200).send(movieData);
+    return res.status(200).send(movieData);
   }
 }
 

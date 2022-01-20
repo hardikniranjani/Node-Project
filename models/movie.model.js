@@ -13,15 +13,14 @@ const movieSchema = new mongoose.Schema({
     type: String, 
     required: true,
   },
+  Media_type: {
+    type : String,
+  },
   Spoken_languages: {
     type: [Number],
     ref: "Language",
   },
-  Budget: {
-    type: String, 
-    required: true,
-  },
-  ShortDescription: {
+  Overview: {
     type: String, 
     required: true,
     minlength: 100,
@@ -40,29 +39,16 @@ const movieSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  DirectorName: {
-    type: [String],
-    required: true,
-  },
   Production_companies: {
     type: [Number],
     ref: "Companies",
     required: true,
-  },
-  Revenue: {
-    type: String,
-  },
-  Status: {
-    type: String,
   },
   Vote_average: {
     type: Number,
   },
   Vote_count: {
     type: Number,
-  },
-  LongDescription: {
-    type: String,
   },
   Video_path : {
     type : String
@@ -78,5 +64,4 @@ const movieSchema = new mongoose.Schema({
 
 const Movie = mongoose.model("Movies", movieSchema);
 
-module.exports =  Movie ;
-  
+module.exports =  Movie;
