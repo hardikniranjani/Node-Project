@@ -320,7 +320,7 @@ class MovieDomain {
     const queryperam = req.query.item1;
     const queryName = req.query.item;
 
-    const movieData = await MovieModel.find({ [queryperam]: queryName })
+    const movieData = await MovieModel.find({ [queryperam]: queryName , IsActive:true })
       .populate("Genres")
       .populate("Spoken_languages")
       .populate("Production_companies")

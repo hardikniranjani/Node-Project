@@ -14,10 +14,7 @@ const seriesSchema = new mongoose.Schema({
     type: [Number],
     ref: "Language",
   },
-  Budget: {
-    type: String,
-  },
-  ShortDescription: {
+  Description: {
     type: String,
   },
   Genres: {
@@ -36,8 +33,11 @@ const seriesSchema = new mongoose.Schema({
   Popularity: {
     type: Number,
   },
-  Poster_path:{
-    type: [String],
+  Banner:{
+    type: String,
+  },
+  backdrop_path:{
+    type: String,
   },
   Production_companies: {
     type: [Number],
@@ -49,9 +49,6 @@ const seriesSchema = new mongoose.Schema({
   Status: {
     type: String,
   },
-  DirectorName: {
-    type: [String],
-  },
   Seasons: {
     type: [Number],
     ref: "seasons",
@@ -61,9 +58,6 @@ const seriesSchema = new mongoose.Schema({
   },
   Vote_count: {
     type: Number,
-  },
-  LongDescription: {
-    type: String,
   },
   IsActive: {
     type: Boolean,
