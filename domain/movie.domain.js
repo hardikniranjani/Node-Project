@@ -18,9 +18,8 @@ class MovieDomain {
       _id: data._id,
       MovieName: data.MovieName,
       Original_language: data.Original_language,
-      Media_type : data.Media_type,
       Spoken_languages: data.Spoken_languages,
-      Overview: data.Overview,
+      Description: data.Description,
       Genres: data.Genres,
       ReleaseDate: data.ReleaseDate,
       Popularity: data.Popularity,
@@ -29,6 +28,7 @@ class MovieDomain {
       Vote_count: data.Vote_count,
       Video_path : "",
       Banner: data.Banner,
+      backdrop_path: data.backdrop_path
     });
 
     try {

@@ -13,17 +13,14 @@ const movieSchema = new mongoose.Schema({
     type: String, 
     required: true,
   },
-  Media_type: {
-    type : String,
-  },
   Spoken_languages: {
     type: [Number],
     ref: "Language",
   },
-  Overview: {
+  Description: {
     type: String, 
     required: true,
-    minlength: 100,
+    minlength: 50,
   },
   Genres: {
     required: true,
@@ -54,6 +51,9 @@ const movieSchema = new mongoose.Schema({
     type : String
   },
   Banner: {
+    type: String,
+  },
+  backdrop_path: {
     type: String,
   },
   IsActive: {
