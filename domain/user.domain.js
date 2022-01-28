@@ -114,7 +114,7 @@ class UserDomain {
     const findUser = await UserModel.findOne({
       Email: user.email,
       IsActive: true,
-    });
+    }).populate("Subscription_plan_id");
 
     if (findUser && findUser.IsActive) {
       if (bcrypt.compareSync(user.password, findUser.Password)) {

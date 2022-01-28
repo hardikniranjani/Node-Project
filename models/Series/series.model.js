@@ -43,12 +43,6 @@ const seriesSchema = new mongoose.Schema({
     type: [Number],
     ref: "Companies",
   },
-  Revenue: {
-    type: String,
-  },
-  Status: {
-    type: String,
-  },
   Seasons: {
     type: [Number],
     ref: "seasons",
