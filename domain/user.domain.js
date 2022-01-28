@@ -159,7 +159,7 @@ class UserDomain {
         },
       },
       { new: true }
-    );
+    ).populate("Subscription_plan_id");
 
     try {
       const result = await updatedUser.save();
