@@ -201,7 +201,7 @@ router.post("/addsubscription", UserController.addSubscription);
 
 
 // verify role
-router.use(checkRole);
+// router.use(checkRole);
 
 // get all users 
 router.get('/getallusers', UserController.getAllUsers);

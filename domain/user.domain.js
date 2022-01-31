@@ -5,7 +5,7 @@ const { UserModel, userValidation } = require("../models/Users/user.model");
 const watchHistory = require("../models/Users/watchHistory.model");
 const watchLater = require("../models/Users/watchLater.model");
 const wishlist = require("../models/Users/wishlist.model");
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 const SubscriptionModel = require("../models/subscription.model");
 
@@ -60,21 +60,17 @@ class UserDomain {
     }
   }
 
-  async signUpEmail(req,res){
-    console.log("email",req.body,"line 64 user.domain");
+  async signUpEmail(req, res) {
+    console.log("email", req.body, "line 64 user.domain");
     const email = req.body.email;
     const findUser = await UserModel.findOne({ Email: email });
 
     if (findUser) return res.status(400).send("User already registered");
 
-    const token = jwt.sign(
-      { email: email },
-      process.env.ACCESS_TOKEN_SECRET,
-      {
-        algorithm: "HS256",
-        expiresIn: "15m",
-      }
-    );
+    const token = jwt.sign({ email: email }, process.env.ACCESS_TOKEN_SECRET, {
+      algorithm: "HS256",
+      expiresIn: "15m",
+    });
 
     const link = `http://localhost:8080/signup/${token}`;
 
@@ -98,15 +94,15 @@ class UserDomain {
       html: `<p>Hey, We have received a request to sing up on ottplatform.com, so if you have requested that, then please <a href=${link}>click here</a> to verify account</p>`,
     };
 
-     transporter.sendMail(mailOptions, (err,info)=>{
-      if(err){
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
         console.log(err);
         return res.status(501).send(err);
-      }else{
-        console.log(`Email sent :`,info.response);
+      } else {
+        console.log(`Email sent :`, info.response);
       }
-    })
-   return res.send(link);
+    });
+    return res.send(link);
   }
   // create new user, signup path
   async createAnUser(req, res) {
@@ -163,7 +159,12 @@ class UserDomain {
     const findUser = await UserModel.findOne({
       Email: user.email,
       IsActive: true,
-    }).populate("Subscription_plan_id");
+    })
+      .populate("watchHistory")
+      .populate("Subscription_plan_id")
+
+      .populate("watchLater")
+      .populate("wishlist");
 
     if (findUser && findUser.IsActive) {
       if (bcrypt.compareSync(user.password, findUser.Password)) {
@@ -172,7 +173,6 @@ class UserDomain {
           process.env.ACCESS_TOKEN_SECRET,
           {
             algorithm: "HS256",
-            
           }
         );
 
@@ -208,7 +208,11 @@ class UserDomain {
         },
       },
       { new: true }
-    ).populate("Subscription_plan_id");
+    )
+      .populate("Subscription_plan_id")
+      .populate("watchHistory")
+      .populate("watchLater")
+      .populate("wishlist");
 
     try {
       const result = await updatedUser.save();
@@ -380,7 +384,11 @@ class UserDomain {
       });
       try {
         const result = await watchedMedia.save();
-
+        console.log(result,'line 387 user');
+        UserModel.findOneAndUpdate(
+          { _id: User_id },
+          { watchHistory: result._id}
+        );
         res.status(200).send({ History: result });
       } catch (e) {
         res.status(500).send("error in line 260 " + e);
