@@ -132,6 +132,11 @@ class UserController {
     userDomain.remove_watch_later(req, res);
   }
 
+  static async createOrder(req,res){
+    const userDomain = new UserDomain();
+    userDomain.createOrder(req,res);
+  }
+
   static async removeCommon(req, res) {
     const userDomain = new UserDomain();
     userDomain.removeCommon(req, res);
@@ -151,6 +156,10 @@ router.post("/create_admin", UserController.createAnAdmin);
 
 // middleware 
 router.use(verifyToken);
+
+//create order for subscription
+router.post('/order',UserController.createOrder);
+
 // create User
 router.post("/signup", UserController.createAnUser);
 

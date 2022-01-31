@@ -7,11 +7,11 @@ const watchLater = require("../models/Users/watchLater.model");
 const wishlist = require("../models/Users/wishlist.model");
 const nodemailer = require("nodemailer");
 const SubscriptionModel = require("../models/subscription.model");
-const shortid = require('shortid');
-
+const shortid = require("shortid");
+const Razorpay = require("razorpay");
 const razorpay = new Razorpay({
-  key_id : process.env.RAZORPAY_ID,
-  key_secret : process.env.RAZORPAY_SECRET
+  key_id: process.env.RAZORPAY_ID,
+  key_secret: process.env.RAZORPAY_SECRET,
 });
 
 class UserDomain {
@@ -389,7 +389,7 @@ class UserDomain {
       });
       try {
         const result = await watchedMedia.save();
-        
+
         await UserModel.findOneAndUpdate(
           { _id: User_id },
           { watchHistory: result._id.toString() }
@@ -695,12 +695,20 @@ class UserDomain {
     }
   }
 
-  async createOrder(req,res){
-     var option = {
-       amount : req.query.amount,
-       currency: process.env.RAZORPAY_DEFAULT_CURRENCY,
-      //  receipt : 
-     };
+  async createOrder(req, res) {
+    // console.log("amount ",req.query.amount);
+    var order = await razorpay.orders.create({
+      amount: req.query.amount,
+      currency: process.env.RAZORPAY_DEFAULT_CURRENCY,
+      receipt: `Receipt-${shortid.generate()}`,
+    });
+
+    res.status(200).send({
+      id: order.id,
+      amount: order.amount,
+      currency: order.currency,
+      receipt: order.receipt,
+    });
   }
 
   // add subscription on user id
