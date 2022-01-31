@@ -11,6 +11,11 @@ class UserController {
     userDomain.createAnAdmin(req, res);
   }
 
+  //signup email
+  static async signUpEmail(req, res) {
+    const userDomain = new UserDomain();
+    userDomain.signUpEmail(req, res);
+  }
   // get user by id
   static async getAnUser(req, res) {
     const userDomain = new UserDomain();
@@ -82,9 +87,9 @@ class UserController {
     userDomain.showWatchLater(req, res);
   }
 
-  static async deleteWatchLater(req,res){
+  static async deleteWatchLater(req, res) {
     const userDomain = new UserDomain();
-    userDomain.deleteWatchLater(req,res);
+    userDomain.deleteWatchLater(req, res);
   }
   // add wishlist of user
   static async addToWishList(req, res) {
@@ -105,9 +110,9 @@ class UserController {
   }
 
   //remove from wishlist
-  static async removeonewishlist(req,res){
+  static async removeonewishlist(req, res) {
     const userDomain = new UserDomain();
-    userDomain.removeOneWishList(req,res)
+    userDomain.removeOneWishList(req, res);
   }
 
   // add subscription of user
@@ -134,17 +139,20 @@ class UserController {
 }
 
 
-// create User
-router.post("/signup", UserController.createAnUser);
+
 
 // login user
 router.post("/login", UserController.getAnUser);
+
+router.post("/signupEmail", UserController.signUpEmail);
 
 // signup admin
 router.post("/create_admin", UserController.createAnAdmin);
 
 // middleware 
 router.use(verifyToken);
+// create User
+router.post("/signup", UserController.createAnUser);
 
 // update user
 router.put("/update", UserController.updateAnUser);

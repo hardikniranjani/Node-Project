@@ -20,9 +20,7 @@ class seasonDomain {
       SeriesID: data.SeriesID,
       ShortDescription: data.ShortDescription,
       Number_of_episodes: data.Number_of_episodes,
-      Vote_average: data.Vote_average,
-      Vote_count: data.Vote_count,
-      Poster_path: data.Poster_path,
+      Banner: data.Poster_path,
       Episodes: data.Episodes,
       IsActive: data.IsActive,
     });

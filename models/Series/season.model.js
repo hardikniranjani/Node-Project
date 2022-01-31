@@ -15,19 +15,13 @@ const seasonSchema = new mongoose.Schema({
     type: Number,
     ref: "series",
   },
-  Description: {
+  ShortDescription: {
     type: String,
   },
   Number_of_episodes: {
     type: Number,
   },
-  Vote_average: {
-    type: Number,
-  },
-  Vote_count: {
-    type: Number,
-  },
-  Poster_path: {
+  Banner: {
     type: String,
   },
   Episodes: {

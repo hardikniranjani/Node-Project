@@ -5,6 +5,7 @@ const { UserModel, userValidation } = require("../models/Users/user.model");
 const watchHistory = require("../models/Users/watchHistory.model");
 const watchLater = require("../models/Users/watchLater.model");
 const wishlist = require("../models/Users/wishlist.model");
+const nodemailer = require('nodemailer');
 
 const SubscriptionModel = require("../models/subscription.model");
 
@@ -59,6 +60,54 @@ class UserDomain {
     }
   }
 
+  async signUpEmail(req,res){
+    console.log("email",req.body,"line 64 user.domain");
+    const email = req.body.email;
+    const findUser = await UserModel.findOne({ Email: email });
+
+    if (findUser) return res.status(400).send("User already registered");
+
+    const token = jwt.sign(
+      { email: email },
+      process.env.ACCESS_TOKEN_SECRET,
+      {
+        algorithm: "HS256",
+        expiresIn: "15m",
+      }
+    );
+
+    const link = `http://localhost:8080/signup/${token}`;
+
+    let transporter = nodemailer.createTransport({
+      // host: "smtp.gmail.com",
+      // port: 587,
+      // secure: true,
+      // requireTLS: true,
+      service: "gmail",
+      auth: {
+        user: "dilipkumavat1807@gmail.com",
+        pass: "oeoihvojnyfpxvta",
+      },
+      from: "dilipkumavat1807@gmail.com",
+    });
+
+    let mailOptions = {
+      from: "dilipkumavat1807@gmail.com",
+      to: email,
+      subject: "Ottplatform Account signup",
+      html: `<p>Hey, We have received a request to sing up on ottplatform.com, so if you have requested that, then please <a href=${link}>click here</a> to verify account</p>`,
+    };
+
+     transporter.sendMail(mailOptions, (err,info)=>{
+      if(err){
+        console.log(err);
+        return res.status(501).send(err);
+      }else{
+        console.log(`Email sent :`,info.response);
+      }
+    })
+   return res.send(link);
+  }
   // create new user, signup path
   async createAnUser(req, res) {
     const user = req.body;
@@ -242,7 +291,7 @@ class UserDomain {
   async getAllUsers(req, res) {
     const result = await UserModel.find({ IsActive: true });
 
-    if (result) res.status(200).send(result);
+    if (result) res.status(200).send({ allUser: result });
     else res.status(404).send("Can't find User");
   }
 
