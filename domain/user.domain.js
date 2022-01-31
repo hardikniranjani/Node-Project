@@ -6,8 +6,13 @@ const watchHistory = require("../models/Users/watchHistory.model");
 const watchLater = require("../models/Users/watchLater.model");
 const wishlist = require("../models/Users/wishlist.model");
 const nodemailer = require("nodemailer");
-
 const SubscriptionModel = require("../models/subscription.model");
+const shortid = require('shortid');
+
+const razorpay = new Razorpay({
+  key_id : process.env.RAZORPAY_ID,
+  key_secret : process.env.RAZORPAY_SECRET
+});
 
 class UserDomain {
   // create Admin
@@ -82,7 +87,7 @@ class UserDomain {
       service: "gmail",
       auth: {
         user: "dilipkumavat1807@gmail.com",
-        pass: "oeoihvojnyfpxvta",
+        pass: process.env.gmail,
       },
       from: "dilipkumavat1807@gmail.com",
     });
@@ -688,6 +693,14 @@ class UserDomain {
         .status(200)
         .send({ msg: "Your list has been Successfully updated!!!" });
     }
+  }
+
+  async createOrder(req,res){
+     var option = {
+       amount : req.query.amount,
+       currency: process.env.RAZORPAY_DEFAULT_CURRENCY,
+      //  receipt : 
+     };
   }
 
   // add subscription on user id
