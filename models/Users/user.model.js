@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
     default : null
   },
   watchHistory: {
-    type: Number,
+    type: String,
     ref: "watchHistory",
   },
   watchLater: {

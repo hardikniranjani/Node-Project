@@ -384,10 +384,10 @@ class UserDomain {
       });
       try {
         const result = await watchedMedia.save();
-        console.log(result,'line 387 user');
-        UserModel.findOneAndUpdate(
+        
+        await UserModel.findOneAndUpdate(
           { _id: User_id },
-          { watchHistory: result._id}
+          { watchHistory: result._id.toString() }
         );
         res.status(200).send({ History: result });
       } catch (e) {
