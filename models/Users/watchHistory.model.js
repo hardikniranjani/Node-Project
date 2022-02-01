@@ -12,7 +12,11 @@ const watchHistorySchema = new mongoose.Schema({
     Episode:{
         type: [Number],
         ref: 'episode'
-    }
+    },
+    IsActive: {
+        type: Boolean,
+        default: true,
+      },
 })
 
 const watchHistory = mongoose.model('watchHistory',watchHistorySchema);

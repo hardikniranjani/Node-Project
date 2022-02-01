@@ -25,7 +25,7 @@ const episodeSchema = new mongoose.Schema({
   ReleaseDate : {
     type : Date
   },
-  Poster_path: {
+  Banner: {
     type: String,
   },
   Video_path: {

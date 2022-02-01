@@ -165,11 +165,40 @@ class UserDomain {
       Email: user.email,
       IsActive: true,
     })
-      .populate("watchHistory")
+      .populate({
+        path: "watchHistory",
+        populate: {
+          path: "Movies",
+          model: "Movies",
+        },
+        populate: {
+          path: "Episode",
+          model: "episode",
+        },
+      })
       .populate("Subscription_plan_id")
-
-      .populate("watchLater")
-      .populate("wishlist");
+      .populate({
+        path: "watchLater",
+        populate: {
+          path: "Movies",
+          model: "Movies",
+        },
+        populate: {
+          path: "Episode",
+          model: "episode",
+        },
+      })
+      .populate({
+        path: "wishlist",
+        populate: {
+          path: "Movies",
+          model: "Movies",
+        },
+        populate: {
+          path: "Series",
+          model: "series",
+        },
+      });
 
     if (findUser && findUser.IsActive) {
       if (bcrypt.compareSync(user.password, findUser.Password)) {
@@ -214,10 +243,40 @@ class UserDomain {
       },
       { new: true }
     )
+      .populate({
+        path: "watchHistory",
+        populate: {
+          path: "Movies",
+          model: "Movies",
+        },
+        populate: {
+          path: "Episode",
+          model: "episode",
+        },
+      })
       .populate("Subscription_plan_id")
-      .populate("watchHistory")
-      .populate("watchLater")
-      .populate("wishlist");
+      .populate({
+        path: "watchLater",
+        populate: {
+          path: "Movies",
+          model: "Movies",
+        },
+        populate: {
+          path: "Episode",
+          model: "episode",
+        },
+      })
+      .populate({
+        path: "wishlist",
+        populate: {
+          path: "Movies",
+          model: "Movies",
+        },
+        populate: {
+          path: "Series",
+          model: "series",
+        },
+      });
 
     try {
       const result = await updatedUser.save();
@@ -339,19 +398,25 @@ class UserDomain {
       .populate({
         path: "Episode",
         populate: { path: "SeriesID" },
-      })
-      .populate({
-        path: "Episode",
-        populate: { path: "SeasonID" },
-      })
-      .sort();
+      });
+    // .populate({
+    //   path: "Episode",
+    //   populate: { path: "SeasonID" },
+    // })
+    // .sort();
 
     if (history.length == 0)
       return res.status(404).send({ msg: "History not available" });
 
     const movieArray = history[0]["Movies"].map((obj) => {
       if (obj.MovieName) {
-        return { movie_name: obj.MovieName, movie_id: obj._id };
+        return {
+          movie_name: obj.MovieName,
+          WatchHistory_id: obj._id,
+          _id: obj._id,
+          Banner: obj.Banner,
+          backdrop_path: obj.backdrop_path,
+        };
       }
     });
 
@@ -359,11 +424,13 @@ class UserDomain {
       if (obj.EpisodeName) {
         return {
           episode_name: obj.EpisodeName,
-          episode_id: obj._id,
+          _id: obj._id,
+          WatchHistory_id: obj._id,
           seriesid: obj.SeriesID._id,
           seriesName: obj.SeriesID.SeriesName,
           seasonid: obj.SeasonID._id,
           seasonName: obj.SeasonID.SeasonName,
+          Banner: obj.Banner,
         };
       }
     });
@@ -437,7 +504,7 @@ class UserDomain {
     let User_id = req.user._id;
     let media_id = req.query.media_id;
     let media_type = req.query.media_type;
-    const list = await watchHistory.find({ User: User_id, IsActive: false });
+    const list = await watchHistory.find({ User: User_id, IsActive: true });
 
     if (list.length == 0) {
       res.status(200).send({ msg: "No list is there." });
@@ -460,7 +527,7 @@ class UserDomain {
     let media_id = req.query.media_id;
     let media_type = req.query.media_type;
     // media_type = media_type.charAt(0).toUpperCase() + media_type.slice(1);
-    console.log([media_type]);
+    // console.log([media_type]);
     const library = await watchLater.find({ User: User_id, IsActive: true });
 
     if (library.length == 0) {
@@ -470,6 +537,12 @@ class UserDomain {
       });
       try {
         const result = await newlibrary.save();
+        await UserModel.findOneAndUpdate(
+          { _id: User_id },
+          {
+            watchLater: result._id.toString(),
+          }
+        );
         res.status(200).send({ Library: result });
       } catch (e) {
         res.status(500).send("error in line 260 " + e);
@@ -544,10 +617,10 @@ class UserDomain {
         path: "Episode",
         populate: { path: "SeriesID" },
       })
-      .populate({
-        path: "Episode",
-        populate: { path: "SeasonID" },
-      })
+      // .populate({
+      //   path: "Episode",
+      //   populate: { path: "SeasonID" },
+      // })
       .sort();
 
     if (watchLaterList.length == 0)
@@ -555,7 +628,13 @@ class UserDomain {
 
     const movieArray = watchLaterList[0]["Movies"].map((obj) => {
       if (obj.MovieName) {
-        return { movie_name: obj.MovieName, movie_id: obj._id };
+        return {
+          movie_name: obj.MovieName,
+          _id: obj._id,
+          WatchLater_id: obj._id,
+          Banner: obj.Banner,
+          backdrop_path: obj.backdrop_path,
+        };
       }
     });
 
@@ -563,11 +642,13 @@ class UserDomain {
       if (obj.EpisodeName) {
         return {
           episode_name: obj.EpisodeName,
-          episode_id: obj._id,
+          _id: obj._id,
+          WatchLater_id: obj._id,
           seriesid: obj.SeriesID._id,
           seriesName: obj.SeriesID.SeriesName,
           seasonid: obj.SeasonID._id,
           seasonName: obj.SeasonID.SeasonName,
+          Banner: obj.Banner,
         };
       }
     });
@@ -593,6 +674,13 @@ class UserDomain {
       });
       try {
         const result = await list.save();
+        // console.log(result, 'line 669');
+        await UserModel.findOneAndUpdate(
+          { _id: User_id },
+          {
+            wishlist: result._id.toString()
+          }
+        );
         res.status(200).send({ wishlist: result });
       } catch (e) {
         res.status(500).send({ msg: `error : ${e.message}` });
@@ -628,10 +716,13 @@ class UserDomain {
     const seriesArray = findWishList[0].Series.map((obj) => {
       if (obj.IsActive == true) {
         return {
-          series_id: obj._id,
+          _id: obj._id,
+          WishList_id: obj._id,
           series_name: obj.SeriesName,
           description: obj.ShortDescription,
           releasedata: obj.ReleaseDate,
+          Banner: obj.Banner,
+          backdrop_path: obj.backdrop_path,
         };
       }
     });
@@ -639,10 +730,13 @@ class UserDomain {
     const movieArray = findWishList[0].Movies.map((obj) => {
       if (obj.IsActive == true) {
         return {
-          movie_id: obj._id,
+          _id: obj._id,
+          WishList_id: obj._id,
           movie_name: obj.MovieName,
           description: obj.ShortDescription,
           releasedata: obj.ReleaseDate,
+          Banner: obj.Banner,
+          backdrop_path: obj.backdrop_path,
         };
       }
     });

@@ -12,7 +12,11 @@ const wishlistSchema = new mongoose.Schema({
     Series:{
         type: [Number],
         ref: 'series'
-    }
+    },
+    IsActive: {
+        type: Boolean,
+        default: true,
+      },
 })
 
 const wishlistItems = mongoose.model('wishlist',wishlistSchema);
