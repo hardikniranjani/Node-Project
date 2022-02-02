@@ -45,11 +45,11 @@ const userSchema = new mongoose.Schema({
     ref: "watchHistory",
   },
   watchLater: {
-    type: Number,
+    type: String,
     ref: "watchLater",
   },
   wishlist: {
-    type: Number,
+    type: String,
     ref: "wishlist",
   },
   IsActive: {
