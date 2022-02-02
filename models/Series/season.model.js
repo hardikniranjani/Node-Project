@@ -15,7 +15,7 @@ const seasonSchema = new mongoose.Schema({
     type: Number,
     ref: "series",
   },
-  ShortDescription: {
+  Description: {
     type: String,
   },
   Number_of_episodes: {

@@ -64,7 +64,7 @@ class SeriesDomain {
   async getAnSeries(req, res) {
     var id = req.params.id;
 
-    const result = await Series.findById(id);
+    const result = await Series.findById(id).populate("Seasons");
     if (result && result.IsActive) {
       res.send(result);
     } else {

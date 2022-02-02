@@ -170,6 +170,7 @@ class UserDomain {
 
       .populate("watchLater")
       .populate("wishlist");
+      // console.log(findUser.Plan_Purchase_Date_Time.toString(),findUser.Plan_Expiry_Date_Time.toLocaleString());
 
     if (findUser && findUser.IsActive) {
       if (bcrypt.compareSync(user.password, findUser.Password)) {
@@ -714,8 +715,9 @@ class UserDomain {
   // add subscription on user id
   async addSubscription(req, res) {
     const user_id = req.user._id;
-    const plan_id = req.query.plan_id;
-
+    const plan_id = Number(req.query.plan_id);
+    const data = req.body.data;
+    console.log(data);
     const getPlan = await SubscriptionModel.findById(plan_id);
     // console.log(getPlan);
     if (!getPlan)
@@ -727,13 +729,24 @@ class UserDomain {
       return res
         .status(404)
         .send({ msg: "Can't find user. Please login again" });
-
+    let date = new Date();
+    let purchase_date = new Date().valueOf();
+    let expiry_date = new Date().setDate(date.getDate() + 29);
+    
+    // console.log(expiry_date,purchase_date, "expiry_date");
+    // console.log(new Date(purchase_date).toString()," by toString method");
+    // Tue Feb 01 2022 17:27:06 GMT+0530 (India Standard Time) by toString method
+    // console.log(new Date(expiry_date).toLocaleString(),"by toLocaleString method");
+    // 2/3/2022, 5:36:19 pm by toLocaleString method
     const addplanToUser = await UserModel.findByIdAndUpdate(
       { _id: user_id },
       {
         $set: {
           Subscription_plan_id: plan_id,
-          Subscription_duration: 1,
+          Plan_Purchase_Date_Time: purchase_date,
+          Plan_Expiry_Date_Time: expiry_date,
+          Payment_ID : data.razorpay_payment_id,
+          Order_ID : data.razorpay_order_id
         },
       },
       { new: true }

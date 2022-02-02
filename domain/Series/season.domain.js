@@ -18,7 +18,7 @@ class seasonDomain {
       SeasonName: data.SeasonName,
       SeasonNumber: data.SeasonNumber,
       SeriesID: data.SeriesID,
-      ShortDescription: data.ShortDescription,
+      Description: data.Description,
       Number_of_episodes: data.Number_of_episodes,
       Banner: data.Poster_path,
       Episodes: data.Episodes,

@@ -1,0 +1,54 @@
+[
+  {
+    "_id": 1,
+    "SeasonName": "Squid Games Season_1",
+    "SeasonNumber": 1,
+    "ShortDescription": "Hundreds of cash-strapped contestants accept an invitation to compete in children's games for a tempting prize, but the stakes are deadly.",
+    "Number_of_episodes": 9,
+    "SeriesID":1,
+    "Vote_average": 8.1,
+    "Vote_count": 7805004,
+    "Poster_path": "https://cdn.amazfeed.com/wp-content/uploads/2021/09/Squid-Games-Wallpaper-Poster-48-1024x540.jpg",
+    "Episodes": [1, 2],
+    "IsActive": true
+  },
+  {
+    "_id": 2,
+    "SeasonName": "Game of Thrones Season_1",
+    "SeasonNumber": 1,
+    "ShortDescription": "The first season of the fantasy drama television series Game of Thrones premiered on HBO on April 17, 2011, in the U.S. and concluded on June 19, 2011. It consists of ten episodes, each of approximately 55 minutes. The series is based on A Game of Thrones, the first novel in the A Song of Ice and Fire series by George R. R. Martin, adapted for television by David Benioff and D. B. Weiss.",
+    "Number_of_episodes": 10,
+    "SeriesID":2,
+    "Vote_average": 9.6,
+    "Vote_count": 5800564,
+    "Poster_path": "https://wallpapercave.com/wp/wp9153792.jpg",
+    "Episodes": [3, 4],
+    "IsActive": true
+  },
+  {
+    "_id": 3,
+    "SeasonName": "Game of Thrones Season_2",
+    "SeasonNumber": 2,
+    "ShortDescription": "The second season of the fantasy drama television series Game of Thrones premiered in the United States on HBO on April 1, 2012, and concluded on June 3, 2012. It was broadcast on Sunday at 9:00 pm in the United States, consisting of 10 episodes, each running approximately 50-60 minutes.",
+    "Number_of_episodes": 10,
+    "SeriesID":2,
+    "Vote_average": 9.6,
+    "Vote_count": 6100235,
+    "Poster_path": "https://wallpapercave.com/wp/wp9153792.jpg",
+    "Episodes": [5],
+    "IsActive": true
+  },
+  {
+    "_id": 4,
+    "SeasonName": "Game of Thrones Season_3",
+    "SeasonNumber": 3,
+    "ShortDescription": "The third season of the fantasy drama television series Game of Thrones premiered in the United States on HBO on March 31, 2013, and concluded on June 9, 2013. It was broadcast on Sunday at 9:00 pm in the United States, consisting of 10 episodes, each running approximately 50-60 minutes",
+    "Number_of_episodes": 10,
+    "SeriesID":2,
+    "Vote_average": 9.6,
+    "Vote_count": 5904063,
+    "Poster_path": "https://upload.wikimedia.org/wikipedia/en/1/1d/Game_of_Thrones_Season_3.jpg",
+    "Episodes": [6],
+    "IsActive": true
+  }
+]
