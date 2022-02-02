@@ -510,12 +510,13 @@ class UserDomain {
     if (list.length == 0) {
       res.status(200).send({ msg: "No list is there." });
     } else {
-      const deletedlist = await watchHistory.findOneAndUpdate({
-        User: User_id,
+      const deletedlist = await watchHistory.findOneAndUpdate(
+      {User: User_id},{
         $pull: {
           [media_type]: media_id,
-        },
-      });
+        }},
+        {new : true}
+      );
       res.status(200).send({
         list: deletedlist,
       });
