@@ -6,12 +6,13 @@ const watchHistory = require("../models/Users/watchHistory.model");
 const watchLater = require("../models/Users/watchLater.model");
 const wishlist = require("../models/Users/wishlist.model");
 const nodemailer = require("nodemailer");
+const Razorpay = require('razorpay');
 const SubscriptionModel = require("../models/subscription.model");
-const shortid = require("shortid");
-const Razorpay = require("razorpay");
+const shortid = require('shortid');
+
 const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_ID,
-  key_secret: process.env.RAZORPAY_SECRET,
+  key_id : process.env.RAZORPAY_ID,
+  key_secret : process.env.RAZORPAY_SECRET
 });
 
 class UserDomain {
