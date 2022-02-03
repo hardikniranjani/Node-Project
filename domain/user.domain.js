@@ -775,19 +775,22 @@ class UserDomain {
     let media_id = req.query.media_id;
     let media_type = req.query.media_type;
     const list = await wishlist.find({ User: User_id });
-
+    
     if (list.length == 0) {
       res.status(200).send({ msg: "No list is there." });
     } else {
-      const deletedlist = await wishlist.findOneAndUpdate({
-        User: User_id,
-        $pull: {
+      const deletedlist = await wishlist.findOneAndUpdate(
+        {UserId: User_id},
+        {$pull: {
           [media_type]: media_id,
-        },
-      });
+        }},
+        {
+          new : true
+        }
+      );
       res
         .status(200)
-        .send({ msg: "Your list has been Successfully updated!!!" });
+        .send({ list: deletedlist});
     }
   }
 
