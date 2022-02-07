@@ -38,12 +38,12 @@ class episodeDomain {
         .status(400)
         .send({ msg: `Episode Id ${data._id} already available ` });
 
-    const dateParts = data["ReleaseDate"].split("-");
+    // const dateParts = data["ReleaseDate"].split("-");
 
-    const year = Number(dateParts[2]);
-    const month = Number(dateParts[1]) - 1;
-    const day = Number(dateParts[0]) + 1;
-    const date = new Date(year, month, day);
+    // const year = Number(dateParts[2]);
+    // const month = Number(dateParts[1]) - 1;
+    // const day = Number(dateParts[0]) + 1;
+    // const date = new Date(year, month, day);
 
     const allEpisode = await episode_Model.find().sort({ _id: -1 });
 
@@ -56,11 +56,11 @@ class episodeDomain {
       _id: id,
       EpisodeName: data.EpisodeName,
       EpisodeNumber: data.EpisodeNumber,
-      ShortDescription: data.ShortDescription,
+      Description: data.Description,
       SeriesID: data.SeriesID,
       SeasonID: data.SeasonID,
-      ReleaseDate: date,
-      Poster_path: data.Poster_path,
+      ReleaseDate: data.ReleaseDate,
+      Banner: data.Banner,
       Video_path: data.Video_path,
       Vote_average: data.Vote_average,
       Vote_count: data.Vote_count,
@@ -272,27 +272,16 @@ class episodeDomain {
   async createBulkEpisode(req, res) {
     const season_id = req.query.season_id;
     const arrayOfEpisode = req.body;
-    const dateUpdatedEpisode = arrayOfEpisode.map((obj) => {
-      const oldDate = obj.ReleaseDate;
-      const dateParts = oldDate.split("-");
-
-      const year = Number(dateParts[2]);
-      const month = Number(dateParts[1]) - 1;
-      const day = Number(dateParts[0]) + 1;
-      const date = new Date(year, month, day);
-
-      obj.ReleaseDate = date;
-      return obj;
-    });
+   
 
     const season = await season_Model.find({ _id: season_id });
 
     if (season.length <= 0)
       return res.status(404).send(`Season of id ${season_id} not found`);
 
-    await episode_Model.insertMany(dateUpdatedEpisode);
+    await episode_Model.insertMany(arrayOfEpisode);
 
-    const updateIdsToSeason = dateUpdatedEpisode.map((obj) => obj._id);
+    const updateIdsToSeason = arrayOfEpisode.map((obj) => obj._id);
 
     const updateSeason = await season_Model.findByIdAndUpdate(
       { _id: season_id },
@@ -306,7 +295,7 @@ class episodeDomain {
 
     res.status(200).send({ seasonEpisodes: updateSeason.Episodes });
   }
-
+           
   //   get an episodes
   async getAnEpisode(req, res) {
     const episode_id = req.query.episode_id;
@@ -487,7 +476,7 @@ class episodeDomain {
       })
       .populate("SeriesID")
       .populate("SeasonID")
-      .sort(`${queryperam}`);
+      .sort(`${queryperam}`);                                
 
     if (EpisodeData.length <= 0)
       res.status(500).send({ msg: `Episode not found` });
