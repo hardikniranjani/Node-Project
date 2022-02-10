@@ -9,6 +9,7 @@ const nodemailer = require("nodemailer");
 const Razorpay = require("razorpay");
 const SubscriptionModel = require("../models/subscription.model");
 const shortid = require("shortid");
+const { response } = require("express");
 
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_ID,
@@ -37,8 +38,7 @@ class UserDomain {
       id = allUser[0]._id + 1;
     }
 
-    const salt = await bcrypt.genSalt(10);
-    const newPassword = await bcrypt.hash(admin.password, salt);
+    const newPassword = (await this.encryptPassword(admin.password)).password;
 
     let newAdmin = new UserModel({
       _id: id,
@@ -50,15 +50,10 @@ class UserDomain {
 
     try {
       const result = await newAdmin.save();
+      const token = (
+        await this.generateToken({ _id: newAdmin._id, role: "admin" }, "7200m")
+      ).token;
 
-      const token = jwt.sign(
-        { _id: newAdmin._id, role: "admin" },
-        process.env.ACCESS_TOKEN_SECRET,
-        {
-          algorithm: "HS256",
-          expiresIn: "7200m",
-        }
-      );
       console.log(token);
       res.header("x-access-token", token).send(result);
     } catch (e) {
@@ -67,24 +62,25 @@ class UserDomain {
   }
 
   async signUpEmail(req, res) {
-    console.log("email", req.body, "line 64 user.domain");
     const email = req.body.email;
+
     const findUser = await UserModel.findOne({ Email: email });
 
     if (findUser) return res.status(400).send("User already registered");
 
-    const token = jwt.sign({ email: email }, process.env.ACCESS_TOKEN_SECRET, {
-      algorithm: "HS256",
-      expiresIn: "15m",
-    });
+    const token = (await this.generateToken({ Email: email }, "15m")).token;
 
-    const link = `http://localhost:8080/signup/${token}`;
+    let baseLink = "http://localhost:8080";
+    let link = `${baseLink}/signup/${token}`;
 
+    let subject = "Ottplatform Account signup";
+    let htmlMessage = `<p>Hey, We have received a request to sing up on <a href=${baseLink}>ottplatform.com</a>, so if you have requested that, then please <a href=${link}>click here</a> to verify account</p>`;
+    let msg = "We have sent you a Email to Verify account.";
+    this.sendMail(email, subject, htmlMessage, response, msg);
+  }
+
+  async sendMail(email, subject, htmlMessage, response, msg) {
     let transporter = nodemailer.createTransport({
-      // host: "smtp.gmail.com",
-      // port: 587,
-      // secure: true,
-      // requireTLS: true,
       service: "gmail",
       auth: {
         user: "dilipkumavat1807@gmail.com",
@@ -96,20 +92,72 @@ class UserDomain {
     let mailOptions = {
       from: "dilipkumavat1807@gmail.com",
       to: email,
-      subject: "Ottplatform Account signup",
-      html: `<p>Hey, We have received a request to sing up on ottplatform.com, so if you have requested that, then please <a href=${link}>click here</a> to verify account</p>`,
+      subject: subject,
+      html: htmlMessage,
     };
 
     transporter.sendMail(mailOptions, (err, info) => {
       if (err) {
-        console.log(err);
-        return res.status(501).send(err);
+        response.status(500).send({ err: err.message });
       } else {
-        console.log(`Email sent :`, info.response);
+        response.status(200).send({ msg: msg });
       }
     });
-    return res.send(link);
   }
+
+  //Generate a token
+  async generateToken(payload, expiryTime) {
+    const token = jwt.sign({ ...payload }, process.env.ACCESS_TOKEN_SECRET, {
+      algorithm: "HS256",
+      expiresIn: expiryTime,
+    });
+    return { token: token };
+  }
+
+  //forgot password email
+  async forgotPasswordMail(req, res) {
+    const email = req.body.email;
+    const findUser = await UserModel.findOne({ Email: email, IsActive: true });
+
+    if (!findUser) return res.status(404).send({ msg: "User not found!!!" });
+
+    const token = (await this.generateToken({ Email: email }, "15m")).token;
+
+    let baseLink = "http://localhost:8080";
+    const link = `${baseLink}/setpassword/${token}`;
+
+    let subject = `Reset Your OttPlatform Password`;
+
+    let htmlMessage = `<p>Hey, We have received a request to Reset a password on <a href=${baseLink}>ottplatform.com</a>, so if you have requested that, then please <a href=${link}>click here</a> to Reset your password</p>`;
+
+    let msg = "We have sent a mail to Reset your Password";
+    this.sendMail(email, subject, htmlMessage, res, msg);
+  }
+
+  //encrypt password
+  async encryptPassword(password) {
+    const salt = await bcrypt.genSalt(10);
+    return { password: await bcrypt.hash(password, salt) };
+  }
+
+  //change password
+  async changePassword(req, res) {
+    let password = req.body.password;
+    let hashedPassword = (await this.encryptPassword(password)).password;
+    let userEmail = req.user.Email;
+
+    let findUser = await UserModel.findOne({
+      Email: userEmail,
+      IsActive: true,
+    }).then(async (res) => {
+      res.Password = hashedPassword;
+      await res.save();
+      return res;
+    });
+
+    res.status(200).send(findUser);
+  }
+
   // create new user, signup path
   async createAnUser(req, res) {
     const user = req.body;
@@ -130,8 +178,7 @@ class UserDomain {
       id = allUser[0]._id + 1;
     }
 
-    const salt = await bcrypt.genSalt(10);
-    const newPassword = await bcrypt.hash(user.password, salt);
+    const newPassword = (await this.encryptPassword(user.password)).password;
 
     let newUser = new UserModel({
       _id: id,
@@ -143,13 +190,12 @@ class UserDomain {
     try {
       const result = await newUser.save();
 
-      const token = jwt.sign(
-        { _id: newUser._id, role: "user" },
-        process.env.ACCESS_TOKEN_SECRET,
+      const token = await this.generateToken(
         {
-          algorithm: "HS256",
-          expiresIn: "7200m",
-        }
+          _id: newUser._id,
+          role: "user",
+        },
+        "7200m"
       );
       console.log(token);
       res.header("x-access-token", token).send(result);
@@ -209,13 +255,12 @@ class UserDomain {
 
     if (findUser && findUser.IsActive) {
       if (bcrypt.compareSync(user.password, findUser.Password)) {
-        const token = jwt.sign(
-          { _id: findUser._id, role: findUser.Role },
-          process.env.ACCESS_TOKEN_SECRET,
-          {
-            algorithm: "HS256",
-          }
-        );
+        const token = (
+          await this.generateToken(
+            { _id: findUser._id, role: findUser.Role },
+            "7200m"
+          )
+        ).token;
 
         res.header("x-access-token", token).send(findUser);
       } else {
@@ -735,7 +780,7 @@ class UserDomain {
       });
       try {
         const result = await list.save();
-        
+
         await UserModel.findOneAndUpdate(
           { _id: User_id },
           {

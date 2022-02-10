@@ -22,6 +22,12 @@ class UserController {
     userDomain.getAnUser(req, res);
   }
 
+  //forgot password
+  static async forgotPassword(req,res){
+    const userDomain = new UserDomain();
+    userDomain.forgotPasswordMail(req,res);
+  }
+
   // get all user
   static async getAllUsers(req, res) {
     const userDomain = new UserDomain();
@@ -121,6 +127,12 @@ class UserController {
     userDomain.addSubscription(req, res);
   }
 
+  //change Password
+  static async changePassword(req,res){
+    const userDomain = new UserDomain();
+    userDomain.changePassword(req,res);
+  }
+
   // add subscription of user
   static async removeFromHistory(req, res) {
     const userDomain = new UserDomain();
@@ -151,11 +163,16 @@ router.post("/login", UserController.getAnUser);
 
 router.post("/signupEmail", UserController.signUpEmail);
 
+router.post("/forgotPassword", UserController.forgotPassword);
+
 // signup admin
 router.post("/create_admin", UserController.createAnAdmin);
 
 // middleware 
 router.use(verifyToken);
+
+//changePassword 
+router.post("/changePassword", UserController.changePassword);
 
 //create order for subscription
 router.post('/order',UserController.createOrder);
@@ -206,8 +223,6 @@ router.put("/removefromwishlist" , UserController.removeonewishlist)
 
 // add subscription plan of user
 router.post("/addsubscription", UserController.addSubscription);
-
-
 
 // verify role
 // router.use(checkRole);
