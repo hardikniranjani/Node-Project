@@ -25,7 +25,7 @@ class CompanyDomain {
 
     if (data.length <= 0)
       return res.status(500).send({ msg: `Company not found` });
-    res.status(200).send({CompanyPlan: data});
+    res.status(200).send({CompanyList: data});
   }
 
   // get specific Company by id
